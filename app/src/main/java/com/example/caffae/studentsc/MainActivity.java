@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO: this is a substitute so remove later
         if (id.equals("1002222")){
             if(password.equals("pwd")){
+                //TODO: toasts not working
                 FancyToast.makeText(this,"Successful Login!",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,true);
 
                 //TODO: go to next activity
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //alternative
-        //DONE: wrong 'pwd/id' toast
+        //TODO: wrong 'pwd/id' toast -- it isn't working
         FancyToast.makeText(this,"Wrong Id/Password !",FancyToast.LENGTH_LONG,FancyToast.ERROR,true);
 
     }
