@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+
+    tools:context="com.example.caffae.studentsc.MainActivity">
+
+    <ImageView
+        android:id="@+id/iconImageView"
+        android:layout_width="120dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp"
+        android:contentDescription="@string/iconImgDescription"
+        app:srcCompat="@drawable/icon"/>
+
+    <EditText
+        android:id="@+id/loginScreenID"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/loginScreenPW"
+        android:layout_below="@+id/iconImageView"
+        android:layout_marginTop="32dp"
+        android:background="#00ffffff"
+        android:drawableStart="@drawable/ic_action_name"
+        android:ems="10"
+        android:hint="Id"
+        android:inputType="textPersonName"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/loginScreenPW"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/loginScreenID"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        android:background="#00ffffff"
+        android:drawableStart="@drawable/ic_action_pwd"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="16sp"/>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/loginCardView"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="104dp"
+        app:cardBackgroundColor="@color/colorAccent"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/cardView"
+            android:layout_centerHorizontal="true">
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Login"
+                android:textColor="#FFFF"
+                android:textSize="18sp"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
