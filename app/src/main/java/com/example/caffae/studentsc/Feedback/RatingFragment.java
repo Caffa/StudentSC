@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.Feedback;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import com.example.caffae.studentsc.R;
 
 
 public class RatingFragment extends Fragment {
