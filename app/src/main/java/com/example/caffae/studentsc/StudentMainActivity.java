@@ -6,7 +6,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class StudentMainActivity extends AppCompatActivity {
@@ -18,13 +17,16 @@ public class StudentMainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentManager manager;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
+                    manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.container, new Forum()).commit();
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
-                    FragmentManager manager = getSupportFragmentManager();
+                    manager = getSupportFragmentManager();
                     manager.beginTransaction().replace(R.id.container, new SubmitQuestionFragment()).commit();
                     return true;
                 case R.id.navigation_notifications:
