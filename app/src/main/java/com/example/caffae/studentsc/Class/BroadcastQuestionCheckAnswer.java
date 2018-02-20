@@ -16,9 +16,7 @@ public class BroadcastQuestionCheckAnswer {
     public ArrayList<String> getquestionanswer(){
         return questionsanswer;
     }
-    public void setanswer(int i){
-        answerid =i;
-    }
+    public void setanswer(int i){answerid =i;}
     public int getanswer(){
         return answerid;
     }

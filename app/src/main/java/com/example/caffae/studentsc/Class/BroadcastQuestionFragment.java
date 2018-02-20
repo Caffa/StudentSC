@@ -1,9 +1,10 @@
 package com.example.caffae.studentsc.Class;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.caffae.studentsc.R;
+import com.example.caffae.studentsc.SubmitQuestionFragment;
 
 import java.util.ArrayList;
 
@@ -94,14 +96,27 @@ public class BroadcastQuestionFragment extends Fragment {
 
                 if (radiogroup.getCheckedRadioButtonId() == radiogroup.getChildAt(newbroadcast.getanswer()-1).getId()){
                     Toast.makeText(getContext(), "Well Done!", Toast.LENGTH_SHORT).show();
+                    changeFragment();
+                }
+                else if (radiogroup.getCheckedRadioButtonId() == -1){
+                    Toast.makeText(getContext(), "Please Select Answer", Toast.LENGTH_SHORT).show();
+
                 }
                 else{
                     Toast.makeText(getContext(), "Try Again Next Time! \n The right answer was Option " + newbroadcast.getanswer(), Toast.LENGTH_SHORT).show();
+                    changeFragment();
                 }
+
             }
 
         });
 
 
+    }
+    public void changeFragment(){
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction ft =  manager.beginTransaction();
+        ft.replace(R.id.broadcastquestioncontainer, new AvailableClassroomFragment()).commit();
+        ft.addToBackStack(null);
     }
 }

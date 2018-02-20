@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.caffae.studentsc.Class.AvailableClassroomFragment;
 import com.example.caffae.studentsc.Class.BroadcastQuestionFragment;
 import com.example.caffae.studentsc.Feedback.FeedbackPageFragment;
 
@@ -27,7 +28,7 @@ public class StudentMainActivity extends AppCompatActivity {
                 case R.id.navigation_dashboard:
                     mTextMessage.setText("Class");
                     FragmentManager manager = getSupportFragmentManager();
-                    manager.beginTransaction().replace(R.id.container, new BroadcastQuestionFragment()).commit();
+                    manager.beginTransaction().replace(R.id.container, new AvailableClassroomFragment()).commit();
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText("Feedback");
