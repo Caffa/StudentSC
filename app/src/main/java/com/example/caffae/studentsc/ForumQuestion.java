@@ -8,9 +8,6 @@ public class ForumQuestion {
     private String question, answer;
     private boolean answered;
 
-    public ForumQuestion(){
-
-    }
 
     public boolean isAnswered() {
         return answered;
