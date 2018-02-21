@@ -2,7 +2,6 @@ package com.example.caffae.studentsc;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,19 +19,23 @@ import java.util.List;
 public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.MyViewHolder> implements Filterable{
 
     private List<ForumQuestion> forumList;
-
+    private List<ForumQuestion> forumListFiltered;
     protected List<ForumQuestion> list;
     protected List<ForumQuestion> originalList;
     protected Context context;
 
+    private ForumAdapterListener listener;
+
     @Override
     public Filter getFilter() {
         return new Filter() {
-            @SuppressWarnings("unchecked")
+//            @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
+                forumListFiltered = (ArrayList<ForumQuestion>) results.values;
+
                 list = (List<ForumQuestion>) results.values;
-                ForumAdapter.this.notifyDataSetChanged();
+                notifyDataSetChanged();
             }
 
             @Override
@@ -43,6 +46,8 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.MyViewHolder
                 } else {
                     filteredResults = getFilteredResults(constraint.toString().toLowerCase());
                 }
+
+                forumListFiltered = filteredResults;
 
                 FilterResults results = new FilterResults();
                 results.values = filteredResults;
@@ -63,9 +68,21 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.MyViewHolder
         return results;
     }
 
+    public ForumAdapter(Context context, List<ForumQuestion> list, ForumAdapterListener listener)
+    {
+        this.originalList = list;
+        this.list = list;
+        this.context = context;
+        this.forumList = list;
+        this.forumListFiltered = list;
+        this.listener = listener;
+    }
 
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+
+
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView question, answer, answered;
 
         public MyViewHolder(View view) {
@@ -73,21 +90,24 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.MyViewHolder
             question = (TextView) view.findViewById(R.id.question);
             answer = (TextView) view.findViewById(R.id.answer);
             answered = (TextView) view.findViewById(R.id.answered);
+
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    // send selected forumQ in callback
+//                    ForumQuestion holding = forumListFiltered.get(getAdapterPosition());
+//                    if(holding != null) {
+//                        listener.onFQSelected(holding);
+//                    }else{
+//                        Toast.makeText(context, "Clicked a null object", Toast.LENGTH_SHORT);
+//                    }
+//                }
+//            });
         }
 
 
 
     }
-
-    public ForumAdapter(Context context,
-                                 List<ForumQuestion> list)
-    {
-        this.originalList = list;
-        this.list = list;
-        this.context = context;
-        this.forumList = list;
-    }
-
 
     @Override
     public ForumAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -99,7 +119,7 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(ForumAdapter.MyViewHolder holder, int position) {
-        ForumQuestion fm = forumList.get(position);
+        final ForumQuestion fm = forumListFiltered.get(position);
         holder.question.setText(fm.getQuestion());
         holder.answer.setText(fm.getAnswer());
         String answ = "Not Answered";
@@ -112,14 +132,18 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.MyViewHolder
     @Override
     public int getItemCount() {
         int itemc;
-        if(forumList == null){
+        if(forumListFiltered == null){
             itemc = 0;
         }else{
-            itemc = forumList.size();
+            itemc = forumListFiltered.size();
         }
 
 
-        Log.d("RecyclerV", "The item count: " + itemc);
+//        Log.d("RecyclerV", "The item count: " + itemc);
         return itemc;
+    }
+
+    public interface ForumAdapterListener {
+        void onFQSelected(ForumQuestion fq);
     }
 }

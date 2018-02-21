@@ -39,10 +39,18 @@ public class ForumQuestion {
     }
 
     public String getAnswer() {
+        if(answer == null){
+            this.answer = "";
+        }
         return answer;
     }
 
     public void setAnswer(String answer) {
         this.answer = answer;
+        if(answer.equals("")){
+            answered = false;
+        }else{
+            answered = true;
+        }
     }
 }

@@ -7,26 +7,44 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.caffae.studentsc.Forum">
 
-    <SearchView
-        android:id="@+id/forumSearch"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="visible">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    </SearchView>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/forumRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="455dp"
-        android:layout_below="@+id/forumSearch"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="0dp"
-        android:scrollbars="vertical"
-        tools:layout_editor_absoluteY="60dp"
-        tools:listitem="@layout/forum_list_row"/>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:context="com.example.caffae.studentsc.Forum"
+                    tools:showIn="@layout/fragment_forum">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="0dp"
+            android:scrollbars="vertical"
+            tools:layout_editor_absoluteY="60dp"
+            tools:listitem="@layout/forum_list_row"/>
+
+    </RelativeLayout>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton"

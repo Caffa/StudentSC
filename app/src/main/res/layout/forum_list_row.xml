@@ -13,25 +13,30 @@
 
     <TextView
         android:id="@+id/question"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
         android:textColor="@color/title"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/contact_name"/>
 
     <TextView
         android:id="@+id/answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/question" />
+        android:layout_below="@id/question"
+        android:textColor="@color/contact_number"
+        android:textSize="@dimen/contact_number"
+        android:layout_toEndOf="@id/question"/>
 
     <TextView
         android:id="@+id/answered"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:textColor="@color/answered" />
+        android:textColor="@color/answered"
+        />
 
 
 </RelativeLayout>
