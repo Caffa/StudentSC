@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
         //TODO:Check against the Database
 
         //TODO: this is a substitute so remove later
-        if (id.equals("1002222")){
-            if(password.equals("pwd")){
+        if (id.equals("1002222") ||id.equals("a")){
+            if(password.equals("pwd") ||password.equals("a")){
                 //TODO: toasts not working
                 FancyToast.makeText(this,"Successful Login!",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,true).show();
 
