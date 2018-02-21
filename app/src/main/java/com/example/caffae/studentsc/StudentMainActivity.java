@@ -27,7 +27,7 @@ public class StudentMainActivity extends AppCompatActivity {
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
                     manager = getSupportFragmentManager();
-                    manager.beginTransaction().replace(R.id.container, new SubmitQuestionFragment()).commit();
+                    manager.beginTransaction().replace(R.id.container, new AddQuestionFragment()).commit();
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);

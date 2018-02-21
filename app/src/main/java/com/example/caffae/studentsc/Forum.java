@@ -58,7 +58,7 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         this.setHasOptionsMenu(true);
@@ -116,6 +116,16 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "Click fab", Toast.LENGTH_LONG).show();
+
+//                Fragment nextFrag = new Fragment();
+//                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.all, nextFrag);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//
+                android.support.v4.app.FragmentManager manager;
+                manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.container, new AddQuestionFragment()).commit();
 
             }
         });
