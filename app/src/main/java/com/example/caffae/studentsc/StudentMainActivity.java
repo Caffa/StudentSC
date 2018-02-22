@@ -8,6 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.caffae.studentsc.Class.AvailableClassroomFragment;
+import com.example.caffae.studentsc.Class.BroadcastQuestionFragment;
+import com.example.caffae.studentsc.Feedback.FeedbackPageFragment;
+
 public class StudentMainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
@@ -25,12 +29,18 @@ public class StudentMainActivity extends AppCompatActivity {
                     manager.beginTransaction().replace(R.id.container, new Forum()).commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    manager = getSupportFragmentManager();
-                    manager.beginTransaction().replace(R.id.container, new AddQuestionFragment()).commit();
+
+                    mTextMessage.setText("Class");
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.container, new AvailableClassroomFragment()).commit();
+
+                    //mTextMessage.setText(R.string.title_dashboard);
+                   // manager = getSupportFragmentManager();
+                   // manager.beginTransaction().replace(R.id.container, new AddQuestionFragment()).commit();
+
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    mTextMessage.setText("Feedback");
                     manager = getSupportFragmentManager();
                     manager.beginTransaction().replace(R.id.container, new FeedbackPageFragment()).commit();
                     return true;
