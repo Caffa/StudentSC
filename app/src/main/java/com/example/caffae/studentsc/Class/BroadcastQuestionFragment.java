@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.caffae.studentsc.R;
-import com.example.caffae.studentsc.SubmitQuestionFragment;
 
 import java.util.ArrayList;
 
