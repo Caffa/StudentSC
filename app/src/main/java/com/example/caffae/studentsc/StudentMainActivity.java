@@ -21,14 +21,23 @@ public class StudentMainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentManager manager;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
+                    manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.container, new Forum()).commit();
                     return true;
                 case R.id.navigation_dashboard:
+
                     mTextMessage.setText("Class");
                     FragmentManager manager = getSupportFragmentManager();
                     manager.beginTransaction().replace(R.id.container, new AvailableClassroomFragment()).commit();
+
+                    //mTextMessage.setText(R.string.title_dashboard);
+                   // manager = getSupportFragmentManager();
+                   // manager.beginTransaction().replace(R.id.container, new AddQuestionFragment()).commit();
+
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText("Feedback");
@@ -49,5 +58,6 @@ public class StudentMainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
 
 }

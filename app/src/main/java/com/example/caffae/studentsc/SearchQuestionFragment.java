@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 
 public class SearchQuestionFragment extends Fragment {
@@ -36,7 +35,7 @@ public class SearchQuestionFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction ft =  manager.beginTransaction();
-                ft.replace(R.id.feedbackpagecontainer, new SubmitQuestionFragment()).commit();
+                ft.replace(R.id.feedbackpagecontainer, new AddQuestionFragment()).commit();
                 ft.addToBackStack(null);
 
             }

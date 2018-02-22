@@ -1,0 +1,63 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.caffae.studentsc.Forum">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:context="com.example.caffae.studentsc.Forum"
+                    tools:showIn="@layout/fragment_forum">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="0dp"
+            android:scrollbars="vertical"
+            tools:layout_editor_absoluteY="60dp"
+            tools:listitem="@layout/forum_list_row"/>
+
+    </RelativeLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="?attr/colorPrimaryDark"/>
+
+</android.support.design.widget.CoordinatorLayout>

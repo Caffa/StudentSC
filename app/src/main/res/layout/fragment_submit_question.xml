@@ -4,35 +4,38 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.example.caffae.studentsc.SubmitQuestionFragment">
+    tools:context="com.example.caffae.studentsc.AddQuestionFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:text="Question" />
+        android:gravity="top|center"
+        android:textColor="@color/title"
+        android:textSize="30sp"
+        android:text="Submit Question" />
+
+    <!--<EditText-->
+        <!--android:id="@+id/edittextsubmittitle"-->
+        <!--android:layout_width="350dp"-->
+        <!--android:background="@drawable/edittextbackground"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:editable="true"-->
+        <!--android:enabled="true"-->
+        <!--android:focusable="true"-->
+        <!--android:inputType="textMultiLine"-->
+        <!--android:isScrollContainer="true"-->
+        <!--android:maxLines="1"-->
+        <!--android:minLines="1"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:hint="Title"-->
+        <!--android:padding="10dp"-->
+        <!--/>-->
 
     <EditText
-        android:id="@+id/edittextsubmittitle"
-        android:layout_width="350dp"
-        android:background="@drawable/edittextbackground"
-        android:layout_gravity="center_horizontal"
-        android:editable="true"
-        android:enabled="true"
-        android:focusable="true"
-        android:inputType="textMultiLine"
-        android:isScrollContainer="true"
-        android:maxLines="1"
-        android:minLines="1"
-        android:layout_height="40dp"
-        android:layout_marginBottom="20dp"
-        android:hint="Title"
-        android:padding="10dp"
-        />
-
-    <EditText
-        android:id="@+id/edittextsubmitquestion"
+        android:id="@+id/QuestionTxtSubmit"
         android:layout_width="350dp"
         android:background="@drawable/edittextbackground"
         android:layout_gravity="center_horizontal"
@@ -40,19 +43,22 @@
         android:enabled="true"
         android:padding="10dp"
         android:hint="Question"
+        android:textAlignment="center"
         android:gravity= "top"
         android:focusable="true"
         android:inputType="textMultiLine"
         android:isScrollContainer="true"
         android:maxLines="6"
         android:minLines="6"
-        android:layout_height="100dp"
+        android:layout_height="300dp"
         android:layout_marginBottom="20dp"/>
 
     <Button
         android:id="@+id/buttonsubmitquestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit Question" />
+        android:layout_marginLeft="120dp"
+        android:gravity="center"
+        android:text="Submit Question"/>
 
 </LinearLayout>
