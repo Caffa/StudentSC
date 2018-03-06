@@ -1,0 +1,30 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.caffae.studentsc.Feedback.SlidesComponent.SlidesMainFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <fragment
+            android:id="@+id/movie_fragment"
+            android:name="com.example.caffae.studentsc.Feedback.SlidesComponent.SlidesFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_rating" />
+
+        <fragment
+            android:id="@+id/movie_details_fragment"
+            android:name="com.example.caffae.studentsc.Feedback.SlidesComponent.SlidesFeedbackfragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_slides" />
+    </LinearLayout>
+
+</FrameLayout>

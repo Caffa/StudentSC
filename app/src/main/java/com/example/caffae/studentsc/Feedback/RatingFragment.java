@@ -15,6 +15,7 @@ import com.example.caffae.studentsc.R;
 public class RatingFragment extends Fragment {
     private RatingBar ratingBar;
     private RatingBar ratingBarexplanation;
+    private RatingBar ratingBarRelevantContent;
     private Button btnSubmit;
 
     public RatingFragment() {
@@ -32,8 +33,10 @@ public class RatingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_rating, container, false);
         ratingBar = new RatingBar(getContext());
         ratingBarexplanation = new RatingBar(getContext());
+        ratingBarRelevantContent = new RatingBar(getContext());
         ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
         ratingBarexplanation = (RatingBar) view.findViewById(R.id.explanationratingbar);
+        ratingBarRelevantContent = view.findViewById(R.id.relevantcontentratingbar);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
         addListenerOnRatingBar(view);
         addListenerOnButton(view);
@@ -52,6 +55,11 @@ public class RatingFragment extends Fragment {
                                         boolean fromUser) {
             }
         });
+        ratingBarRelevantContent.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            public void onRatingChanged(RatingBar ratingBarexplanation, float rating,
+                                        boolean fromUser) {
+            }
+        });
     }
 
     public void addListenerOnButton(View view) {
@@ -60,7 +68,9 @@ public class RatingFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Clarity: "+ String.valueOf(ratingBar.getRating()) + " Explanation: " + String.valueOf(ratingBarexplanation.getRating()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Feedback Submitted!", Toast.LENGTH_SHORT).show();
+
+                // Toast.makeText(getContext(), "Clarity: "+ String.valueOf(ratingBar.getRating()) + " Explanation: " + String.valueOf(ratingBarexplanation.getRating()), Toast.LENGTH_SHORT).show();
             }
 
         });
