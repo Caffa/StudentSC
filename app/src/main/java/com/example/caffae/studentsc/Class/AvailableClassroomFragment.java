@@ -14,10 +14,17 @@ import android.widget.Toast;
 
 import com.example.caffae.studentsc.R;
 
+import org.json.JSONArray;
+
 
 public class AvailableClassroomFragment extends Fragment {
     Button quizButton;
     Button questionButton;
+    DatabaseJSON quizDatabaseJSON = new DatabaseJSON();
+    DatabaseJSON questionDatabaseJSON = new DatabaseJSON();
+    static JSONArray quizjsonArray = new JSONArray();
+    static JSONArray questionjsonArray = new JSONArray();
+
 
 
     public AvailableClassroomFragment() {
@@ -33,13 +40,18 @@ public class AvailableClassroomFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_available_classroom, container, false);
 
+        String QuizURL = "https://escproject-4871b.firebaseio.com/Quiz.json";
+        String BroadcastURL = "https://escproject-4871b.firebaseio.com/BroadcastQuestion.json";
         quizButton = new Button(getContext());
         quizButton = view.findViewById(R.id.quizButton);
         questionButton = new Button(getContext());
         questionButton = view.findViewById(R.id.questionButton);
+        quizDatabaseJSON.fetchDatabaseInfo(QuizURL);
+        questionDatabaseJSON.fetchDatabaseInfo(BroadcastURL);
         addListenerOnButton(view);
         return view;
     }
+
     public void addListenerOnButton(View view) {
 
         questionButton.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +62,10 @@ public class AvailableClassroomFragment extends Fragment {
                 FragmentTransaction ft =  manager.beginTransaction();
                 ft.replace(R.id.availableclassroomcontainer, new BroadcastQuestionFragment()).commit();
                 ft.addToBackStack(null);
+                System.out.println(questionDatabaseJSON.jsonarray[0]);
+                questionjsonArray = questionDatabaseJSON.jsonarray[0];
+
+
             }
 
         });
@@ -62,6 +78,9 @@ public class AvailableClassroomFragment extends Fragment {
                 FragmentTransaction ft =  manager.beginTransaction();
                 ft.replace(R.id.availableclassroomcontainer, new QuizFragment()).commit();
                 ft.addToBackStack(null);
+                System.out.println(quizDatabaseJSON.jsonarray[0]);
+                quizjsonArray = quizDatabaseJSON.jsonarray[0];
+
             }
 
         });

@@ -24,11 +24,9 @@ class QuizItem {
     public String getOption2() {
         return Option2;
     }
-
     public String getQuestion() {
         return Question;
     }
-
     public String getOption3() {
         return Option3;
     }
