@@ -34,7 +34,7 @@ public class QuizFragment extends Fragment {
     LinearLayout quizlinearlayout;
     Button quizsubmitbutton;
     ArrayList<Integer> selectedAnswers;
-    List<QuizItem> questionanswer;
+    ArrayList<QuizItem> questionanswer;
     int j = 0;
 
     public void onCreate(Bundle savedInstanceState) {
