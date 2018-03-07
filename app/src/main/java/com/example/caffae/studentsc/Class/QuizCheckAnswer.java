@@ -24,29 +24,22 @@ import java.util.Map;
 
 public class QuizCheckAnswer {
 
-    private List<QuizItem> questionsanswer;
+    private ArrayList<QuizItem> questionsanswer;
     private ArrayList<String> answerid;
-    private String jsonString;
 
-    public String getjsonstring(){
-        return jsonString;
-    }
-
-    public void convertJSON(String jsonstring){
+    public ArrayList<QuizItem> convertJSON(String jsonstring){
        // getStringFromJson(context);
         Gson gson = new Gson();
         @SuppressWarnings("serial")
-        Type collectionType = new TypeToken<List<QuizItem>>() {}.getType();
+        Type collectionType = new TypeToken<ArrayList<QuizItem>>() {}.getType();
         questionsanswer = gson.fromJson(jsonstring, collectionType);
-    }
-
-    public void setquestionanswer( List<QuizItem> questionans){
-        questionsanswer = questionans;
-    }
-    public List<QuizItem>   getquestionanswer(){
         return questionsanswer;
     }
-    public int printScore(ArrayList<Integer> buttonnumber, List<QuizItem> quizitemlist){
+
+    public ArrayList<QuizItem>   getquestionanswer(){
+        return questionsanswer;
+    }
+    public int printScore(ArrayList<Integer> buttonnumber, ArrayList<QuizItem> quizitemlist){
         int sum = 0;
         for (int i= 0; i<buttonnumber.size();i++){
             if (buttonnumber.get(i)==Integer.parseInt(quizitemlist.get(i).getAnswer())){
