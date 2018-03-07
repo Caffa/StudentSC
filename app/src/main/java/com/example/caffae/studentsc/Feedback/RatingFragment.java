@@ -10,6 +10,8 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.example.caffae.studentsc.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class RatingFragment extends Fragment {
@@ -17,6 +19,8 @@ public class RatingFragment extends Fragment {
     private RatingBar ratingBarexplanation;
     private RatingBar ratingBarRelevantContent;
     private Button btnSubmit;
+    private DatabaseReference mDatabase;
+
 
     public RatingFragment() {
     }
@@ -69,7 +73,10 @@ public class RatingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Feedback Submitted!", Toast.LENGTH_SHORT).show();
-
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                mDatabase.child("Rating").child("Criteria1").setValue(ratingBar.getRating());
+                mDatabase.child("Rating").child("Criteria2").setValue(ratingBarexplanation.getRating());
+                mDatabase.child("Rating").child("Criteria3").setValue(ratingBarRelevantContent.getRating());
                 // Toast.makeText(getContext(), "Clarity: "+ String.valueOf(ratingBar.getRating()) + " Explanation: " + String.valueOf(ratingBarexplanation.getRating()), Toast.LENGTH_SHORT).show();
             }
 
