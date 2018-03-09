@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.Forum;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 
 import com.example.caffae.studentsc.Class.AvailableClassroomFragment;
-import com.example.caffae.studentsc.Class.BroadcastQuestionFragment;
 import com.example.caffae.studentsc.Feedback.FeedbackPageFragment;
+import com.example.caffae.studentsc.R;
 
 public class StudentMainActivity extends AppCompatActivity {
 

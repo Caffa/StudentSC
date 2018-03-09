@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.Forum;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+
+import com.example.caffae.studentsc.R;
 
 import java.util.ArrayList;
 import java.util.List;

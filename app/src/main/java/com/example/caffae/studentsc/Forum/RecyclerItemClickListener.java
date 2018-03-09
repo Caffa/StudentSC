@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.Forum;
 
 /**
  * Created by Caffae on 21/2/18.

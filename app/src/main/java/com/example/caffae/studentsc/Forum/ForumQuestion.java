@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.Forum;
 
 /**
  * Created by Caffae on 21/2/18.
@@ -7,6 +7,7 @@ package com.example.caffae.studentsc;
 public class ForumQuestion {
     private String question, answer;
     private boolean answered;
+    public boolean show;
 
 
     public boolean isAnswered() {
@@ -21,6 +22,7 @@ public class ForumQuestion {
         this.answered = false;
         this.question = q;
         this.answer= "";
+        this.show = true;
 
     }
 
@@ -28,6 +30,7 @@ public class ForumQuestion {
         this.answered = true;
         this.question = q;
         this.answer = a;
+        this.show = true;
     }
 
     public String getQuestion() {
@@ -52,5 +55,9 @@ public class ForumQuestion {
         }else{
             answered = true;
         }
+    }
+
+    public void setDontShow() {
+        this.show = false;
     }
 }

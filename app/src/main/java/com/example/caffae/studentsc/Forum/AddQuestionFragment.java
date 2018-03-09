@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.Forum;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.caffae.studentsc.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -47,20 +48,36 @@ public class AddQuestionFragment extends Fragment {
                 if(questionTxt.equals("")){
                     Toast.makeText(getContext(), "Question is Blank", Toast.LENGTH_SHORT).show();
                 }else{
-//                    ForumQuestion holder = new ForumQuestion(questionTxt);
-                    //TODO add to firebase properly
 
                     mDatabase = FirebaseDatabase.getInstance().getReference();
+//                    DatabaseReference ref_carid = mDatabase.child("0").child("question");
+//                    final int[] counter = new int[1];
+//
+//
+//                    ref_carid.addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+//                            String sc = (String) dataSnapshot.getValue(String.class);
+//                            counter[0] = Integer.parseInt(sc);
+//                            Log.e("SC", "Error: " + sc);
+//                            Toast.makeText(getContext(), sc, Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                        }
+//                    });
+//
+                    int counter = 30;
+
 
 //                    Toast.makeText(getContext(), lastQuery.toString(), Toast.LENGTH_SHORT).show();
 //                    String uniqueNode = mDatabase.push().getKey();
 
 
-                    int counter = 30;
-
-
                     mDatabase.child(Integer.toString(counter)).child("question").setValue(questionTxt);
-
+//                    mDatabase.child("0").child("question").setValue(counter[0] +1);
 
                     Toast.makeText(getContext(), "Question Submitted", Toast.LENGTH_SHORT).show();
                     FragmentManager manager;
@@ -80,4 +97,6 @@ public class AddQuestionFragment extends Fragment {
 
 
     }
+
+
 }

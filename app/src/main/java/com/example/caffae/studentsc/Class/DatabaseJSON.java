@@ -3,12 +3,9 @@ package com.example.caffae.studentsc.Class;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.example.caffae.studentsc.MyApplication;
+import com.example.caffae.studentsc.Forum.MyApplication;
 
 import org.json.JSONArray;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by dorette_ong on 5/3/2018.
