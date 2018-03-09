@@ -10,12 +10,17 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.example.caffae.studentsc.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class RatingFragment extends Fragment {
     private RatingBar ratingBar;
     private RatingBar ratingBarexplanation;
+    private RatingBar ratingBarRelevantContent;
     private Button btnSubmit;
+    private DatabaseReference mDatabase;
+
 
     public RatingFragment() {
     }
@@ -32,8 +37,10 @@ public class RatingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_rating, container, false);
         ratingBar = new RatingBar(getContext());
         ratingBarexplanation = new RatingBar(getContext());
+        ratingBarRelevantContent = new RatingBar(getContext());
         ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
         ratingBarexplanation = (RatingBar) view.findViewById(R.id.explanationratingbar);
+        ratingBarRelevantContent = view.findViewById(R.id.relevantcontentratingbar);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
         addListenerOnRatingBar(view);
         addListenerOnButton(view);
@@ -52,6 +59,11 @@ public class RatingFragment extends Fragment {
                                         boolean fromUser) {
             }
         });
+        ratingBarRelevantContent.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            public void onRatingChanged(RatingBar ratingBarexplanation, float rating,
+                                        boolean fromUser) {
+            }
+        });
     }
 
     public void addListenerOnButton(View view) {
@@ -60,7 +72,12 @@ public class RatingFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Clarity: "+ String.valueOf(ratingBar.getRating()) + " Explanation: " + String.valueOf(ratingBarexplanation.getRating()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Feedback Submitted!", Toast.LENGTH_SHORT).show();
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                mDatabase.child("Rating").child("Criteria1").setValue(ratingBar.getRating());
+                mDatabase.child("Rating").child("Criteria2").setValue(ratingBarexplanation.getRating());
+                mDatabase.child("Rating").child("Criteria3").setValue(ratingBarRelevantContent.getRating());
+                // Toast.makeText(getContext(), "Clarity: "+ String.valueOf(ratingBar.getRating()) + " Explanation: " + String.valueOf(ratingBarexplanation.getRating()), Toast.LENGTH_SHORT).show();
             }
 
         });

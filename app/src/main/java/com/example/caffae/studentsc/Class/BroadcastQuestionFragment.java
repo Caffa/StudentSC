@@ -58,32 +58,21 @@ public class BroadcastQuestionFragment extends Fragment {
 
         addListenerOnButton(view);
         newbroadcast = new BroadcastQuestionCheckAnswer();
-
-        //to be deleted later on
-        ArrayList<String> questions = new ArrayList<>();
-        questions.add("2+3=?");
-        questions.add("3");
-        questions.add("5");
-        questions.add("6");
-        questions.add("7");
-        newbroadcast.setquestionanswer(questions);
-        newbroadcast.setanswer(2);
-        //
-
+        newbroadcast.convertJSON(AvailableClassroomFragment.questionjsonArray.toString());
         setQuestion(view);
         setAnswers(view);
         return view;
     }
 
     public void setQuestion(View view) {
-        question.setText(newbroadcast.getquestionanswer().get(0));
+        question.setText(newbroadcast.getquestionanswer().get(0).getQuestion());
     }
 
     public void setAnswers(View view) {
-        button1.setText(newbroadcast.getquestionanswer().get(1));
-        button2.setText(newbroadcast.getquestionanswer().get(2));
-        button3.setText(newbroadcast.getquestionanswer().get(3));
-        button4.setText(newbroadcast.getquestionanswer().get(4));
+        button1.setText(newbroadcast.getquestionanswer().get(0).getOption1());
+        button2.setText(newbroadcast.getquestionanswer().get(0).getOption2());
+        button3.setText(newbroadcast.getquestionanswer().get(0).getOption3());
+        button4.setText(newbroadcast.getquestionanswer().get(0).getOption4());
     }
 
     public void addListenerOnButton(View view) {
@@ -93,7 +82,7 @@ public class BroadcastQuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (radiogroup.getCheckedRadioButtonId() == radiogroup.getChildAt(newbroadcast.getanswer()-1).getId()){
+                if (radiogroup.getCheckedRadioButtonId() == radiogroup.getChildAt(Integer.parseInt(newbroadcast.getquestionanswer().get(0).getAnswer())-1).getId()){
                     Toast.makeText(getContext(), "Well Done!", Toast.LENGTH_SHORT).show();
                     changeFragment();
                 }
@@ -102,7 +91,7 @@ public class BroadcastQuestionFragment extends Fragment {
 
                 }
                 else{
-                    Toast.makeText(getContext(), "Try Again Next Time! \n The right answer was Option " + newbroadcast.getanswer(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Try Again Next Time! \n The right answer was Option " + newbroadcast.getquestionanswer().get(0).getAnswer(), Toast.LENGTH_SHORT).show();
                     changeFragment();
                 }
 

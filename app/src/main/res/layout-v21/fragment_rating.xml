@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:numStars="5"
         android:rating="2.0"
-        android:stepSize="1.0" tools:targetApi="lollipop"/>
+        android:stepSize="1.0" />
 
 
     <Button

@@ -20,6 +20,7 @@ import com.example.caffae.studentsc.R;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -33,7 +34,7 @@ public class QuizFragment extends Fragment {
     LinearLayout quizlinearlayout;
     Button quizsubmitbutton;
     ArrayList<Integer> selectedAnswers;
-    List<QuizItem> questionanswer;
+    ArrayList<QuizItem> questionanswer;
     int j = 0;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -51,14 +52,16 @@ public class QuizFragment extends Fragment {
         quizlinearlayout = new LinearLayout(getContext());
         quizlinearlayout = view.findViewById(R.id.quizlinearlayout);
         quizCheckAnswer = new QuizCheckAnswer();
-        quizCheckAnswer.convertJSON(getContext());
+        quizCheckAnswer.convertJSON(AvailableClassroomFragment.quizjsonArray.toString());
         addListenerOnButton(view);
         questionanswer = quizCheckAnswer.getquestionanswer();
+
         j =0;
         for (QuizItem i: questionanswer){
-            addQuizItem(i,j);
+           addQuizItem(i,j);
             j++;
         }
+
         return view;
     }
 
@@ -94,8 +97,8 @@ public class QuizFragment extends Fragment {
        quizsubmitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    int finalscore= quizCheckAnswer.printScore(selectedAnswers,questionanswer);
-                    Toast.makeText(getContext(),"Submitted! Your score is " + finalscore, Toast.LENGTH_SHORT).show();
+                int finalscore= quizCheckAnswer.printScore(selectedAnswers,questionanswer);
+                Toast.makeText(getContext(),"Submitted! Your score is " + finalscore, Toast.LENGTH_SHORT).show();
                 }
         });
 
