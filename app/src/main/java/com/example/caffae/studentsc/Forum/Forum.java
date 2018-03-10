@@ -32,6 +32,9 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -173,6 +176,20 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
 //                                forumList.remove(i);
 //                            }
 //                        }
+
+                        try {
+                            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getContext().openFileOutput("counter.txt", Context.MODE_PRIVATE));
+                            outputStreamWriter.write(items.size());
+                            outputStreamWriter.close();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        catch (NullPointerException e){
+                            e.printStackTrace();
+                        }
 
                         // refreshing recycler view
                         fAdapter.notifyDataSetChanged();

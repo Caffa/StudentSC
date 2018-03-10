@@ -39,7 +39,6 @@
         android:layout_width="350dp"
         android:background="@drawable/edittextbackground"
         android:layout_gravity="center_horizontal"
-        android:editable="true"
         android:enabled="true"
         android:padding="10dp"
         android:hint="Question"

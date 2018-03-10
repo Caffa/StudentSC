@@ -1,8 +1,10 @@
 package com.example.caffae.studentsc.Forum;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,12 @@ import android.widget.Toast;
 import com.example.caffae.studentsc.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class AddQuestionFragment extends Fragment {
@@ -44,7 +52,7 @@ public class AddQuestionFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                String questionTxt = edittextsubmitquestion.getText().toString();;
+                String questionTxt = edittextsubmitquestion.getText().toString().trim();
                 if(questionTxt.equals("")){
                     Toast.makeText(getContext(), "Question is Blank", Toast.LENGTH_SHORT).show();
                 }else{
@@ -69,8 +77,8 @@ public class AddQuestionFragment extends Fragment {
 //                        }
 //                    });
 //
-                    int counter = 30;
-
+//                    int counter = 30;
+                    int counter = Integer.parseInt(readFromFile(getContext()));
 
 //                    Toast.makeText(getContext(), lastQuery.toString(), Toast.LENGTH_SHORT).show();
 //                    String uniqueNode = mDatabase.push().getKey();
@@ -96,6 +104,43 @@ public class AddQuestionFragment extends Fragment {
         });
 
 
+    }
+
+    private String readFromFile(Context context) {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput("counter.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("postQ activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("postQ activity", "Can not read file: " + e.toString());
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+        if( ret.trim().equals("")){
+            Log.e("postQ activity", "Empty String");
+            ret = "30";
+        }
+
+        return ret;
     }
 
 
