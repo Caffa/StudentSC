@@ -3,7 +3,7 @@
     android:id="@+id/searchquestioncontainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.caffae.studentsc.SearchQuestionFragment">
+    tools:context="com.example.caffae.studentsc.Forum.SearchQuestionFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

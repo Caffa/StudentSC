@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.Forum;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -24,12 +24,17 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.example.caffae.studentsc.ForumAdapter.ForumAdapterListener;
+import com.example.caffae.studentsc.Forum.ForumAdapter.ForumAdapterListener;
+import com.example.caffae.studentsc.MainActivity;
+import com.example.caffae.studentsc.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,6 +114,7 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
         fetchDatabaseInfo();
 
 
+
         Log.d("RecyclerV", "Finish Data Prep");
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
@@ -143,10 +149,18 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
                             return;
                         }
 
+
+
                         List<ForumQuestion> items = new Gson().fromJson(response.toString(), new TypeToken<List<ForumQuestion>>() {
                         }.getType());
 
                         for(ForumQuestion i : items){
+                            if(i.getQuestion().equals("0")){
+                                //this is the counter node so don't show
+                                i.setDontShow();
+                                items.remove(i);
+                            }
+
                             if(i.getAnswer().equals("")){
                                 i.setAnswered(false);
                             }else{
@@ -156,6 +170,26 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
 
                         forumList.clear();
                         forumList.addAll(items);
+//                        for(ForumQuestion i : items) {
+//                            if (i.show == false) {
+//                                //this is the counter node so don't show
+//                                forumList.remove(i);
+//                            }
+//                        }
+
+                        try {
+                            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getContext().openFileOutput("counter.txt", Context.MODE_PRIVATE));
+                            outputStreamWriter.write(items.size());
+                            outputStreamWriter.close();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        catch (NullPointerException e){
+                            e.printStackTrace();
+                        }
 
                         // refreshing recycler view
                         fAdapter.notifyDataSetChanged();
@@ -165,7 +199,7 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
             public void onErrorResponse(VolleyError error) {
                 // error in getting json
                 Log.e(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 

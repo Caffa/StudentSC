@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.example.caffae.studentsc.AddQuestionFragment">
+    tools:context="com.example.caffae.studentsc.Forum.AddQuestionFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -39,7 +39,6 @@
         android:layout_width="350dp"
         android:background="@drawable/edittextbackground"
         android:layout_gravity="center_horizontal"
-        android:editable="true"
         android:enabled="true"
         android:padding="10dp"
         android:hint="Question"
