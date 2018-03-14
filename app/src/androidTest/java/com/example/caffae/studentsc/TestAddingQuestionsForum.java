@@ -163,7 +163,9 @@ public class TestAddingQuestionsForum {
 //                        isDisplayed()));
 //        bottomNavigationItemView4.perform(click());
 
-        //todo this part is an issue coz navigation bar ducks down...
+        onView(withId(R.id.questionButton)).perform(click());
+
+
         onView(withId(R.id.navigation_home)).perform(click());
 
 //        try {
