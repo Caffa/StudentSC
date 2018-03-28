@@ -39,9 +39,8 @@ public class QuizItem {
     public void setOption2(String option2){
         Option2 = option2;
     }
-    public void setOption3(String option3){
-        Option3= option3;
-    }public void setOption4(String option4){
+    public void setOption3(String option3){Option3= option3;}
+    public void setOption4(String option4){
        Option4= option4;
     }
     public void setQuestion(String question) {
