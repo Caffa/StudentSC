@@ -13,8 +13,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.caffae.studentsc.R;
+import com.example.caffae.studentsc.StudentMainActivity;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.IOException;
+
+import static java.lang.Thread.sleep;
 
 
 public class AvailableClassroomFragment extends Fragment {
@@ -39,18 +45,24 @@ public class AvailableClassroomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_available_classroom, container, false);
-
-        String QuizURL = "https://escproject-4871b.firebaseio.com/Quiz.json";
-        String BroadcastURL = "https://escproject-4871b.firebaseio.com/BroadcastQuestion.json";
         quizButton = new Button(getContext());
         quizButton = view.findViewById(R.id.quizButton);
         questionButton = new Button(getContext());
         questionButton = view.findViewById(R.id.questionButton);
-        quizDatabaseJSON.fetchDatabaseInfo(QuizURL);
-        questionDatabaseJSON.fetchDatabaseInfo(BroadcastURL);
+        try {
+            quizDatabaseJSON.fetchQuizInfo(StudentMainActivity.ongoing);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        questionDatabaseJSON.fetchBroadCastInfo(StudentMainActivity.ongoingBroadcast);
         addListenerOnButton(view);
         return view;
     }
+
 
     public void addListenerOnButton(View view) {
 
@@ -59,13 +71,11 @@ public class AvailableClassroomFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
-                FragmentTransaction ft =  manager.beginTransaction();
+                FragmentTransaction ft = manager.beginTransaction();
                 ft.replace(R.id.availableclassroomcontainer, new BroadcastQuestionFragment()).commit();
                 ft.addToBackStack(null);
                 System.out.println(questionDatabaseJSON.jsonarray[0]);
                 questionjsonArray = questionDatabaseJSON.jsonarray[0];
-
-
             }
 
         });
@@ -75,12 +85,11 @@ public class AvailableClassroomFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
-                FragmentTransaction ft =  manager.beginTransaction();
+                FragmentTransaction ft = manager.beginTransaction();
                 ft.replace(R.id.availableclassroomcontainer, new QuizFragment()).commit();
                 ft.addToBackStack(null);
                 System.out.println(quizDatabaseJSON.jsonarray[0]);
                 quizjsonArray = quizDatabaseJSON.jsonarray[0];
-
             }
 
         });

@@ -4,8 +4,6 @@ import android.app.Instrumentation;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
-import com.example.caffae.studentsc.Forum.StudentMainActivity;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

@@ -14,14 +14,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.caffae.studentsc.R;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 
 public class QuizFragment extends Fragment {
@@ -30,7 +25,7 @@ public class QuizFragment extends Fragment {
 
     }
 
-    QuizCheckAnswer quizCheckAnswer;
+   QuizMain quizMain;
     LinearLayout quizlinearlayout;
     Button quizsubmitbutton;
     ArrayList<Integer> selectedAnswers;
@@ -51,10 +46,10 @@ public class QuizFragment extends Fragment {
         quizsubmitbutton = view.findViewById(R.id.quizsubmitbutton);
         quizlinearlayout = new LinearLayout(getContext());
         quizlinearlayout = view.findViewById(R.id.quizlinearlayout);
-        quizCheckAnswer = new QuizCheckAnswer();
-        quizCheckAnswer.convertJSON(AvailableClassroomFragment.quizjsonArray.toString());
+        quizMain = new QuizMain();
+        quizMain.convertJSON(AvailableClassroomFragment.quizjsonArray.toString());
         addListenerOnButton(view);
-        questionanswer = quizCheckAnswer.getquestionanswer();
+        questionanswer = quizMain.getquestionanswer();
 
         j =0;
         for (QuizItem i: questionanswer){
@@ -97,7 +92,7 @@ public class QuizFragment extends Fragment {
        quizsubmitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int finalscore= quizCheckAnswer.printScore(selectedAnswers,questionanswer);
+                int finalscore= quizMain.printScore(selectedAnswers,questionanswer);
                 Toast.makeText(getContext(),"Submitted! Your score is " + finalscore, Toast.LENGTH_SHORT).show();
                 }
         });

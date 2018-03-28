@@ -22,10 +22,9 @@ import java.util.Map;
  * Created by dorette_ong on 20/2/2018.
  */
 
-public class QuizCheckAnswer {
+public class QuizMain {
 
     private ArrayList<QuizItem> questionsanswer;
-    private ArrayList<String> answerid;
 
     public ArrayList<QuizItem> convertJSON(String jsonstring){
        // getStringFromJson(context);

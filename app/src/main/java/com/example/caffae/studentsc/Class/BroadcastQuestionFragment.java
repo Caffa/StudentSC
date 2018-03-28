@@ -57,22 +57,31 @@ public class BroadcastQuestionFragment extends Fragment {
         radiogroup = view.findViewById(R.id.broadcastradiogroup);
 
         addListenerOnButton(view);
-        newbroadcast = new BroadcastQuestionCheckAnswer();
-        newbroadcast.convertJSON(AvailableClassroomFragment.questionjsonArray.toString());
         setQuestion(view);
         setAnswers(view);
         return view;
     }
 
     public void setQuestion(View view) {
+        newbroadcast = new BroadcastQuestionCheckAnswer();
+        newbroadcast.convertJSON(AvailableClassroomFragment.questionjsonArray.toString());
         question.setText(newbroadcast.getquestionanswer().get(0).getQuestion());
     }
 
     public void setAnswers(View view) {
+
         button1.setText(newbroadcast.getquestionanswer().get(0).getOption1());
         button2.setText(newbroadcast.getquestionanswer().get(0).getOption2());
         button3.setText(newbroadcast.getquestionanswer().get(0).getOption3());
         button4.setText(newbroadcast.getquestionanswer().get(0).getOption4());
+
+       // button1.setVisibility(View.INVISIBLE);
+       // button2.setVisibility(View.INVISIBLE);
+        //button3.setVisibility(View.INVISIBLE);
+       // button4.setVisibility(View.INVISIBLE);
+        //submitButton.setVisibility(View.INVISIBLE);
+
+
     }
 
     public void addListenerOnButton(View view) {

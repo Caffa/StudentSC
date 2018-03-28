@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.widget.EditText;
 
-import com.example.caffae.studentsc.Forum.StudentMainActivity;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import butterknife.BindView;
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 FancyToast.makeText(this,"Successful Login!",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,true).show();
 
                 //TODO: go to next activity
-                Intent intent = new Intent(this, StudentMainActivity.class);
+                Intent intent = new Intent(this, ClassroomIDActivity.class);
                 startActivity(intent);
 
             }
