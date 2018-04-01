@@ -21,16 +21,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.caffae.studentsc.Forum.ForumAdapter.ForumAdapterListener;
 import com.example.caffae.studentsc.MainActivity;
 import com.example.caffae.studentsc.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,6 +43,7 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
     private RecyclerView recyclerView;
     private ForumAdapter fAdapter;
     ForumAdapterListener listener;
+    private DatabaseReference mDatabase;
 
 
 
@@ -140,47 +140,42 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
         return view;
     }
 
-    private void fetchDatabaseInfo() {
-        JsonArrayRequest request = new JsonArrayRequest(URL,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        if (response == null) {
-                            Toast.makeText(getContext(), "Couldn't fetch the forumQs! Pleas try again.", Toast.LENGTH_LONG).show();
-                            return;
-                        }
+    void fetchDatabaseInfo(){
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query mQueryRef = mDatabase.child("Classroom1").child("Forum");
+        mQueryRef.addValueEventListener(new ValueEventListener() {
 
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e("Count " ,""+ dataSnapshot.getChildrenCount());
+                forumList.clear();
+                for (DataSnapshot i: dataSnapshot.getChildren()){
+                    ForumQuestion holder;
+//                    System.out.println("Key " + i.getKey() + " Value " + i.getValue(String.class));
+//                    List<ForumQuestion> items = new Gson().fromJson(i.toString(), new TypeToken<List<ForumQuestion>>() {}.getType());
 
-                        List<ForumQuestion> items = new Gson().fromJson(response.toString(), new TypeToken<List<ForumQuestion>>() {
-                        }.getType());
+//                    System.out.println(i.getKey()); //useless node number
+//                    System.out.println(i.getValue()); //string off stuff
+//                    System.out.println(i.toString());
 
-                        for(ForumQuestion i : items){
-                            if(i.getQuestion().equals("0")){
-                                //this is the counter node so don't show
-                                i.setDontShow();
-                                items.remove(i);
-                            }
+//                    forumList.addAll(items);
+//                    System.out.println(i.getValue());
 
-                            if(i.getAnswer().equals("")){
-                                i.setAnswered(false);
-                            }else{
-                                i.setAnswered(true);
-                            }
-                        }
+                    if(i.getValue().toString().contains("answer")){
+                        holder = new ForumQuestion(i.child("question").getValue().toString(), i.child("answer").getValue().toString());
+                        holder.setAnswered(true);
+                    }else{
+                        holder = new ForumQuestion(i.child("question").getValue().toString());
+                        holder.setAnswered(false);
+                    }
+                    forumList.add(holder);
 
-                        forumList.clear();
-                        forumList.addAll(items);
-//                        for(ForumQuestion i : items) {
-//                            if (i.show == false) {
-//                                //this is the counter node so don't show
-//                                forumList.remove(i);
-//                            }
-//                        }
-
-                        try {
+//                    System.out.println(i.child("question").getValue());
+                }
+                try {
                             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getContext().openFileOutput("counter.txt", Context.MODE_PRIVATE));
-                            outputStreamWriter.write(items.size());
+                            outputStreamWriter.write(forumList.size());
                             outputStreamWriter.close();
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
@@ -194,19 +189,83 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
 
                         // refreshing recycler view
                         fAdapter.notifyDataSetChanged();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // error in getting json
-                Log.e(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getContext(), "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+
+
             }
-        });
 
-        MyApplication.getInstance().addToRequestQueue(request);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("The read failed: " , databaseError.getMessage());
+            }
+        });}
 
-    }
+//    private void fetchDatabaseInfo() {
+//        JsonArrayRequest request = new JsonArrayRequest(URL,
+//                new Response.Listener<JSONArray>() {
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        if (response == null) {
+//                            Toast.makeText(getContext(), "Couldn't fetch the forumQs! Pleas try again.", Toast.LENGTH_LONG).show();
+//                            return;
+//                        }
+//
+//
+//
+//                        List<ForumQuestion> items = new Gson().fromJson(response.toString(), new TypeToken<List<ForumQuestion>>() {
+//                        }.getType());
+//
+//                        for(ForumQuestion i : items){
+////                            if(i.getQuestion().equals("0")){
+////                                //this is the counter node so don't show
+////                                i.setDontShow();
+////                                items.remove(i);
+////                            }
+//
+//                            if(i.getAnswer().equals("")){
+//                                i.setAnswered(false);
+//                            }else{
+//                                i.setAnswered(true);
+//                            }
+//                        }
+//
+//                        forumList.clear();
+//                        forumList.addAll(items);
+////                        for(ForumQuestion i : items) {
+////                            if (i.show == false) {
+////                                //this is the counter node so don't show
+////                                forumList.remove(i);
+////                            }
+////                        }
+//
+//                        try {
+//                            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getContext().openFileOutput("counter.txt", Context.MODE_PRIVATE));
+//                            outputStreamWriter.write(items.size());
+//                            outputStreamWriter.close();
+//                        } catch (FileNotFoundException e) {
+//                            e.printStackTrace();
+//                        }
+//                        catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                        catch (NullPointerException e){
+//                            e.printStackTrace();
+//                        }
+//
+//                        // refreshing recycler view
+//                        fAdapter.notifyDataSetChanged();
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                // error in getting json
+//                Log.e(TAG, "Error: " + error.getMessage());
+//                Toast.makeText(getContext(), "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//        MyApplication.getInstance().addToRequestQueue(request);
+//
+//    }
 
 //
 //    private void prepareForumData() {
