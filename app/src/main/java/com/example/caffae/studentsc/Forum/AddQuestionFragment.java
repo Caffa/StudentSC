@@ -1,6 +1,7 @@
 package com.example.caffae.studentsc.Forum;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -78,7 +79,15 @@ public class AddQuestionFragment extends Fragment {
 //                    });
 //
 //                    int counter = 30;
-                    int counter = Integer.parseInt(readFromFile(getContext()));
+//                    int counter = Integer.parseInt(readFromFile(getContext()));
+//                    int mergeCounterStudentId = Integer.parseInt(counter)
+
+                    //for unique id of forum Q
+                    String countTxt = readFromFile(getContext());
+                    SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.studentId), Context.MODE_PRIVATE);
+                    int studentId = sharedPref.getInt(getString(R.string.studentId), 1000030);
+                    String myStudenId = String.valueOf(studentId);
+                    int counter = Integer.parseInt(myStudenId + countTxt);
 
 //                    Toast.makeText(getContext(), lastQuery.toString(), Toast.LENGTH_SHORT).show();
 //                    String uniqueNode = mDatabase.push().getKey();

@@ -146,7 +146,7 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
                     @Override
                     public void onResponse(JSONArray response) {
                         if (response == null) {
-                            Toast.makeText(getContext(), "Couldn't fetch the contacts! Pleas try again.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Couldn't fetch the forumQs! Pleas try again.", Toast.LENGTH_LONG).show();
                             return;
                         }
 
