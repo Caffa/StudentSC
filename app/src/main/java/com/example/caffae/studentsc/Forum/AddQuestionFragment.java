@@ -86,7 +86,7 @@ public class AddQuestionFragment extends Fragment {
                     String countTxt = readFromFile(getContext());
                     SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.studentId), Context.MODE_PRIVATE);
                     int studentId = sharedPref.getInt(getString(R.string.studentId), 1000030);
-                    String myStudenId = String.valueOf(studentId);
+                    String myStudenId = String.valueOf(studentId - 1000000);
                     int counter = Integer.parseInt(myStudenId + countTxt);
 
 //                    Toast.makeText(getContext(), lastQuery.toString(), Toast.LENGTH_SHORT).show();
