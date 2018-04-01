@@ -1,7 +1,13 @@
 package com.example.caffae.studentsc.Class;
 
+import android.content.Intent;
 import android.provider.ContactsContract;
+import android.view.View;
+import android.widget.EditText;
 
+import com.example.caffae.studentsc.ClassroomIDActivity;
+import com.example.caffae.studentsc.MainActivity;
+import com.example.caffae.studentsc.StudentMainActivity;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -9,70 +15,64 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 
 public class BroadcastQuestionTiming {
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    private String classroomID = "";
-    private final Query query = mDatabase.child(classroomID).child("BroadcastQuestion");
+    private String classroomID = ClassroomIDActivity.getClassroomID();
     private final DatabaseReference broadcastnode = mDatabase.child(classroomID).child("BroadcastQuestion");
-    final int[] ongoing  = new int[]{-1};
-    final Long[] timing = new Long[]{(long) 0, (long) 0, (long) 0};
 
-    public long getTiming(){
-        return timing[2];
-    }
-    public int getOngoing(){
-       return ongoing[0];
-    }
 
-    public void inputTiming() {
-    }
-
-    public void generateTiming() {
-        broadcastnode.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.getValue().equals("None")) {
-                    long startTime = System.nanoTime();
-                    timing[0] = startTime;
-                }
-                if (dataSnapshot.child("Ongoing").getValue().equals("0")) {
-                    long timetaken = System.nanoTime() - timing[0];
-                    timing[1] = System.nanoTime();
-                    timing[2] = timetaken;
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
-    public void checkOngoingQuestion() {
+    public void pushFastestTiming(final long endTime) {
         broadcastnode.child("Ongoing").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("Ongoing").getValue().equals("None")) {
-                    ongoing[0] = -1;
+                final long startTime = 0;
+                final DatabaseReference questionnode = broadcastnode.child(dataSnapshot.getValue().toString()).child("0");
+                if (!dataSnapshot.getValue().equals("-1")) {
+                    questionnode.child("Fastest").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                                     @Override
+                                                                                     public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                                         if (dataSnapshot.exists()) {
+                                                                                             if (Long.parseLong(dataSnapshot.getValue().toString().substring(9, dataSnapshot.getValue().toString().length() - 1)) > (endTime - startTime)) {
+                                                                                                 questionnode.child("Fastest").child(MainActivity.studentID).setValue(endTime - startTime);
+                                                                                             }
+                                                                                         } else {
+                                                                                             questionnode.child("Fastest").child(MainActivity.studentID).setValue(endTime - startTime);
+                                                                                         }
+                                                                                         System.out.println("newtiming" + (endTime - startTime));
+
+                                                                                     }
+
+                                                                                     @Override
+                                                                                     public void onCancelled(DatabaseError databaseError) {
+
+                                                                                     }
+                                                                                 }
+                    );
+
                 }
-                else ongoing[0] = (int)dataSnapshot.getValue();
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
     }
 
-    public void checkFastest() {
-        broadcastnode.child("timing").addListenerForSingleValueEvent(new ValueEventListener() {
+    public void checkOngoing() {
+        final boolean[] ongoing = new boolean[1];
+        broadcastnode.child("Ongoing").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue().toString().equals("-1")){
+                    ongoing[0]=false;
+                }
+                else ongoing[0] = true;
             }
 
             @Override
@@ -81,6 +81,8 @@ public class BroadcastQuestionTiming {
             }
         });
 
-
     }
+
 }
+
+

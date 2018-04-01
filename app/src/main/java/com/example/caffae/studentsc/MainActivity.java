@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     EditText loginScreenPW;
     @BindView(R.id.loginCardView)
     CardView loginCardView;
+    public static String studentID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO: go to next activity
                 Intent intent = new Intent(this, ClassroomIDActivity.class);
                 startActivity(intent);
+                studentID = id;
 
             }
         }

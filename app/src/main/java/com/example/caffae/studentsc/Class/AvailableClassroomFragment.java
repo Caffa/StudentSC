@@ -1,7 +1,5 @@
 package com.example.caffae.studentsc.Class;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,15 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.caffae.studentsc.R;
 import com.example.caffae.studentsc.StudentMainActivity;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.io.IOException;
 
 import static java.lang.Thread.sleep;
 
@@ -26,11 +20,10 @@ import static java.lang.Thread.sleep;
 public class AvailableClassroomFragment extends Fragment {
     Button quizButton;
     Button questionButton;
-    DatabaseJSON quizDatabaseJSON = new DatabaseJSON();
-    DatabaseJSON questionDatabaseJSON = new DatabaseJSON();
+    DatabaseClassroom quizDatabaseClassroom = new DatabaseClassroom();
+    DatabaseClassroom questionDatabaseClassroom = new DatabaseClassroom();
     static JSONArray quizjsonArray = new JSONArray();
     static JSONArray questionjsonArray = new JSONArray();
-
 
 
     public AvailableClassroomFragment() {
@@ -49,16 +42,8 @@ public class AvailableClassroomFragment extends Fragment {
         quizButton = view.findViewById(R.id.quizButton);
         questionButton = new Button(getContext());
         questionButton = view.findViewById(R.id.questionButton);
-        try {
-            quizDatabaseJSON.fetchQuizInfo(StudentMainActivity.ongoing);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        questionDatabaseJSON.fetchBroadCastInfo(StudentMainActivity.ongoingBroadcast);
+        quizDatabaseClassroom.fetchQuizInfo(StudentMainActivity.ongoingQuiz);
+        questionDatabaseClassroom.fetchBroadCastInfo(StudentMainActivity.ongoingBroadcast);
         addListenerOnButton(view);
         return view;
     }
@@ -74,8 +59,8 @@ public class AvailableClassroomFragment extends Fragment {
                 FragmentTransaction ft = manager.beginTransaction();
                 ft.replace(R.id.availableclassroomcontainer, new BroadcastQuestionFragment()).commit();
                 ft.addToBackStack(null);
-                System.out.println(questionDatabaseJSON.jsonarray[0]);
-                questionjsonArray = questionDatabaseJSON.jsonarray[0];
+                questionjsonArray = questionDatabaseClassroom.jsonarray[0];
+                System.out.println(questionjsonArray);
             }
 
         });
@@ -88,8 +73,8 @@ public class AvailableClassroomFragment extends Fragment {
                 FragmentTransaction ft = manager.beginTransaction();
                 ft.replace(R.id.availableclassroomcontainer, new QuizFragment()).commit();
                 ft.addToBackStack(null);
-                System.out.println(quizDatabaseJSON.jsonarray[0]);
-                quizjsonArray = quizDatabaseJSON.jsonarray[0];
+                System.out.println(quizDatabaseClassroom.jsonarray[0]);
+                quizjsonArray = quizDatabaseClassroom.jsonarray[0];
             }
 
         });

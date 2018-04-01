@@ -16,7 +16,7 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 
 public class ClassroomIDActivity extends AppCompatActivity {
     Button buttonEnterClassroom;
-    String classroomID;
+    static String classroomID;
     EditText editTextclassroomID;
 
     @Override
@@ -36,7 +36,7 @@ public class ClassroomIDActivity extends AppCompatActivity {
     }
 
 
-    public String getClassroomID(){
+    public static String getClassroomID(){
         return classroomID;
     }
 
