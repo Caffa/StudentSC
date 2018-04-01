@@ -51,7 +51,8 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
     private SearchView searchView;
 
     // url to fetch contacts json
-    private static final String URL = "https://softwareconstruct-forum.firebaseio.com/.json";
+//    private static final String URL = "https://softwareconstruct-forum.firebaseio.com/.json";
+    private static final String URL = "https://softwareconstruct-forum.firebaseio.com/Classroom1/Forum.json";
 
 
     public Forum(){

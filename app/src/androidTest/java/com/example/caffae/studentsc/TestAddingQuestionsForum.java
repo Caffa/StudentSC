@@ -165,6 +165,12 @@ public class TestAddingQuestionsForum {
 
         onView(withId(R.id.questionButton)).perform(click());
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         onView(withId(R.id.navigation_home)).perform(click());
 

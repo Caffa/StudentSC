@@ -83,9 +83,15 @@ public class AddQuestionFragment extends Fragment {
 //                    Toast.makeText(getContext(), lastQuery.toString(), Toast.LENGTH_SHORT).show();
 //                    String uniqueNode = mDatabase.push().getKey();
 
+                    //Add the numberID for the student into this so can make it a unique ID
 
-                    mDatabase.child(Integer.toString(counter)).child("question").setValue(questionTxt);
-//                    mDatabase.child("0").child("question").setValue(counter[0] +1);
+
+
+
+
+
+//                    mDatabase.child(Integer.toString(counter)).child("question").setValue(questionTxt);
+                    mDatabase.child("Classroom1").child("Forum").child(Integer.toString(counter)).child("question").setValue(questionTxt);
 
                     Toast.makeText(getContext(), "Question Submitted", Toast.LENGTH_SHORT).show();
                     FragmentManager manager;
