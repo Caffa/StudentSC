@@ -1,9 +1,7 @@
 package com.example.caffae.studentsc.Class;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +13,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.caffae.studentsc.R;
+import com.example.caffae.studentsc.StudentMainActivity;
+
 import java.util.ArrayList;
 
 
@@ -40,24 +40,31 @@ public class QuizFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_quiz, container, false);
-        selectedAnswers = new ArrayList<>();
-        quizsubmitbutton = new Button(getContext());
-        quizsubmitbutton = view.findViewById(R.id.quizsubmitbutton);
-        quizlinearlayout = new LinearLayout(getContext());
-        quizlinearlayout = view.findViewById(R.id.quizlinearlayout);
-        quizMain = new QuizMain();
-        quizMain.convertJSON(AvailableClassroomFragment.quizjsonArray.toString());
-        addListenerOnButton(view);
-        questionanswer = quizMain.getquestionanswer();
-
-        j =0;
-        for (QuizItem i: questionanswer){
-           addQuizItem(i,j);
-            j++;
+        View noQuizView =  inflater.inflate(R.layout.fragment_no_ongoing_quiz, container, false);
+        if (StudentMainActivity.ongoingQuiz.equals("-1")){
+            return noQuizView;
         }
+        else {
 
-        return view;
+            View view = inflater.inflate(R.layout.fragment_quiz, container, false);
+            selectedAnswers = new ArrayList<>();
+            quizsubmitbutton = new Button(getContext());
+            quizsubmitbutton = view.findViewById(R.id.quizsubmitbutton);
+            quizlinearlayout = new LinearLayout(getContext());
+            quizlinearlayout = view.findViewById(R.id.quizlinearlayout);
+            quizMain = new QuizMain();
+            quizMain.convertJSON(AvailableClassroomFragment.quizjsonArray.toString());
+            addListenerOnButton(view);
+            questionanswer = quizMain.getquestionanswer();
+
+            j = 0;
+            for (QuizItem i : questionanswer) {
+                addQuizItem(i, j);
+                j++;
+            }
+
+            return view;
+        }
     }
 
     public void addQuizItem(QuizItem quizItem, final int k) {
@@ -93,6 +100,8 @@ public class QuizFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int finalscore= quizMain.printScore(selectedAnswers,questionanswer);
+                DatabaseClassroom databaseClassroom = new DatabaseClassroom();
+                databaseClassroom.pushQuizScores(finalscore);
                 Toast.makeText(getContext(),"Submitted! Your score is " + finalscore, Toast.LENGTH_SHORT).show();
                 }
         });
