@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 for (Map.Entry<String, String> pair : idsList.entrySet()) {
-                    System.out.println("Verify! Id is " + pair.getKey() + " pwd is "+ pair.getValue());
+//                    System.out.println("Verify! Id is " + pair.getKey() + " pwd is "+ pair.getValue());
                     if(pair.getKey().equals(enteredid) && pair.getValue().equals(enteredpassword)){
                         loginCorrect = true;
                     }
