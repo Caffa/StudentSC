@@ -9,19 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.example.caffae.studentsc.Forum.MyApplication;
 import com.example.caffae.studentsc.Forum.StudentMainActivity;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
-import org.json.JSONArray;
-
+import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -35,7 +33,11 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
 
     private static final String URL = "https://softwareconstruct-forum.firebaseio.com/Student%20List.json";
-    private Map<String, String> idsList;
+    private Map<String, String> idsList = new HashMap<String, String>();
+    private DatabaseReference mDatabase;
+    private boolean loginCorrect = false;
+    String enteredid;
+    String enteredpassword;
 
     @BindView(R.id.loginScreenID)
     EditText loginScreenID;
@@ -55,20 +57,30 @@ public class MainActivity extends AppCompatActivity {
     public void onViewClicked() {
 
         //DONE: Check against set values
-        String id = loginScreenID.getText().toString();
-        String password = loginScreenPW.getText().toString();
+         enteredid = loginScreenID.getText().toString();
+         enteredpassword = loginScreenPW.getText().toString();
+
+
 
         //DONE:Check against the Database
-        boolean shouldLogin = CheckIfIdCorrect(id,password);
+        fetchDatabaseInfo();
+//        boolean shouldLogin;
+//        shouldLogin = CheckIfIdCorrect(id,password);
 
+//        if (idsList != null){
+//             shouldLogin = CheckIfIdCorrect(id,password);
+//        }else{
+//            FancyToast.makeText(this,"Not connected to Internet",FancyToast.LENGTH_LONG,FancyToast.ERROR,true).show();
+//             shouldLogin = false;
+//        }
         //DONE: this is a substitute so remove later
 
-        if (shouldLogin){
+        if (loginCorrect){
 
                 //add studentId to counter for forumQadding
             SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.studentId), Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putInt(getString(R.string.studentId), Integer.parseInt(id));
+            editor.putInt(getString(R.string.studentId), Integer.parseInt(enteredid));
             editor.commit();
 
                 //DONE: toasts not working
@@ -87,53 +99,118 @@ public class MainActivity extends AppCompatActivity {
 
     }}
 
-    private boolean CheckIfIdCorrect(String id, String password) {
-        fetchDatabaseInfo();
-        boolean match = false;
-        if(idsList.get(id).equals(password)){
-            match = true;
+//    private boolean CheckIfIdCorrect(String id, String password) {
+//        fetchDatabaseInfo();
+//        if (idsList == null){
+//            System.out.println("IdList not inits");
+//        }
+//        boolean match = false;
+//        System.out.println("Id is " + id + " pwd is "+ password);
+//
+//        for (Map.Entry<String, String> pair : idsList.entrySet()) {
+//            System.out.println("Other V: Id is " + pair.getKey() + " pwd is "+ pair.getValue());
+//
+//        }
+//
+//        if(idsList.containsKey(id)){
+//            idsList.get(id).equals(password);
+//
+//            match = true;
+//            System.out.println("Correct");
+//        }
+//
+//        return match;
+//    }
+
+
+    private void fetchDatabaseInfo(){
+
+        if (idsList != null){
+            idsList.clear();
         }
 
-        return match;
-    }
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query mQueryRef = mDatabase.child("Student List");
+        mQueryRef.addValueEventListener(new ValueEventListener() {
 
-
-
-
-
-
-
-    private void fetchDatabaseInfo() {
-        JsonArrayRequest request = new JsonArrayRequest(URL,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        if (response == null) {
-                            Toast.makeText(getApplicationContext(), "Couldn't fetch the StudentIds! Pleas try again.", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-
-
-
-                        Map<String, String> items = new Gson().fromJson(response.toString(), new TypeToken<Map<String, String>>() {
-                        }.getType());
-
-                        idsList.clear();
-                        idsList = items;
-
-                    }
-                }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                // error in getting json
-                Log.e("Fetch S-Ids - Database", "Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e("Count " ,""+ dataSnapshot.getChildrenCount());
+                for (DataSnapshot i: dataSnapshot.getChildren()){
+                    idsList.put(i.getKey(), (String) i.getValue());
+//                    System.out.println("Key " + i.getKey() + " Value " + i.getValue(String.class));
+                }
+
+                for (Map.Entry<String, String> pair : idsList.entrySet()) {
+                    System.out.println("Verify! Id is " + pair.getKey() + " pwd is "+ pair.getValue());
+                    if(pair.getKey().equals(enteredid) && pair.getValue().equals(enteredpassword)){
+                        loginCorrect = true;
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("The read failed: " , databaseError.getMessage());
             }
         });
 
-        MyApplication.getInstance().addToRequestQueue(request);
 
+
+
+//        Map<String, String> idsList = (Map<String, String>) dataSnapshot.getValue();
+//        Log.i("dataSnapshot", "dataSnapshot" + new JSONObject(idsList));
     }
+
+
+
+
+//    private void fetchDatabaseInfo() {
+//        JsonArrayRequest request = new JsonArrayRequest(URL,
+//                new Response.Listener<JSONArray>() {
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        if (response == null) {
+//                            Toast.makeText(getApplicationContext(), "Couldn't fetch the StudentIds! Pleas try again.", Toast.LENGTH_LONG).show();
+//                            return;
+//                        }
+//
+//                        JSONObject object = new JSONObject(result);
+//                        JSONArray Jarray  = object.getJSONArray("contacts");
+//
+//                        for (int i = 0; i < Jarray.length(); i++)
+//                        {
+//                            JSONObject Jasonobject = Jarray.getJSONObject(i);
+//                        }
+//
+//                        //DEbug
+//
+//                        Map<String, String> items = new Gson().fromJson(response.toString(), new TypeToken<Map<String, String>>() {
+//                        }.getType());
+//
+////                        Map<String, String> items = new Gson().fromJson(response.toString(), new TypeToken<Map>())
+//
+//
+//
+////                        System.out.println(items);
+//
+////                        idsList.clear();
+//                        idsList = items;
+//
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                // error in getting json
+//                Log.e("Fetch S-Ids - Database", "Error: " + error.getMessage());
+//                Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//        MyApplication.getInstance().addToRequestQueue(request);
+//
+//    }
 
 
 
