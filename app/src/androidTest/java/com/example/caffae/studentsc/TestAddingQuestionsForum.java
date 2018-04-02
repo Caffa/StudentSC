@@ -53,7 +53,7 @@ public class TestAddingQuestionsForum {
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("a"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("1000008"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.loginScreenPW),
@@ -63,7 +63,7 @@ public class TestAddingQuestionsForum {
                                         0),
                                 2),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("a"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("pwd"), closeSoftKeyboard());
 
         onView(withId(R.id.loginCardView)).perform(click());
 
@@ -164,6 +164,12 @@ public class TestAddingQuestionsForum {
 //        bottomNavigationItemView4.perform(click());
 
         onView(withId(R.id.questionButton)).perform(click());
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
         onView(withId(R.id.navigation_home)).perform(click());
