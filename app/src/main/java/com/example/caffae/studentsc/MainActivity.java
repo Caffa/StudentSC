@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
 //             shouldLogin = false;
 //        }
         //DONE: this is a substitute so remove later
-        while(WaitForInfo){
-            FancyToast.makeText(this,"Verifying",FancyToast.LENGTH_LONG,FancyToast.DEFAULT,true).show();
-        }
+//        if(WaitForInfo){
+//            FancyToast.makeText(this,"Verifying",FancyToast.LENGTH_LONG,FancyToast.DEFAULT,true).show();
+//        }
 
         if (loginCorrect){
 
@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
                 //TODO: go to next activity
                 Intent intent = new Intent(this, ClassroomIDActivity.class);
                 startActivity(intent);
+
+
+        }else if(WaitForInfo){
+            FancyToast.makeText(this,"Verifying",FancyToast.LENGTH_LONG,FancyToast.DEFAULT,true).show();
 
 
         }else{

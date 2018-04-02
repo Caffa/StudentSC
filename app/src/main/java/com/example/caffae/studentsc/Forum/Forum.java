@@ -1,9 +1,11 @@
 package com.example.caffae.studentsc.Forum;
 
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.caffae.studentsc.Forum.ForumAdapter.ForumAdapterListener;
@@ -38,6 +41,8 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.support.design.widget.Snackbar.LENGTH_LONG;
+
 
 public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener {
     private List<ForumQuestion> forumList;
@@ -45,6 +50,8 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
     private ForumAdapter fAdapter;
     ForumAdapterListener listener;
     private DatabaseReference mDatabase;
+    String currentQ;
+    String currentAns;
 
 
 
@@ -97,13 +104,18 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
                     @Override public void onItemClick(View view, int position) {
                         // do whatever
                         int itemPosition = recyclerView.getChildLayoutPosition(view);
-                        String item = forumList.get(itemPosition).getQuestion();
-                        Toast.makeText(getContext(), "Short Click " + item, Toast.LENGTH_LONG).show();
+//                        String item = forumList.get(itemPosition).getQuestion();
+//                        Toast.makeText(getContext(), "Short Click " + item, Toast.LENGTH_LONG).show();
+                        ForumQuestion item = forumList.get(itemPosition);
+                        onFQSelected(item);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
                         // do whatever
-                        Toast.makeText(getContext(), "Long Click", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getContext(), "Long Click", Toast.LENGTH_LONG).show();
+                        int itemPosition = recyclerView.getChildLayoutPosition(view);
+                        ForumQuestion item = forumList.get(itemPosition);
+                        onFQSelected(item);
                     }
                 })
         );
@@ -385,12 +397,55 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
 
     @Override
     public void onFQSelected(ForumQuestion fq) {
+        currentQ = fq.getQuestion();
 //        Toast.makeText(getContext(), "Selected: " + fq.getQuestion() + ", " + fq.getAnswer(), Toast.LENGTH_LONG).show();
-        FancyToast.makeText(getContext(),"Selected" + fq.getQuestion(),FancyToast.LENGTH_LONG,FancyToast.INFO,true).show();
+        FancyToast.makeText(getContext(),"Selected " + fq.getQuestion(),FancyToast.LENGTH_LONG,FancyToast.INFO,true).show();
 
-        FancyToast.makeText(getContext(),fq.getAnswer(),FancyToast.LENGTH_LONG,FancyToast.INFO,true).show();
+//        FancyToast.makeText(getContext(),fq.getAnswer(),FancyToast.LENGTH_LONG,FancyToast.INFO,true).show();
+        if(fq.isAnswered()){
+        currentAns = fq.getAnswer();}
+        else{
+            currentAns = "Not answered yet";
+        }
+        Snackbar mySnackbar = Snackbar.make(getView(), currentAns, LENGTH_LONG);
+        mySnackbar.setAction("Expand", new MyShowAnsListener());
+        mySnackbar.show();
 
 
 
+    }
+
+    public void longPress(ForumQuestion fq){
+        currentQ = fq.getQuestion();
+        if(fq.isAnswered()){
+            currentAns = fq.getAnswer();}
+        else{
+            currentAns = "Not answered yet";
+        }
+        Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.popupview);//popup view is the layout you created
+        TextView txt = (TextView)dialog.findViewById(R.id.contentBoxAns);
+        txt.setText(currentAns);
+        TextView qtitle = (TextView)dialog.findViewById(R.id.titleQ);
+        qtitle.setText(currentQ);
+        dialog.show();
+
+    }
+
+    public class MyShowAnsListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            // Code to undo the user's last action
+            //TODO display screen for currentAns
+            Dialog dialog = new Dialog(getContext());
+            dialog.setContentView(R.layout.popupview);//popup view is the layout you created
+            TextView txt = (TextView)dialog.findViewById(R.id.contentBoxAns);
+            txt.setText(currentAns);
+            TextView qtitle = (TextView)dialog.findViewById(R.id.titleQ);
+            qtitle.setText(currentQ);
+            dialog.show();
+
+        }
     }
 }
