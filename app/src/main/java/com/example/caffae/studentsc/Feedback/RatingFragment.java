@@ -1,6 +1,7 @@
 package com.example.caffae.studentsc.Feedback;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.example.caffae.studentsc.ClassroomIDActivity;
 import com.example.caffae.studentsc.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,7 +21,7 @@ public class RatingFragment extends Fragment {
     private RatingBar ratingBarexplanation;
     private RatingBar ratingBarRelevantContent;
     private Button btnSubmit;
-    private DatabaseReference mDatabase;
+    private DatabaseRatingLecturer databaseRatingLecturer = new DatabaseRatingLecturer();
 
 
     public RatingFragment() {
@@ -42,8 +44,11 @@ public class RatingFragment extends Fragment {
         ratingBarexplanation = (RatingBar) view.findViewById(R.id.explanationratingbar);
         ratingBarRelevantContent = view.findViewById(R.id.relevantcontentratingbar);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
+
         addListenerOnRatingBar(view);
         addListenerOnButton(view);
+
+
         return view ;
     }
 
@@ -73,10 +78,12 @@ public class RatingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Feedback Submitted!", Toast.LENGTH_SHORT).show();
-                mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("Rating").child("Criteria1").setValue(ratingBar.getRating());
-                mDatabase.child("Rating").child("Criteria2").setValue(ratingBarexplanation.getRating());
-                mDatabase.child("Rating").child("Criteria3").setValue(ratingBarRelevantContent.getRating());
+                DatabaseRatingLecturer databaseRatingLecturer = new DatabaseRatingLecturer();
+
+                databaseRatingLecturer.pushLecturerRating("Clarity",ratingBar.getRating());
+                databaseRatingLecturer.pushLecturerRating("Meaningful",ratingBarexplanation.getRating());
+                databaseRatingLecturer.pushLecturerRating("Relevant",ratingBarRelevantContent.getRating());
+
                 // Toast.makeText(getContext(), "Clarity: "+ String.valueOf(ratingBar.getRating()) + " Explanation: " + String.valueOf(ratingBarexplanation.getRating()), Toast.LENGTH_SHORT).show();
             }
 

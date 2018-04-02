@@ -10,6 +10,7 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.widget.EditText;
 
+<<<<<<< HEAD
 import com.example.caffae.studentsc.Forum.StudentMainActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+=======
+>>>>>>> master
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.HashMap;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     EditText loginScreenPW;
     @BindView(R.id.loginCardView)
     CardView loginCardView;
+    public static String studentID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,9 +90,15 @@ public class MainActivity extends AppCompatActivity {
                 //DONE: toasts not working
                 FancyToast.makeText(this,"Successful Login!",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,true).show();
 
+<<<<<<< HEAD
                 //DONE: go to next activity
                 Intent intent = new Intent(this, StudentMainActivity.class);
+=======
+                //TODO: go to next activity
+                Intent intent = new Intent(this, ClassroomIDActivity.class);
+>>>>>>> master
                 startActivity(intent);
+                studentID = id;
 
         }else{
 

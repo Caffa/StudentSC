@@ -22,6 +22,7 @@
             android:padding="5dp"
             android:maxLines="1"
             android:inputType="number"
+            android:id="@+id/editTextSlideNumber"
             android:textSize="10dp"
             android:background="@drawable/edittextoutline"/>
     </LinearLayout>
@@ -34,6 +35,8 @@
         android:gravity="top"
         android:layout_margin="5dp"
         android:isScrollContainer="true"
+        android:id="@+id/editTextSlideFeedback"
+
         android:background="@drawable/edittextoutline"
         />
 </LinearLayout>

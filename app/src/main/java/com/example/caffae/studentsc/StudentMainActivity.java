@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc.Forum;
+package com.example.caffae.studentsc;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,12 +10,17 @@ import android.widget.TextView;
 
 
 import com.example.caffae.studentsc.Class.AvailableClassroomFragment;
+import com.example.caffae.studentsc.Class.DatabaseClassroom;
 import com.example.caffae.studentsc.Feedback.FeedbackPageFragment;
-import com.example.caffae.studentsc.R;
+import com.example.caffae.studentsc.Forum.Forum;
 
 public class StudentMainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    DatabaseClassroom databaseClassroom = new DatabaseClassroom();
+    public static String ongoingQuiz= "";
+    public static String ongoingBroadcast = "";
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -34,10 +39,13 @@ public class StudentMainActivity extends AppCompatActivity {
                     mTextMessage.setText("Class");
                     manager = getSupportFragmentManager();
                     manager.beginTransaction().replace(R.id.container, new AvailableClassroomFragment()).commit();
+                    ongoingQuiz = databaseClassroom.ongoing[0].substring(1, databaseClassroom.ongoing[0].length()-1);
+                    ongoingBroadcast = databaseClassroom.ongoing[1].substring(1, databaseClassroom.ongoing[1].length()-1);
 
+                    System.out.println("Ongoing" + ongoingBroadcast);
                     //mTextMessage.setText(R.string.title_dashboard);
-                   // manager = getSupportFragmentManager();
-                   // manager.beginTransaction().replace(R.id.container, new AddQuestionFragment()).commit();
+                    // manager = getSupportFragmentManager();
+                    // manager.beginTransaction().replace(R.id.container, new AddQuestionFragment()).commit();
 
                     return true;
                 case R.id.navigation_notifications:
@@ -58,6 +66,11 @@ public class StudentMainActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationBarSA);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        databaseClassroom.fetchOngoingQuiz();
+        databaseClassroom.fetchOngoingBroadcast();
+
+
     }
 
 
