@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -384,7 +385,12 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
 
     @Override
     public void onFQSelected(ForumQuestion fq) {
-        Toast.makeText(getContext(), "Selected: " + fq.getQuestion() + ", " + fq.getAnswer(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getContext(), "Selected: " + fq.getQuestion() + ", " + fq.getAnswer(), Toast.LENGTH_LONG).show();
+        FancyToast.makeText(getContext(),"Selected" + fq.getQuestion(),FancyToast.LENGTH_LONG,FancyToast.INFO,true).show();
+
+        FancyToast.makeText(getContext(),fq.getAnswer(),FancyToast.LENGTH_LONG,FancyToast.INFO,true).show();
+
+
 
     }
 }

@@ -20,4 +20,5 @@
     <string name="title_class">Class</string>
     <string name="title_feedback">Feedback</string>
     <string name="studentId">1000000</string>
+    <string name="title_grades">Grades</string>
 </resources>
