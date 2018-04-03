@@ -1,7 +1,9 @@
 package com.example.caffae.studentsc.Forum;
 
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -19,18 +21,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.caffae.studentsc.Forum.ForumAdapter.ForumAdapterListener;
 import com.example.caffae.studentsc.MainActivity;
 import com.example.caffae.studentsc.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,6 +47,9 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
     private RecyclerView recyclerView;
     private ForumAdapter fAdapter;
     ForumAdapterListener listener;
+    private DatabaseReference mDatabase;
+    String currentQ;
+    String currentAns;
 
 
 
@@ -51,7 +57,8 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
     private SearchView searchView;
 
     // url to fetch contacts json
-    private static final String URL = "https://softwareconstruct-forum.firebaseio.com/.json";
+//    private static final String URL = "https://softwareconstruct-forum.firebaseio.com/.json";
+    private static final String URL = "https://softwareconstruct-forum.firebaseio.com/Classroom1/Forum.json";
 
 
     public Forum(){
@@ -95,13 +102,18 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
                     @Override public void onItemClick(View view, int position) {
                         // do whatever
                         int itemPosition = recyclerView.getChildLayoutPosition(view);
-                        String item = forumList.get(itemPosition).getQuestion();
-                        Toast.makeText(getContext(), "Short Click " + item, Toast.LENGTH_LONG).show();
+//                        String item = forumList.get(itemPosition).getQuestion();
+//                        Toast.makeText(getContext(), "Short Click " + item, Toast.LENGTH_LONG).show();
+                        ForumQuestion item = forumList.get(itemPosition);
+                        onFQSelected(item);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
                         // do whatever
-                        Toast.makeText(getContext(), "Long Click", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getContext(), "Long Click", Toast.LENGTH_LONG).show();
+                        int itemPosition = recyclerView.getChildLayoutPosition(view);
+                        ForumQuestion item = forumList.get(itemPosition);
+                        longPress(item);
                     }
                 })
         );
@@ -139,47 +151,45 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
         return view;
     }
 
-    private void fetchDatabaseInfo() {
-        JsonArrayRequest request = new JsonArrayRequest(URL,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        if (response == null) {
-                            Toast.makeText(getContext(), "Couldn't fetch the contacts! Pleas try again.", Toast.LENGTH_LONG).show();
-                            return;
-                        }
+    void fetchDatabaseInfo(){
 
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.classroomID), Context.MODE_PRIVATE);
+        String classroom = sharedPref.getString(getString(R.string.classroomID), "Classroom1");
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query mQueryRef = mDatabase.child(classroom).child("Forum");
+        mQueryRef.addValueEventListener(new ValueEventListener() {
 
-                        List<ForumQuestion> items = new Gson().fromJson(response.toString(), new TypeToken<List<ForumQuestion>>() {
-                        }.getType());
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e("Count " ,""+ dataSnapshot.getChildrenCount());
+                forumList.clear();
+                for (DataSnapshot i: dataSnapshot.getChildren()){
+                    ForumQuestion holder;
+//                    System.out.println("Key " + i.getKey() + " Value " + i.getValue(String.class));
+//                    List<ForumQuestion> items = new Gson().fromJson(i.toString(), new TypeToken<List<ForumQuestion>>() {}.getType());
 
-                        for(ForumQuestion i : items){
-                            if(i.getQuestion().equals("0")){
-                                //this is the counter node so don't show
-                                i.setDontShow();
-                                items.remove(i);
-                            }
+//                    System.out.println(i.getKey()); //useless node number
+//                    System.out.println(i.getValue()); //string off stuff
+//                    System.out.println(i.toString());
 
-                            if(i.getAnswer().equals("")){
-                                i.setAnswered(false);
-                            }else{
-                                i.setAnswered(true);
-                            }
-                        }
+//                    forumList.addAll(items);
+//                    System.out.println(i.getValue());
 
-                        forumList.clear();
-                        forumList.addAll(items);
-//                        for(ForumQuestion i : items) {
-//                            if (i.show == false) {
-//                                //this is the counter node so don't show
-//                                forumList.remove(i);
-//                            }
-//                        }
+                    if(i.getValue().toString().contains("answer")){
+                        holder = new ForumQuestion(i.child("question").getValue().toString(), i.child("answer").getValue().toString());
+                        holder.setAnswered(true);
+                    }else{
+                        holder = new ForumQuestion(i.child("question").getValue().toString());
+                        holder.setAnswered(false);
+                    }
+                    forumList.add(holder);
 
-                        try {
+//                    System.out.println(i.child("question").getValue());
+                }
+                try {
                             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getContext().openFileOutput("counter.txt", Context.MODE_PRIVATE));
-                            outputStreamWriter.write(items.size());
+                            outputStreamWriter.write(forumList.size());
                             outputStreamWriter.close();
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
@@ -193,19 +203,83 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
 
                         // refreshing recycler view
                         fAdapter.notifyDataSetChanged();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // error in getting json
-                Log.e(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getContext(), "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+
+
             }
-        });
 
-        MyApplication.getInstance().addToRequestQueue(request);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("The read failed: " , databaseError.getMessage());
+            }
+        });}
 
-    }
+//    private void fetchDatabaseInfo() {
+//        JsonArrayRequest request = new JsonArrayRequest(URL,
+//                new Response.Listener<JSONArray>() {
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        if (response == null) {
+//                            Toast.makeText(getContext(), "Couldn't fetch the forumQs! Pleas try again.", Toast.LENGTH_LONG).show();
+//                            return;
+//                        }
+//
+//
+//
+//                        List<ForumQuestion> items = new Gson().fromJson(response.toString(), new TypeToken<List<ForumQuestion>>() {
+//                        }.getType());
+//
+//                        for(ForumQuestion i : items){
+////                            if(i.getQuestion().equals("0")){
+////                                //this is the counter node so don't show
+////                                i.setDontShow();
+////                                items.remove(i);
+////                            }
+//
+//                            if(i.getAnswer().equals("")){
+//                                i.setAnswered(false);
+//                            }else{
+//                                i.setAnswered(true);
+//                            }
+//                        }
+//
+//                        forumList.clear();
+//                        forumList.addAll(items);
+////                        for(ForumQuestion i : items) {
+////                            if (i.show == false) {
+////                                //this is the counter node so don't show
+////                                forumList.remove(i);
+////                            }
+////                        }
+//
+//                        try {
+//                            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getContext().openFileOutput("counter.txt", Context.MODE_PRIVATE));
+//                            outputStreamWriter.write(items.size());
+//                            outputStreamWriter.close();
+//                        } catch (FileNotFoundException e) {
+//                            e.printStackTrace();
+//                        }
+//                        catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                        catch (NullPointerException e){
+//                            e.printStackTrace();
+//                        }
+//
+//                        // refreshing recycler view
+//                        fAdapter.notifyDataSetChanged();
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                // error in getting json
+//                Log.e(TAG, "Error: " + error.getMessage());
+//                Toast.makeText(getContext(), "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//        MyApplication.getInstance().addToRequestQueue(request);
+//
+//    }
 
 //
 //    private void prepareForumData() {
@@ -324,7 +398,55 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
 
     @Override
     public void onFQSelected(ForumQuestion fq) {
-        Toast.makeText(getContext(), "Selected: " + fq.getQuestion() + ", " + fq.getAnswer(), Toast.LENGTH_LONG).show();
+        currentQ = fq.getQuestion();
+//        Toast.makeText(getContext(), "Selected: " + fq.getQuestion() + ", " + fq.getAnswer(), Toast.LENGTH_LONG).show();
+        FancyToast.makeText(getContext(),"Selected " + fq.getQuestion(),FancyToast.LENGTH_LONG,FancyToast.INFO,true).show();
+
+//        FancyToast.makeText(getContext(),fq.getAnswer(),FancyToast.LENGTH_LONG,FancyToast.INFO,true).show();
+        if(fq.isAnswered()){
+        currentAns = fq.getAnswer();}
+        else{
+            currentAns = "Not answered yet";
+        }
+//        Snackbar mySnackbar = Snackbar.make(getView(), currentAns, LENGTH_LONG);
+//        mySnackbar.setAction("Expand", new MyShowAnsListener());
+//        mySnackbar.show();
+
+
 
     }
+
+    public void longPress(ForumQuestion fq){
+        currentQ = fq.getQuestion();
+        if(fq.isAnswered()){
+            currentAns = fq.getAnswer();}
+        else{
+            currentAns = "Not answered yet";
+        }
+        Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.popupview);//popup view is the layout you created
+        TextView txt = (TextView)dialog.findViewById(R.id.contentBoxAns);
+        txt.setText(currentAns);
+        TextView qtitle = (TextView)dialog.findViewById(R.id.titleQ);
+        qtitle.setText(currentQ);
+        dialog.show();
+
+    }
+
+//    public class MyShowAnsListener implements View.OnClickListener{
+//
+//        @Override
+//        public void onClick(View v) {
+//            // Code to undo the user's last action
+//            //TODO display screen for currentAns
+//            Dialog dialog = new Dialog(getContext());
+//            dialog.setContentView(R.layout.popupview);//popup view is the layout you created
+//            TextView txt = (TextView)dialog.findViewById(R.id.contentBoxAns);
+//            txt.setText(currentAns);
+//            TextView qtitle = (TextView)dialog.findViewById(R.id.titleQ);
+//            qtitle.setText(currentQ);
+//            dialog.show();
+//
+//        }
+//    }
 }

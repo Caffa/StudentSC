@@ -53,7 +53,7 @@ public class TestAddingQuestionsForum {
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("a"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("1000020"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.loginScreenPW),
@@ -164,6 +164,12 @@ public class TestAddingQuestionsForum {
 //        bottomNavigationItemView4.perform(click());
 
         onView(withId(R.id.questionButton)).perform(click());
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
         onView(withId(R.id.navigation_home)).perform(click());

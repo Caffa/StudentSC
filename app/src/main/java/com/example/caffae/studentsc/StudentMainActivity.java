@@ -12,7 +12,9 @@ import android.widget.TextView;
 import com.example.caffae.studentsc.Classroom.AvailableClassroomFragment;
 import com.example.caffae.studentsc.Classroom.DatabaseClassroom;
 import com.example.caffae.studentsc.Feedback.RatingLecturer.FeedbackPageFragment;
+
 import com.example.caffae.studentsc.Forum.Forum;
+import com.example.caffae.studentsc.Grades.GradesPageFragment;
 
 public class StudentMainActivity extends AppCompatActivity {
 
@@ -52,6 +54,11 @@ public class StudentMainActivity extends AppCompatActivity {
                     mTextMessage.setText("Feedback");
                     manager = getSupportFragmentManager();
                     manager.beginTransaction().replace(R.id.container, new FeedbackPageFragment()).commit();
+                    return true;
+                case R.id.navigation_grades:
+                    mTextMessage.setText("Grades");
+                    manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.container, new GradesPageFragment()).commit();
                     return true;
             }
             return false;
