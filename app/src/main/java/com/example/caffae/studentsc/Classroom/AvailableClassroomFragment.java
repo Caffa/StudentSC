@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc.Class;
+package com.example.caffae.studentsc.Classroom;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,26 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import com.example.caffae.studentsc.R;
 import com.example.caffae.studentsc.StudentMainActivity;
-
 import org.json.JSONArray;
-
-import static java.lang.Thread.sleep;
 
 
 public class AvailableClassroomFragment extends Fragment {
-    Button quizButton;
-    Button questionButton;
-    DatabaseClassroom quizDatabaseClassroom = new DatabaseClassroom();
-    DatabaseClassroom questionDatabaseClassroom = new DatabaseClassroom();
-    static JSONArray quizjsonArray = new JSONArray();
-    static JSONArray questionjsonArray = new JSONArray();
+    private Button quizButton;
+    private Button questionButton;
+    private DatabaseClassroom quizDatabaseClassroom = new DatabaseClassroom();
+    private DatabaseClassroom questionDatabaseClassroom = new DatabaseClassroom();
+    protected static JSONArray quizjsonArray = new JSONArray();
+    protected static JSONArray questionjsonArray = new JSONArray();
 
 
     public AvailableClassroomFragment() {
-        // Required empty public constructor
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -48,9 +43,10 @@ public class AvailableClassroomFragment extends Fragment {
         return view;
     }
 
+    //addListener for quiz and question button
+    private void addListenerOnButton(View view) {
 
-    public void addListenerOnButton(View view) {
-
+        //Replaces current fragment with BroadcastQuestionFragment and pulls jsonarray for broadcast question
         questionButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -59,12 +55,12 @@ public class AvailableClassroomFragment extends Fragment {
                 FragmentTransaction ft = manager.beginTransaction();
                 ft.replace(R.id.availableclassroomcontainer, new BroadcastQuestionFragment()).commit();
                 ft.addToBackStack(null);
-                questionjsonArray = questionDatabaseClassroom.jsonarray[0];
-                System.out.println(questionjsonArray);
+                questionjsonArray = questionDatabaseClassroom.getJsonarray()[0];
             }
 
         });
 
+        //Replaces current fragment with QuizFragment and pulls jsonarray for quiz
         quizButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -73,8 +69,7 @@ public class AvailableClassroomFragment extends Fragment {
                 FragmentTransaction ft = manager.beginTransaction();
                 ft.replace(R.id.availableclassroomcontainer, new QuizFragment()).commit();
                 ft.addToBackStack(null);
-                System.out.println(quizDatabaseClassroom.jsonarray[0]);
-                quizjsonArray = quizDatabaseClassroom.jsonarray[0];
+                quizjsonArray = quizDatabaseClassroom.getJsonarray()[0];
             }
 
         });

@@ -1,26 +1,21 @@
-package com.example.caffae.studentsc.Feedback;
-
-import android.os.Handler;
+package com.example.caffae.studentsc.Feedback.RatingLecturer;
 
 import com.example.caffae.studentsc.ClassroomIDActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import javax.security.auth.callback.Callback;
 
 /**
  * Created by dorette_ong on 29/3/2018.
  */
 
-public class DatabaseRatingLecturer {
+class DatabaseRatingLecturer {
     private DatabaseReference mDatabase;
 
-
-    public void pushLecturerRating(final String criteria, final float rating){
+    //Push lecturer rating to database with main node: LecturerID, key: criteria, value: rating
+    void pushLecturerRating(final String criteria, final float rating){
 
         FirebaseDatabase.getInstance().getReference().child(ClassroomIDActivity.getClassroomID()).child("CurrentLecture").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

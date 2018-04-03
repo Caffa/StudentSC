@@ -1,7 +1,7 @@
 package com.example.caffae.studentsc.QuizTest;
 
-import com.example.caffae.studentsc.Class.QuizCheckAnswer;
-import com.example.caffae.studentsc.Class.QuizItem;
+import com.example.caffae.studentsc.Classroom.QuizItem;
+import com.example.caffae.studentsc.Classroom.QuizAndBroadcastMain;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,15 +12,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.*;
+import static junit.framework.Assert.assertEquals;
+
 /**
  * Created by dorette_ong on 7/3/2018.
  */
 @RunWith(Parameterized.class)
 public class QuizCheckPrintScoreTest {
-    QuizCheckAnswer quizCheckAnswer;
-    ArrayList<QuizItem> quiz;
-    ArrayList<Integer> buttonnumber;
+    private QuizAndBroadcastMain quizAndBroadcastMain;
+    private ArrayList<QuizItem> quiz;
+    private ArrayList<Integer> buttonnumber;
     int expected;
 
     public QuizCheckPrintScoreTest (int expected, ArrayList<Integer> buttonnumber , ArrayList<QuizItem>quiz) {
@@ -31,11 +32,11 @@ public class QuizCheckPrintScoreTest {
     }
     @Before
     public void runBeforeEachTest() {
-        quizCheckAnswer = new QuizCheckAnswer();
+        quizAndBroadcastMain = new QuizAndBroadcastMain();
     }
 
     @Parameterized.Parameters
-    public static Collection<Object[]> parameters() {
+    private static Collection<Object[]> parameters() {
         ArrayList<QuizItem> setquiz= new ArrayList<>();
         QuizItem quizItem1 = new QuizItem();
         quizItem1.setQuestion("2+5=?");
@@ -67,7 +68,7 @@ public class QuizCheckPrintScoreTest {
 
     @Test
     public void testPrintScore() {
-        assertEquals(expected, quizCheckAnswer.printScore(buttonnumber, quiz));
+        assertEquals(expected, quizAndBroadcastMain.printScore(buttonnumber, quiz));
     }
 
 }
