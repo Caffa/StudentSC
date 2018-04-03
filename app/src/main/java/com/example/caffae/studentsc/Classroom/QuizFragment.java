@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,6 +18,7 @@ import com.example.caffae.studentsc.R;
 import com.example.caffae.studentsc.StudentMainActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class QuizFragment extends Fragment {
@@ -28,6 +30,7 @@ public class QuizFragment extends Fragment {
     private Button quizsubmitbutton;
     private ArrayList<Integer> selectedAnswers;
     private ArrayList<QuizItem> questionanswer;
+    private HashMap<EditText,String> selectedShortAnswers = new HashMap<>();
     int j = 0;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -38,11 +41,11 @@ public class QuizFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // inflate and return no ongoing quiz layout if no current quiz
+        // inflate and return no ongoing quiz shortansweritem_quiz if no current quiz
         if (StudentMainActivity.ongoingQuiz.equals("-1")) {
             return inflater.inflate(R.layout.fragment_no_ongoing_quiz, container, false);
         }
-        // Else inflate and return layout with quiz
+        // Else inflate and return shortansweritem_quiz with quiz
         else {
 
             View view = inflater.inflate(R.layout.fragment_quiz, container, false);
@@ -59,7 +62,7 @@ public class QuizFragment extends Fragment {
             addListenerOnButton();
             questionanswer = quizMain.getquestionanswer();
 
-            //Dynamically add quiz items into the overall linear layout
+            //Dynamically add quiz items into the overall linear shortansweritem_quiz
             j = 0;
             for (QuizItem i : questionanswer) {
                 addQuizItem(i, j);
@@ -71,38 +74,52 @@ public class QuizFragment extends Fragment {
     }
 
     private void addQuizItem(QuizItem quizItem, final int k) {
-        // Inflate the layout for a single quiz item
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.item_quiz, null);
+        if (quizItem.getType().equals("MultipleChoice")){
 
-        // Set text for individual radio buttons
-        TextView question = v.findViewById(R.id.quizquestion);
-        question.setText(quizItem.getQuestion());
-        RadioButton option1 = v.findViewById(R.id.quizOption1);
-        option1.setText(quizItem.getOption1());
-        RadioButton option2 = v.findViewById(R.id.quizOption2);
-        option2.setText(quizItem.getOption2());
-        RadioButton option3 = v.findViewById(R.id.quizOption3);
-        option3.setText(quizItem.getOption3());
-        RadioButton option4 = v.findViewById(R.id.quizOption4);
-        option4.setText(quizItem.getOption4());
+            // Inflate the shortansweritem_quiz for a single quiz item
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v = inflater.inflate(R.layout.item_quiz, null);
 
-        quizlinearlayout.addView(v);
-        RadioGroup radiogroup = v.findViewById(R.id.quizradiogroup);
-        selectedAnswers.add(-1);
+            // Set text for individual radio buttons
+            TextView question = v.findViewById(R.id.quizquestion);
+            question.setText(quizItem.getQuestion());
+            RadioButton option1 = v.findViewById(R.id.quizOption1);
+            option1.setText(quizItem.getOption1());
+            RadioButton option2 = v.findViewById(R.id.quizOption2);
+            option2.setText(quizItem.getOption2());
+            RadioButton option3 = v.findViewById(R.id.quizOption3);
+            option3.setText(quizItem.getOption3());
+            RadioButton option4 = v.findViewById(R.id.quizOption4);
+            option4.setText(quizItem.getOption4());
 
-        //Add selected answers for each question into ArrayList selctedAnswers as (questionnumber, selected option)
-        radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                for (int buttonnumber = 0; buttonnumber < 4; buttonnumber++) {
-                    if (radioGroup.getChildAt(buttonnumber).getId() == radioGroup.getCheckedRadioButtonId()) {
-                        selectedAnswers.set(k, buttonnumber + 1);
+            quizlinearlayout.addView(v);
+            RadioGroup radiogroup = v.findViewById(R.id.quizradiogroup);
+            selectedAnswers.add(-1);
+
+            //Add selected answers for each question into ArrayList selctedAnswers as (questionnumber, selected option)
+            radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    for (int buttonnumber = 0; buttonnumber < 4; buttonnumber++) {
+                        if (radioGroup.getChildAt(buttonnumber).getId() == radioGroup.getCheckedRadioButtonId()) {
+                            selectedAnswers.set(k, buttonnumber + 1);
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
+        else{
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v = inflater.inflate(R.layout.shortansweritem_quiz,null);
+            TextView question = v.findViewById(R.id.shortAnswerQuestion);
+            question.setText(quizItem.getQuestion());
+            EditText shortanswer = v.findViewById(R.id.shortAnswerQuestionEditText);
+            quizlinearlayout.addView(v);
+            selectedShortAnswers.put(shortanswer,quizItem.getAnswer());
+        }
+
     }
+
 
     // Add listener for submit button
     // Toast Quizscore and push Quizscores to database
@@ -110,9 +127,16 @@ public class QuizFragment extends Fragment {
         quizsubmitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int finalscore = quizMain.printScore(selectedAnswers, questionanswer);
+                quizMain.multipleChoiceScore(selectedAnswers, questionanswer);
+                for (EditText editText: selectedShortAnswers.keySet()){
+                    quizMain.shortAnswerScore(selectedShortAnswers.get(editText),editText.getText().toString());
+                }
+                double finalscore =quizMain.getScore();
                 DatabaseClassroom databaseClassroom = new DatabaseClassroom();
-                databaseClassroom.pushQuizScores(finalscore);
+
+                System.out.println("QuestionAnswerSize"+questionanswer.size());
+                databaseClassroom.pushQuizScores((finalscore/questionanswer.size()));
+                databaseClassroom.updateOverallScore( (finalscore/questionanswer.size()));
                 Toast.makeText(getContext(), "Submitted! Your score is " + finalscore, Toast.LENGTH_SHORT).show();
             }
         });

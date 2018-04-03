@@ -68,7 +68,7 @@ public class QuizCheckPrintScoreTest {
 
     @Test
     public void testPrintScore() {
-        assertEquals(expected, quizAndBroadcastMain.printScore(buttonnumber, quiz));
+        assertEquals(expected, quizAndBroadcastMain.multipleChoiceScore(buttonnumber, quiz));
     }
 
 }

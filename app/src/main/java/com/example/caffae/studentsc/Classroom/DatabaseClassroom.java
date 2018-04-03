@@ -1,5 +1,7 @@
 package com.example.caffae.studentsc.Classroom;
 
+import android.provider.ContactsContract;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -14,6 +16,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
+
+import java.nio.DoubleBuffer;
 
 
 /**
@@ -65,7 +69,7 @@ public class DatabaseClassroom {
     }
 
     void fetchBroadCastInfo(String ongoing) {
-        String BroadcastURL = "https://softwareconstruct-forum.firebaseio.com/" + ClassroomIDActivity.getClassroomID() + "/BroadcastQuestion/" + ongoing + ".json";
+        String BroadcastURL = "https://softwareconstruct-forum.firebaseio.com/" + ClassroomIDActivity.getClassroomID() + "/BroadcastQuestion/" + ongoing  +".json";
         this.fetchDatabaseInfo(BroadcastURL);
     }
     // Save ongoing broadcast question number in ongoing[1]
@@ -79,14 +83,67 @@ public class DatabaseClassroom {
         this.fetchOngoing(OngoingQuizURL, 0);
     }
     // Save quiz scores into database with key: QuizID, value: QuizScore into student's grades
-    void pushQuizScores(final int QuizScore) {
+    void pushQuizScores(final double QuizScore) {
         FirebaseDatabase.getInstance().getReference().child(ClassroomIDActivity.getClassroomID()).child("Quiz").child("Ongoing").addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String QuizID = dataSnapshot.getValue().toString();
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child(ClassroomIDActivity.getClassroomID()).child("Grades").child("PerStudent").child(MainActivity.studentID);
-                mDatabase.child(QuizID).setValue(Integer.toString(QuizScore));
+                mDatabase.child(QuizID).setValue(Double.toString(QuizScore));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        });
+    }
+    void updateOverallScore(final double newQuizScore){
+        final DatabaseReference gradesPerStudent =  FirebaseDatabase.getInstance().getReference().child(ClassroomIDActivity.getClassroomID()).child("Grades").child("PerStudent").child(MainActivity.studentID);
+        gradesPerStudent.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot){
+               long childrencount = dataSnapshot.getChildrenCount();
+               final long quizCount = childrencount-2;
+               System.out.println("QuizCount" + quizCount);
+               gradesPerStudent.child("score").addListenerForSingleValueEvent(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(DataSnapshot dataSnapshot) {
+                       double cumulatedgrades = Double.parseDouble(dataSnapshot.getValue().toString())*quizCount/100;
+                       System.out.println("Cumulatedgrades"+cumulatedgrades);
+                       System.out.println("newScore"+(cumulatedgrades+newQuizScore)*100/(quizCount+1));
+                       double newOverallScore= (cumulatedgrades+newQuizScore)*100/(quizCount+1);
+                       gradesPerStudent.child("score").setValue(newOverallScore);
+                       if (newOverallScore<50){
+                           gradesPerStudent.child("Overall Grade").setValue("F");
+                       }
+                       else if (newOverallScore<60){
+                           gradesPerStudent.child("Overall Grade").setValue("E");
+                       }
+                       else if (newOverallScore<70){
+                           gradesPerStudent.child("Overall Grade").setValue("D");
+
+                       }
+                       else if (newOverallScore<75){
+                           gradesPerStudent.child("Overall Grade").setValue("C");
+
+                       }
+                       else if (newOverallScore<80){
+                           gradesPerStudent.child("Overall Grade").setValue("B");
+
+                       }
+                       else {
+                           gradesPerStudent.child("Overall Grade").setValue("A");
+                       }
+
+                   }
+
+                   @Override
+                   public void onCancelled(DatabaseError databaseError) {
+
+                   }
+               });
             }
 
             @Override

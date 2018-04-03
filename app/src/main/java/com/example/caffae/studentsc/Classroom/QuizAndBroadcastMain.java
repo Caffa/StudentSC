@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class QuizAndBroadcastMain {
 
     private ArrayList<QuizItem> questionsanswer;
+    private int sum =0;
 
     // Convert JSON from jsonstring to ArrayList of QuizItems
     public ArrayList<QuizItem> convertJSON(String jsonstring){
@@ -28,14 +29,27 @@ public class QuizAndBroadcastMain {
     }
 
     //Calculate score for Quiz
-    public int printScore(ArrayList<Integer> buttonnumber, ArrayList<QuizItem> quizitemlist){
-        int sum = 0;
+    public double getScore(){
+        return sum;
+    }
+
+    //Calculate score for Quiz
+    public void multipleChoiceScore(ArrayList<Integer> buttonnumber, ArrayList<QuizItem> quizitemlist){
         for (int i= 0; i<buttonnumber.size();i++){
             if (buttonnumber.get(i)==Integer.parseInt(quizitemlist.get(i).getAnswer())){
                 sum+=1;
             }
         }
-        return sum;
+
     }
+    public void shortAnswerScore(String answer, String input){
+        if (answer.trim().toLowerCase().equals(input.toLowerCase())){
+            sum+=1;
+        }
+
+    }
+
+
+
 
 }
