@@ -51,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fetchDatabaseInfo();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
     }
 
     @OnClick(R.id.loginCardView)
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         //DONE: Check against set values
          enteredid = loginScreenID.getText().toString();
          enteredpassword = loginScreenPW.getText().toString();
+        boolean WaitForInfo = true;
 
 
 
