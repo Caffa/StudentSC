@@ -1,7 +1,9 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.OutdatedTests;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+
+import com.example.caffae.studentsc.MainActivity;
 
 import org.junit.Rule;
 import org.junit.runner.RunWith;

@@ -1,8 +1,12 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.OutdatedTests;
 
 import android.app.Instrumentation;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
+
+import com.example.caffae.studentsc.MainActivity;
+import com.example.caffae.studentsc.R;
+import com.example.caffae.studentsc.StudentMainActivity;
 
 import org.junit.After;
 import org.junit.Assert;

@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.OutdatedTests;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

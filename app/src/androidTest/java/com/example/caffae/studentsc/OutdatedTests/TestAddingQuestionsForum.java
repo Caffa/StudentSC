@@ -1,13 +1,17 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.OutdatedTests;
 
 
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+
+import com.example.caffae.studentsc.MainActivity;
+import com.example.caffae.studentsc.R;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -46,7 +50,7 @@ public class TestAddingQuestionsForum {
 //        }
 
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.loginScreenID),
+                allOf(ViewMatchers.withId(R.id.loginScreenID),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
