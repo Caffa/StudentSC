@@ -29,7 +29,5 @@ class DatabaseSlidesFeedback {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-
     }
 }

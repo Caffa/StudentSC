@@ -110,10 +110,10 @@ public class DatabaseClassroom {
                gradesPerStudent.child("score").addListenerForSingleValueEvent(new ValueEventListener() {
                    @Override
                    public void onDataChange(DataSnapshot dataSnapshot) {
-                       double cumulatedgrades = Double.parseDouble(dataSnapshot.getValue().toString())*quizCount/100;
+                       double cumulatedgrades = Double.parseDouble(dataSnapshot.getValue().toString())*quizCount;
                        System.out.println("Cumulatedgrades"+cumulatedgrades);
-                       System.out.println("newScore"+(cumulatedgrades+newQuizScore)*100/(quizCount+1));
-                       double newOverallScore= (cumulatedgrades+newQuizScore)*100/(quizCount+1);
+                       System.out.println("newScore"+(cumulatedgrades+newQuizScore)/(quizCount+1));
+                       double newOverallScore= (cumulatedgrades+newQuizScore)/(quizCount+1);
                        gradesPerStudent.child("score").setValue(newOverallScore);
                        if (newOverallScore<50){
                            gradesPerStudent.child("Overall Grade").setValue("F");

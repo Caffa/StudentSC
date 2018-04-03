@@ -11,11 +11,11 @@ import com.google.firebase.database.ValueEventListener;
  * Created by dorette_ong on 29/3/2018.
  */
 
-class DatabaseRatingLecturer {
+public class DatabaseRatingLecturer {
     private DatabaseReference mDatabase;
 
     //Push lecturer rating to database with main node: LecturerID, key: criteria, value: rating
-    void pushLecturerRating(final String criteria, final float rating){
+    public void pushLecturerRating(final String criteria, final float rating){
 
         FirebaseDatabase.getInstance().getReference().child(ClassroomIDActivity.getClassroomID()).child("CurrentLecture").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
