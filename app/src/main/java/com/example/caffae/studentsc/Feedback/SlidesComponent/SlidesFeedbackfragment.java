@@ -45,7 +45,7 @@ public class SlidesFeedbackfragment extends Fragment {
         return view;
     }
 
-    //Inflates each feedback layout
+    //Inflates each feedback shortanweritem_quiz
     private ArrayList<EditText> addSlideFeedbackItems() {
         ArrayList<EditText> addedBox = new ArrayList<>();
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

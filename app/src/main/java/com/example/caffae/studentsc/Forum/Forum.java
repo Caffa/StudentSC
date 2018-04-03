@@ -72,7 +72,7 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the shortansweritem_quiz for this fragment
         this.setHasOptionsMenu(true);
 
         View view = inflater.inflate(R.layout.fragment_forum, container, false);
@@ -424,7 +424,7 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
             currentAns = "Not answered yet";
         }
         Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.popupview);//popup view is the layout you created
+        dialog.setContentView(R.layout.popupview);//popup view is the shortansweritem_quiz you created
         TextView txt = (TextView)dialog.findViewById(R.id.contentBoxAns);
         txt.setText(currentAns);
         TextView qtitle = (TextView)dialog.findViewById(R.id.titleQ);
@@ -440,7 +440,7 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
 //            // Code to undo the user's last action
 //            //TODO display screen for currentAns
 //            Dialog dialog = new Dialog(getContext());
-//            dialog.setContentView(R.layout.popupview);//popup view is the layout you created
+//            dialog.setContentView(R.shortansweritem_quiz.popupview);//popup view is the shortansweritem_quiz you created
 //            TextView txt = (TextView)dialog.findViewById(R.id.contentBoxAns);
 //            txt.setText(currentAns);
 //            TextView qtitle = (TextView)dialog.findViewById(R.id.titleQ);

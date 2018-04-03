@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     tools:context="com.example.caffae.studentsc.Forum.AddQuestionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragmshortanweritem_quizyout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

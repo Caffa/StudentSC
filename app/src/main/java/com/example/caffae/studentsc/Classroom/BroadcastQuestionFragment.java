@@ -38,11 +38,11 @@ public class BroadcastQuestionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // If no ongoing broadcast, inflate and return layout for no ongoing broadcast
+        // If no ongoing broadcast, inflate and return shortansweritem_quiz for no ongoing broadcast
         if (StudentMainActivity.ongoingBroadcast.equals("-1")) {
             return inflater.inflate(R.layout.fragment_no_ongoing, container, false);
         }
-        // Else if there is an ongoing broadcast, inflate layout with broadcast question
+        // Else if there is an ongoing broadcast, inflate shortansweritem_quiz with broadcast question
         else {
             View view = inflater.inflate(R.layout.fragment_broadcast_question, container, false);
             submitButton = new Button(getContext());

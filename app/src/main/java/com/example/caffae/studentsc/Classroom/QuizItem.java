@@ -12,6 +12,7 @@ public class QuizItem {
     private String Option2;
     private String Option3;
     private String Option4;
+    private String Type;
 
     public String getAnswer() {
         return Answer;
@@ -28,6 +29,9 @@ public class QuizItem {
     }
     public String getOption4(){
         return Option4;
+    }
+    public String getType(){
+        return Type;
     }
 
     public void setAnswer(String answer){
