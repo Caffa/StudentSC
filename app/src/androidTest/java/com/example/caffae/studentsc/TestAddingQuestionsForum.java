@@ -53,7 +53,11 @@ public class TestAddingQuestionsForum {
                                         0),
                                 1),
                         isDisplayed()));
+<<<<<<< HEAD
         appCompatEditText.perform(replaceText("a"), closeSoftKeyboard());
+=======
+        appCompatEditText.perform(replaceText("1000020"), closeSoftKeyboard());
+>>>>>>> 0f128ed81c464bc920c6dab42054242e60416649
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.loginScreenPW),

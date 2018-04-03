@@ -2,6 +2,7 @@ package com.example.caffae.studentsc.Forum;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -149,6 +150,15 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
                             return;
                         }
 
+<<<<<<< HEAD
+=======
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.classroomID), Context.MODE_PRIVATE);
+        String classroom = sharedPref.getString(getString(R.string.classroomID), "Classroom1");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query mQueryRef = mDatabase.child(classroom).child("Forum");
+        mQueryRef.addValueEventListener(new ValueEventListener() {
+>>>>>>> 0f128ed81c464bc920c6dab42054242e60416649
 
 
                         List<ForumQuestion> items = new Gson().fromJson(response.toString(), new TypeToken<List<ForumQuestion>>() {

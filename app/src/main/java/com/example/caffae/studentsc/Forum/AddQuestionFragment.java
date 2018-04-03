@@ -78,14 +78,39 @@ public class AddQuestionFragment extends Fragment {
 //                    });
 //
 //                    int counter = 30;
+<<<<<<< HEAD
                     int counter = Integer.parseInt(readFromFile(getContext()));
+=======
+//                    int counter = Integer.parseInt(readFromFile(getContext()));
+//                    int mergeCounterStudentId = Integer.parseInt(counter)
+
+                    //for unique id of forum Q
+                    String countTxt = readFromFile(getContext());
+                    SharedPreferences sharedPrefStudent = getActivity().getSharedPreferences(getString(R.string.studentId), Context.MODE_PRIVATE);
+                    int studentId = sharedPrefStudent.getInt(getString(R.string.studentId), 1000030);
+                    String myStudenId = String.valueOf(studentId - 1000000);
+                    int counter = Integer.parseInt(myStudenId + countTxt);
+>>>>>>> 0f128ed81c464bc920c6dab42054242e60416649
 
 //                    Toast.makeText(getContext(), lastQuery.toString(), Toast.LENGTH_SHORT).show();
 //                    String uniqueNode = mDatabase.push().getKey();
 
+<<<<<<< HEAD
 
                     mDatabase.child(Integer.toString(counter)).child("question").setValue(questionTxt);
 //                    mDatabase.child("0").child("question").setValue(counter[0] +1);
+=======
+                    //Add the numberID for the student into this so can make it a unique ID
+
+
+                    SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.classroomID), Context.MODE_PRIVATE);
+                    String classroom = sharedPref.getString(getString(R.string.classroomID), "Classroom1");
+
+
+
+//                    mDatabase.child(Integer.toString(counter)).child("question").setValue(questionTxt);
+                    mDatabase.child(classroom).child("Forum").child(Integer.toString(counter)).child("question").setValue(questionTxt);
+>>>>>>> 0f128ed81c464bc920c6dab42054242e60416649
 
                     Toast.makeText(getContext(), "Question Submitted", Toast.LENGTH_SHORT).show();
                     FragmentManager manager;

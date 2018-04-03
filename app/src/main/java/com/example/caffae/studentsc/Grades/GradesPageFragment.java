@@ -41,6 +41,9 @@ public class GradesPageFragment extends Fragment {
     @BindView(R.id.scoreDisplay)
     TextView scoreDisplay;
 
+    @BindView(R.id.individualQScores)
+    TextView individualQScores;
+
 
     public GradesPageFragment() {
         // Required empty public constructor
@@ -73,17 +76,21 @@ public class GradesPageFragment extends Fragment {
 
     private void fetchDatabaseInfo(){
 
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.classroomID), Context.MODE_PRIVATE);
+        String classroom = sharedPref.getString(getString(R.string.classroomID), "Classroom1");
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query mQueryRef = mDatabase.child("Classroom1").child("Grades").child("PerStudent");
+        Query mQueryRef = mDatabase.child(classroom).child("Grades").child("PerStudent");
         mQueryRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.e("Count " ,""+ dataSnapshot.getChildrenCount());
                 for (DataSnapshot i: dataSnapshot.getChildren()){
-                        System.out.println("Key " + i.getKey());
+//                        System.out.println("Key " + i.getKey());
                         String currentKey = i.getKey().toString();
+
 
                         if(Integer.parseInt(currentKey) == studentId){
                             overallGrade = i.child("Overall Grade").getValue().toString();
@@ -94,6 +101,22 @@ public class GradesPageFragment extends Fragment {
 
                             gradeDisplay.setText(String.valueOf(overallGrade));
                             scoreDisplay.setText(String.valueOf(score));
+
+                            String individualScores = "";
+
+                            for(DataSnapshot a : i.getChildren()){
+                                if(!a.getKey().toString().equals("Overall Grade") && !a.getKey().toString().equals("score")){
+                                    individualScores += "Quiz " + a.getKey().toString() + " : " + a.getValue().toString() + "\n";
+                                }
+
+                            }
+                            individualScores.trim();
+
+                            individualQScores.setText(individualScores);
+
+
+
+
                         }
 
                 }

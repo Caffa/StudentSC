@@ -64,11 +64,19 @@ public class TestForForumRelativeLayout {
                                         0),
                                 1),
                         isDisplayed()));
+<<<<<<< HEAD
         appCompatEditText2.perform(replaceText("1002222"), closeSoftKeyboard());
 
 
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.loginScreenID), withText("1002222"),
+=======
+        appCompatEditText2.perform(replaceText("1000020"), closeSoftKeyboard());
+
+
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.loginScreenID), withText("1000020"),
+>>>>>>> 0f128ed81c464bc920c6dab42054242e60416649
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -95,10 +103,17 @@ public class TestForForumRelativeLayout {
                                         0),
                                 2),
                         isDisplayed()));
+<<<<<<< HEAD
         appCompatEditText6.perform(replaceText("pwd"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText7 = onView(
                 allOf(withId(R.id.loginScreenPW), withText("pwd"),
+=======
+        appCompatEditText6.perform(replaceText("a"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText7 = onView(
+                allOf(withId(R.id.loginScreenPW), withText("a"),
+>>>>>>> 0f128ed81c464bc920c6dab42054242e60416649
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
