@@ -1,13 +1,14 @@
 package com.example.caffae.studentsc;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -33,6 +34,19 @@ public class ClassroomIDActivity extends AppCompatActivity {
     public void setClassroomID(){
         classroomID = "Classroom"+editTextclassroomID.getText().toString();
         System.out.println("ClassroomIDEditText: " + classroomID);
+
+
+
+
+
+
+
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.classroomID), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.classroomID), classroomID);
+        editor.commit();
+
     }
 
 

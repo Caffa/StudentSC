@@ -76,9 +76,12 @@ public class GradesPageFragment extends Fragment {
 
     private void fetchDatabaseInfo(){
 
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.classroomID), Context.MODE_PRIVATE);
+        String classroom = sharedPref.getString(getString(R.string.classroomID), "Classroom1");
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query mQueryRef = mDatabase.child("Classroom1").child("Grades").child("PerStudent");
+        Query mQueryRef = mDatabase.child(classroom).child("Grades").child("PerStudent");
         mQueryRef.addValueEventListener(new ValueEventListener() {
 
             @Override
