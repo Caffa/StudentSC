@@ -43,7 +43,7 @@ public class QuizAndBroadcastMain {
 
     }
     public void shortAnswerScore(String answer, String input){
-        if (answer.trim().toLowerCase().equals(input.toLowerCase())){
+        if (answer.equals(input)){
             sum+=1;
         }
 

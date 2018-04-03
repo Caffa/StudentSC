@@ -9,7 +9,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-class BroadcastQuestionTiming {
+public class BroadcastQuestionTiming {
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private String classroomID = ClassroomIDActivity.getClassroomID();
@@ -17,7 +17,7 @@ class BroadcastQuestionTiming {
 
     // Compares timing with current timing in database
     // Pushes key: studentID and value:timing to Fastest node if it is smaller than timing in database.
-    void pushFastestTiming(final long endTime) {
+    public void pushFastestTiming(final long endTime) {
         broadcastnode.child("Ongoing").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

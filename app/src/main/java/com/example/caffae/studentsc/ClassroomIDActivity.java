@@ -35,13 +35,6 @@ public class ClassroomIDActivity extends AppCompatActivity {
         classroomID = "Classroom"+editTextclassroomID.getText().toString();
         System.out.println("ClassroomIDEditText: " + classroomID);
 
-
-
-
-
-
-
-
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.classroomID), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.classroomID), classroomID);

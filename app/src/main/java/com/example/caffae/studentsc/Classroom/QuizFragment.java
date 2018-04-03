@@ -135,8 +135,8 @@ public class QuizFragment extends Fragment {
                 DatabaseClassroom databaseClassroom = new DatabaseClassroom();
 
                 System.out.println("QuestionAnswerSize"+questionanswer.size());
-                databaseClassroom.pushQuizScores((finalscore/questionanswer.size()));
-                databaseClassroom.updateOverallScore( (finalscore/questionanswer.size()));
+                databaseClassroom.pushQuizScores(Math.round(100*(finalscore/questionanswer.size())));
+                databaseClassroom.updateOverallScore(Math.round(100*(finalscore/questionanswer.size())));
                 Toast.makeText(getContext(), "Submitted! Your score is " + finalscore, Toast.LENGTH_SHORT).show();
             }
         });
