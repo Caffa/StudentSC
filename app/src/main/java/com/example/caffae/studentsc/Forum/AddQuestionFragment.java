@@ -18,7 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -99,6 +102,11 @@ public class AddQuestionFragment extends Fragment {
                     String classroom = sharedPref.getString(getString(R.string.classroomID), "Classroom1");
 
 
+                    int newCount = 1 + Integer.parseInt(countTxt);
+                    String myCountTxt = String.valueOf(newCount);
+//                    System.out.println(destination.getAbsolutePath());
+
+                    stringToFile(myCountTxt,"counter.txt");
 
 //                    mDatabase.child(Integer.toString(counter)).child("question").setValue(questionTxt);
                     mDatabase.child(classroom).child("Forum").child(Integer.toString(counter)).child("question").setValue(questionTxt);
@@ -158,6 +166,31 @@ public class AddQuestionFragment extends Fragment {
 
         return ret;
     }
+
+    private void stringToFile( String text, String fileName )
+    {
+        try
+        {
+            File file = new File( fileName );
+
+            // if file doesnt exists, then create it
+            if ( ! file.exists( ) )
+            {
+                file.createNewFile( );
+            }
+
+            FileWriter fw = new FileWriter( file.getAbsoluteFile( ) );
+            BufferedWriter bw = new BufferedWriter( fw );
+            bw.write( text );
+            bw.close( );
+            //System.out.println("Done writing to " + fileName); //For testing
+        }
+        catch( IOException e )
+        {
+            System.out.println("Error: " + e);
+            e.printStackTrace( );
+        }
+    } //End method stringToFile
 
 
 }
