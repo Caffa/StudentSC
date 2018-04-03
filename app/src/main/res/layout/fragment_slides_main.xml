@@ -12,7 +12,7 @@
 
         <fragment
             android:id="@+id/movie_fragment"
-            android:name="com.example.caffae.studentsc.Feedback.SlidesComponent.SlidesFragment"
+            android:name="com.example.caffae.studentsc.Feedback.SlidesComponent.SlidesDisplayFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context="com.example.caffae.studentsc.Class.QuizFragment">
+    tools:context="com.example.caffae.studentsc.Classroom.QuizFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:layout_marginBottom="40dp">
 
         <LinearLayout
@@ -26,7 +26,7 @@
                 android:id="@+id/quizsubmitbutton"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:text="Submit" />
+                android:text="@string/submit" />
         </LinearLayout>
     </ScrollView>
 

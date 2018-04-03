@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.caffae.studentsc.Class.AvailableClassroomFragment;
-import com.example.caffae.studentsc.Class.DatabaseClassroom;
-import com.example.caffae.studentsc.Feedback.FeedbackPageFragment;
+
+import com.example.caffae.studentsc.Classroom.AvailableClassroomFragment;
+import com.example.caffae.studentsc.Classroom.DatabaseClassroom;
+import com.example.caffae.studentsc.Feedback.RatingLecturer.FeedbackPageFragment;
+
 import com.example.caffae.studentsc.Forum.Forum;
 import com.example.caffae.studentsc.Grades.GradesPageFragment;
 
@@ -39,8 +41,8 @@ public class StudentMainActivity extends AppCompatActivity {
                     mTextMessage.setText("Class");
                     manager = getSupportFragmentManager();
                     manager.beginTransaction().replace(R.id.container, new AvailableClassroomFragment()).commit();
-                    ongoingQuiz = databaseClassroom.ongoing[0].substring(1, databaseClassroom.ongoing[0].length()-1);
-                    ongoingBroadcast = databaseClassroom.ongoing[1].substring(1, databaseClassroom.ongoing[1].length()-1);
+                    ongoingQuiz = databaseClassroom.getOngoing()[0].substring(1, databaseClassroom.getOngoing()[0].length()-1);
+                    ongoingBroadcast = databaseClassroom.getOngoing()[1].substring(1, databaseClassroom.getOngoing()[1].length()-1);
 
                     System.out.println("Ongoing" + ongoingBroadcast);
                     //mTextMessage.setText(R.string.title_dashboard);
@@ -68,8 +70,8 @@ public class StudentMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationBarSA);
+        mTextMessage = findViewById(R.id.message);
+        BottomNavigationView navigation = findViewById(R.id.navigationBarSA);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         databaseClassroom.fetchOngoingQuiz();

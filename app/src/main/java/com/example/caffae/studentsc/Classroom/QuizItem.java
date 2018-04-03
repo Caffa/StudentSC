@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc.Class;
+package com.example.caffae.studentsc.Classroom;
 
 /**
  * Created by dorette_ong on 20/2/2018.
@@ -40,9 +40,7 @@ public class QuizItem {
         Option2 = option2;
     }
     public void setOption3(String option3){Option3= option3;}
-    public void setOption4(String option4){
-       Option4= option4;
-    }
+    public void setOption4(String option4){Option4= option4;}
     public void setQuestion(String question) {
         Question = question;
     }

@@ -1,7 +1,6 @@
 package com.example.caffae.studentsc.Feedback.SlidesComponent;
 
 import com.example.caffae.studentsc.ClassroomIDActivity;
-import com.example.caffae.studentsc.Feedback.DatabaseRatingLecturer;
 import com.example.caffae.studentsc.MainActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,11 +12,11 @@ import com.google.firebase.database.ValueEventListener;
  * Created by dorette_ong on 31/3/2018.
  */
 
-public class DatabaseSlidesFeedback {
+class DatabaseSlidesFeedback {
     private DatabaseReference mDatabase;
 
-
-    public void pushSlidesFeedback(final String slideNumber, final String feedback){
+    // Push slides feedback into database with key: slideNumber , value: feedback
+    void pushSlidesFeedback(final String slideNumber, final String feedback){
 
         FirebaseDatabase.getInstance().getReference().child(ClassroomIDActivity.getClassroomID()).child("CurrentLecture").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

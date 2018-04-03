@@ -77,7 +77,7 @@ public class ClassroomIDActivity extends AppCompatActivity {
         buttonEnterClassroom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setClassroomID();;
+                setClassroomID();
                 checkClassroomExists(classroomID,view);
             }
         });

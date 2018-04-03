@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc.Class;
+package com.example.caffae.studentsc.Classroom;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,10 +21,10 @@ import org.json.JSONArray;
  */
 
 public class DatabaseClassroom {
-    public JSONArray[] jsonarray = new JSONArray[1];
-    public String[] ongoing = new String[2];
-
-    public void fetchDatabaseInfo(String URL) {
+    private JSONArray[] jsonarray = new JSONArray[1];
+    private String[] ongoing = new String[2];
+    //get data from URL as a jsonarray
+    private void fetchDatabaseInfo(String URL) {
         final JsonArrayRequest request = new JsonArrayRequest(URL,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -42,7 +42,8 @@ public class DatabaseClassroom {
         MyApplication.getInstance().addToRequestQueue(request);
     }
 
-    public void fetchOngoing(String URL, final int number) {
+    //Get String value from URL
+    private void fetchOngoing(String URL, final int number) {
         StringRequest request = new StringRequest(URL,
                 new Response.Listener<String>() {
                     @Override
@@ -58,29 +59,27 @@ public class DatabaseClassroom {
         MyApplication.getInstance().addToRequestQueue(request);
     }
 
-    public void fetchQuizInfo(String ongoing) {
+    void fetchQuizInfo(String ongoing) {
         String QuizURL = "https://softwareconstruct-forum.firebaseio.com/" + ClassroomIDActivity.getClassroomID() + "/Quiz/Saved/" + ongoing + ".json";
         this.fetchDatabaseInfo(QuizURL);
     }
 
-    public void fetchBroadCastInfo(String ongoing) {
+    void fetchBroadCastInfo(String ongoing) {
         String BroadcastURL = "https://softwareconstruct-forum.firebaseio.com/" + ClassroomIDActivity.getClassroomID() + "/BroadcastQuestion/" + ongoing + ".json";
-        //String BroadcastURL = "https://softwareconstruct-forum.firebaseio.com/"+ ClassroomIDActivity.getClassroomID()+"/BroadcastQuestion.json";
-
         this.fetchDatabaseInfo(BroadcastURL);
     }
-
+    // Save ongoing broadcast question number in ongoing[1]
     public void fetchOngoingBroadcast() {
         String OngoingBroadcastURL = "https://softwareconstruct-forum.firebaseio.com/" + ClassroomIDActivity.getClassroomID() + "/BroadcastQuestion/Ongoing.json";
         this.fetchOngoing(OngoingBroadcastURL, 1);
     }
-
+    // Save ongoing quiz number in ongoing[0]
     public void fetchOngoingQuiz() {
         String OngoingQuizURL = "https://softwareconstruct-forum.firebaseio.com/" + ClassroomIDActivity.getClassroomID() + "/Quiz/Ongoing.json";
         this.fetchOngoing(OngoingQuizURL, 0);
     }
-
-    public void pushQuizScores(final int QuizScore) {
+    // Save quiz scores into database with key: QuizID, value: QuizScore into student's grades
+    void pushQuizScores(final int QuizScore) {
         FirebaseDatabase.getInstance().getReference().child(ClassroomIDActivity.getClassroomID()).child("Quiz").child("Ongoing").addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
@@ -95,8 +94,14 @@ public class DatabaseClassroom {
             }
 
         });
+    }
 
+    protected JSONArray[] getJsonarray() {
+        return jsonarray;
+    }
 
+    public String[] getOngoing() {
+        return ongoing;
     }
 
 

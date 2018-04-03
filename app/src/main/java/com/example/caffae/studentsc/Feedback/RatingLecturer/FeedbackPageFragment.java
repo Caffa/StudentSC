@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc.Feedback;
+package com.example.caffae.studentsc.Feedback.RatingLecturer;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,16 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-
 import com.example.caffae.studentsc.Feedback.SlidesComponent.SlidesMainFragment;
 import com.example.caffae.studentsc.R;
+
+/**
+ * Created by dorette_ong on 29/3/2018.
+ */
+
 
 public class FeedbackPageFragment extends Fragment {
     private Button lectureButton;
     private Button slidesButton;
-    public FeedbackPageFragment() {
-    }
+
+    public FeedbackPageFragment() {}
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -31,10 +35,13 @@ public class FeedbackPageFragment extends Fragment {
         lectureButton = view.findViewById(R.id.lectureButton);
         slidesButton = new Button(getContext());
         slidesButton = view.findViewById(R.id.slideButton);
-        addListenerOnButton(view);
+        addListenerOnButton();
         return view;
     }
-    public void addListenerOnButton(View view) {
+    // Replace fragment with SlidesMainFragment if press on slides button
+    // Replace fragment with RatingFragment if press on lecture button
+
+    private void addListenerOnButton() {
         slidesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
