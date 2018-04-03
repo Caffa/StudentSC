@@ -84,8 +84,8 @@ public class AddQuestionFragment extends Fragment {
 
                     //for unique id of forum Q
                     String countTxt = readFromFile(getContext());
-                    SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.studentId), Context.MODE_PRIVATE);
-                    int studentId = sharedPref.getInt(getString(R.string.studentId), 1000030);
+                    SharedPreferences sharedPrefStudent = getActivity().getSharedPreferences(getString(R.string.studentId), Context.MODE_PRIVATE);
+                    int studentId = sharedPrefStudent.getInt(getString(R.string.studentId), 1000030);
                     String myStudenId = String.valueOf(studentId - 1000000);
                     int counter = Integer.parseInt(myStudenId + countTxt);
 
@@ -95,12 +95,13 @@ public class AddQuestionFragment extends Fragment {
                     //Add the numberID for the student into this so can make it a unique ID
 
 
-
+                    SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.classroomID), Context.MODE_PRIVATE);
+                    String classroom = sharedPref.getString(getString(R.string.classroomID), "Classroom1");
 
 
 
 //                    mDatabase.child(Integer.toString(counter)).child("question").setValue(questionTxt);
-                    mDatabase.child("Classroom1").child("Forum").child(Integer.toString(counter)).child("question").setValue(questionTxt);
+                    mDatabase.child(classroom).child("Forum").child(Integer.toString(counter)).child("question").setValue(questionTxt);
 
                     Toast.makeText(getContext(), "Question Submitted", Toast.LENGTH_SHORT).show();
                     FragmentManager manager;
