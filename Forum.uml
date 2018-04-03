@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.example.caffae.studentsc.Forum</OriginalElement>
+  <nodes>
+    <node x="626.075" y="854.0">com.example.caffae.studentsc.Forum.Forum</node>
+    <node x="943.825" y="491.0">com.example.caffae.studentsc.Forum.MyApplication</node>
+    <node x="1319.825" y="569.0">com.example.caffae.studentsc.Forum.RecyclerItemClickListener.OnItemClickListener</node>
+    <node x="1603.825" y="513.5">com.example.caffae.studentsc.Forum.AddQuestionFragment</node>
+    <node x="577.575" y="1242.0">com.example.caffae.studentsc.Forum.StudentMainActivity</node>
+    <node x="0.0" y="279.5">com.example.caffae.studentsc.Forum.ForumAdapter.MyViewHolder</node>
+    <node x="292.07500000000016" y="0.0">com.example.caffae.studentsc.Forum.ForumQuestion</node>
+    <node x="530.825" y="447.0">com.example.caffae.studentsc.Forum.MyDividerItemDecoration</node>
+    <node x="221.82499999999993" y="301.5">com.example.caffae.studentsc.Forum.ForumAdapter.ForumAdapterListener</node>
+    <node x="1739.8249999999998" y="964.0">com.example.caffae.studentsc.Forum.SearchQuestionFragment</node>
+    <node x="85.72204472843464" y="1044.3833865814697">com.example.caffae.studentsc.Forum.AddQuestionFragmentTest</node>
+    <node x="9.0" y="469.0">com.example.caffae.studentsc.Forum.ForumAdapter</node>
+    <node x="1246.904365079365" y="257.0">com.example.caffae.studentsc.Forum.RecyclerItemClickListener</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.example.caffae.studentsc.Forum.Forum" target="com.example.caffae.studentsc.Forum.MyDividerItemDecoration">
+      <point x="-17.000000000000057" y="-169.0" />
+      <point x="813.075" y="784.0" />
+      <point x="726.825" y="784.0" />
+      <point x="0.0" y="158.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.ForumAdapter" target="com.example.caffae.studentsc.Forum.ForumAdapter.ForumAdapterListener">
+      <point x="72.75" y="-136.5" />
+      <point x="275.75" y="422.0" />
+      <point x="250.6249999999999" y="422.0" />
+      <point x="-115.19999999999999" y="25.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.Forum" target="com.example.caffae.studentsc.Forum.ForumAdapter">
+      <point x="-153.00000000000006" y="-169.0" />
+      <point x="677.075" y="824.0" />
+      <point x="300.0" y="824.0" />
+      <point x="97.0" y="136.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.ForumAdapter" target="com.example.caffae.studentsc.Forum.ForumQuestion">
+      <point x="-24.25" y="-136.5" />
+      <point x="178.75" y="422.0" />
+      <point x="197.5" y="422.0" />
+      <point x="197.5" y="227.0" />
+      <point x="311.1750000000001" y="227.0" />
+      <point x="-76.40000000000003" y="103.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.AddQuestionFragment" target="com.example.caffae.studentsc.Forum.Forum">
+      <point x="0.0" y="92.0" />
+      <point x="1807.825" y="834.0" />
+      <point x="1017.075" y="834.0" />
+      <point x="186.99999999999994" y="-169.0" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.SearchQuestionFragment" target="com.example.caffae.studentsc.Forum.AddQuestionFragment">
+      <point x="0.0" y="-59.0" />
+      <point x="136.0" y="92.0" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.Forum" target="com.example.caffae.studentsc.Forum.ForumAdapter.ForumAdapterListener">
+      <point x="-85.00000000000006" y="-169.0" />
+      <point x="745.075" y="804.0" />
+      <point x="457.725" y="804.0" />
+      <point x="457.725" y="422.0" />
+      <point x="481.0249999999999" y="422.0" />
+      <point x="115.19999999999999" y="25.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.Forum" target="com.example.caffae.studentsc.Forum.RecyclerItemClickListener">
+      <point x="118.99999999999994" y="-169.0" />
+      <point x="949.075" y="814.0" />
+      <point x="1593.325" y="814.0" />
+      <point x="1593.325" y="422.0" />
+      <point x="1633.654365079365" y="422.0" />
+      <point x="165.75" y="70.0" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.ForumAdapter.MyViewHolder" target="com.example.caffae.studentsc.Forum.ForumAdapter">
+      <point x="62.33333333333337" y="47.5" />
+      <point x="155.83333333333337" y="422.0" />
+      <point x="130.25" y="422.0" />
+      <point x="-72.75" y="-136.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.StudentMainActivity" target="com.example.caffae.studentsc.Forum.Forum">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="169.0" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.RecyclerItemClickListener.OnItemClickListener" target="com.example.caffae.studentsc.Forum.RecyclerItemClickListener">
+      <point x="-87.66666666666674" y="-36.5" />
+      <point x="1363.6583333333333" y="422.0" />
+      <point x="1302.154365079365" y="422.0" />
+      <point x="-165.75" y="70.0" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.ForumAdapter.ForumAdapterListener" target="com.example.caffae.studentsc.Forum.ForumAdapter">
+      <point x="0.0" y="25.5" />
+      <point x="365.82499999999993" y="422.0" />
+      <point x="372.75" y="422.0" />
+      <point x="169.75" y="-136.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.ForumAdapter" target="com.example.caffae.studentsc.Forum.ForumAdapter.MyViewHolder">
+      <point x="-121.25" y="-136.5" />
+      <point x="81.75" y="422.0" />
+      <point x="93.5" y="422.0" />
+      <point x="0.0" y="47.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.Forum" target="com.example.caffae.studentsc.Forum.ForumQuestion">
+      <point x="16.999999999999943" y="-169.0" />
+      <point x="847.075" y="784.0" />
+      <point x="933.325" y="784.0" />
+      <point x="933.325" y="227.0" />
+      <point x="463.97500000000014" y="227.0" />
+      <point x="76.39999999999998" y="103.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.ForumAdapter.ForumAdapterListener" target="com.example.caffae.studentsc.Forum.ForumQuestion">
+      <point x="0.0" y="-25.5" />
+      <point x="365.82499999999993" y="237.0" />
+      <point x="387.57500000000016" y="237.0" />
+      <point x="0.0" y="103.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.Forum" target="com.example.caffae.studentsc.Forum.RecyclerItemClickListener.OnItemClickListener">
+      <point x="84.99999999999994" y="-169.0" />
+      <point x="915.075" y="804.0" />
+      <point x="1451.325" y="804.0" />
+      <point x="0.0" y="36.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.RecyclerItemClickListener" target="com.example.caffae.studentsc.Forum.RecyclerItemClickListener.OnItemClickListener">
+      <point x="-55.25" y="70.0" />
+      <point x="1412.654365079365" y="422.0" />
+      <point x="1451.325" y="422.0" />
+      <point x="0.0" y="-36.5" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.Forum" target="com.example.caffae.studentsc.Forum.AddQuestionFragment">
+      <point x="152.99999999999994" y="-169.0" />
+      <point x="983.075" y="824.0" />
+      <point x="1671.825" y="824.0" />
+      <point x="-136.0" y="92.0" />
+    </edge>
+    <edge source="com.example.caffae.studentsc.Forum.Forum" target="com.example.caffae.studentsc.Forum.MyApplication">
+      <point x="50.99999999999994" y="-169.0" />
+      <point x="881.075" y="794.0" />
+      <point x="1121.825" y="794.0" />
+      <point x="0.0" y="114.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.46097201767304863" x="1074.0" y="669.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+    <Category>Fields</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
