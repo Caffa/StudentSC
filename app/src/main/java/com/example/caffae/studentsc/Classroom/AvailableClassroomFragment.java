@@ -16,8 +16,8 @@ import org.json.JSONArray;
 public class AvailableClassroomFragment extends Fragment {
     private Button quizButton;
     private Button questionButton;
-    private DatabaseClassroom quizDatabaseClassroom = new DatabaseClassroom();
-    private DatabaseClassroom questionDatabaseClassroom = new DatabaseClassroom();
+    private DatabaseClassroom quizDatabaseClassroom = new DatabaseClassroom(getContext());
+    private DatabaseClassroom questionDatabaseClassroom = new DatabaseClassroom(getContext());
     protected static JSONArray quizjsonArray = new JSONArray();
     protected static JSONArray questionjsonArray = new JSONArray();
 

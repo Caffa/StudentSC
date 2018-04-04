@@ -1,7 +1,12 @@
 package com.example.caffae.studentsc.Classroom;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.example.caffae.studentsc.ClassroomIDActivity;
+import com.example.caffae.studentsc.ClassroomMainActivity;
 import com.example.caffae.studentsc.MainActivity;
+import com.example.caffae.studentsc.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -10,9 +15,14 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class BroadcastQuestionTiming {
+    Context mContext;
+    public BroadcastQuestionTiming(Context c){
+        this.mContext = c;
+    }
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    private String classroomID = ClassroomIDActivity.getClassroomID();
+    SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
+    private String classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
     private final DatabaseReference broadcastnode = mDatabase.child(classroomID).child("BroadcastQuestion");
 
     // Compares timing with current timing in database

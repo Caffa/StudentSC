@@ -26,5 +26,7 @@
     <string name="studentId">1000000</string>
     <string name="title_grades">Grades</string>
     <string name="classroomID">1</string>
+    <string name="classroomcount">ClassroomCount</string>
+    <string name="classnames">classnames</string>
 
 </resources>

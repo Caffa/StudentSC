@@ -75,7 +75,7 @@ public class SlidesFeedbackfragment extends Fragment {
                     else{
                         String slideNumber = feedbackitem.get(0).getText().toString();
                         String slideFeedback = feedbackitem.get(1).getText().toString();
-                        DatabaseSlidesFeedback databaseSlidesFeedback = new DatabaseSlidesFeedback();
+                        DatabaseSlidesFeedback databaseSlidesFeedback = new DatabaseSlidesFeedback(getContext());
                         databaseSlidesFeedback.pushSlidesFeedback(slideNumber, slideFeedback);
 
                     }

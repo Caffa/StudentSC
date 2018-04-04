@@ -132,7 +132,7 @@ public class QuizFragment extends Fragment {
                     quizMain.shortAnswerScore(selectedShortAnswers.get(editText),editText.getText().toString());
                 }
                 double finalscore =quizMain.getScore();
-                DatabaseClassroom databaseClassroom = new DatabaseClassroom();
+                DatabaseClassroom databaseClassroom = new DatabaseClassroom(getContext());
 
                 System.out.println("QuestionAnswerSize"+questionanswer.size());
                 databaseClassroom.pushQuizScores(Math.round(100*(finalscore/questionanswer.size())));

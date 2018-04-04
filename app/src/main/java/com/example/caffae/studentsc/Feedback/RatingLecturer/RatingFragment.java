@@ -72,7 +72,7 @@ public class RatingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Feedback Submitted!", Toast.LENGTH_SHORT).show();
-                DatabaseRatingLecturer databaseRatingLecturer = new DatabaseRatingLecturer();
+                DatabaseRatingLecturer databaseRatingLecturer = new DatabaseRatingLecturer(getContext());
 
                 databaseRatingLecturer.pushLecturerRating("Clarity", ratingBar1.getRating());
                 databaseRatingLecturer.pushLecturerRating("Meaningful", ratingBar2.getRating());

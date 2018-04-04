@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 //DONE: go to next activity
 //                Intent intent = new Intent(this, StudentMainActivity.class);
                 //TODO: go to next activity
-                Intent intent = new Intent(this, ClassroomIDActivity.class);
+                Intent intent = new Intent(this, ClassroomMainActivity.class);
                 startActivity(intent);
 
 
@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
+
     private void fetchDatabaseInfo(){
 
         if (idsList != null){
@@ -172,6 +173,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("The read failed: " , databaseError.getMessage());
             }
         });
+
+
 
 
 
