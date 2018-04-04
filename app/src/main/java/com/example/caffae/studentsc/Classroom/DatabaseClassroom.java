@@ -1,5 +1,7 @@
 package com.example.caffae.studentsc.Classroom;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.provider.ContactsContract;
 
 import com.android.volley.Response;
@@ -7,8 +9,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.caffae.studentsc.ClassroomIDActivity;
+import com.example.caffae.studentsc.ClassroomMainActivity;
 import com.example.caffae.studentsc.Forum.MyApplication;
 import com.example.caffae.studentsc.MainActivity;
+import com.example.caffae.studentsc.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,8 +29,18 @@ import java.nio.DoubleBuffer;
  */
 
 public class DatabaseClassroom {
+    Context mContext;
+
+    public DatabaseClassroom(Context c){
+        this.mContext = c;
+    }
+    public DatabaseClassroom(){}
+
     private JSONArray[] jsonarray = new JSONArray[1];
     private String[] ongoing = new String[2];
+    private String classroomID = ClassroomMainActivity.classroomID;
+    //SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
+    //private String classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
     //get data from URL as a jsonarray
     private void fetchDatabaseInfo(String URL) {
         final JsonArrayRequest request = new JsonArrayRequest(URL,
@@ -64,32 +78,32 @@ public class DatabaseClassroom {
     }
 
     void fetchQuizInfo(String ongoing) {
-        String QuizURL = "https://softwareconstruct-forum.firebaseio.com/" + ClassroomIDActivity.getClassroomID() + "/Quiz/Saved/" + ongoing + ".json";
+        String QuizURL = "https://softwareconstruct-forum.firebaseio.com/" + classroomID + "/Quiz/Saved/" + ongoing + ".json";
         this.fetchDatabaseInfo(QuizURL);
     }
 
     void fetchBroadCastInfo(String ongoing) {
-        String BroadcastURL = "https://softwareconstruct-forum.firebaseio.com/" + ClassroomIDActivity.getClassroomID() + "/BroadcastQuestion/" + ongoing  +".json";
+        String BroadcastURL = "https://softwareconstruct-forum.firebaseio.com/" + classroomID + "/BroadcastQuestion/" + ongoing  +".json";
         this.fetchDatabaseInfo(BroadcastURL);
     }
     // Save ongoing broadcast question number in ongoing[1]
     public void fetchOngoingBroadcast() {
-        String OngoingBroadcastURL = "https://softwareconstruct-forum.firebaseio.com/" + ClassroomIDActivity.getClassroomID() + "/BroadcastQuestion/Ongoing.json";
+        String OngoingBroadcastURL = "https://softwareconstruct-forum.firebaseio.com/" + classroomID + "/BroadcastQuestion/Ongoing.json";
         this.fetchOngoing(OngoingBroadcastURL, 1);
     }
     // Save ongoing quiz number in ongoing[0]
     public void fetchOngoingQuiz() {
-        String OngoingQuizURL = "https://softwareconstruct-forum.firebaseio.com/" + ClassroomIDActivity.getClassroomID() + "/Quiz/Ongoing.json";
+        String OngoingQuizURL = "https://softwareconstruct-forum.firebaseio.com/" + classroomID + "/Quiz/Ongoing.json";
         this.fetchOngoing(OngoingQuizURL, 0);
     }
     // Save quiz scores into database with key: QuizID, value: QuizScore into student's grades
     void pushQuizScores(final double QuizScore) {
-        FirebaseDatabase.getInstance().getReference().child(ClassroomIDActivity.getClassroomID()).child("Quiz").child("Ongoing").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child(classroomID).child("Quiz").child("Ongoing").addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String QuizID = dataSnapshot.getValue().toString();
-                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child(ClassroomIDActivity.getClassroomID()).child("Grades").child("PerStudent").child(MainActivity.studentID);
+                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child(classroomID).child("Grades").child("PerStudent").child(MainActivity.studentID);
                 mDatabase.child(QuizID).setValue(Double.toString(QuizScore));
             }
 
@@ -100,7 +114,7 @@ public class DatabaseClassroom {
         });
     }
     void updateOverallScore(final double newQuizScore){
-        final DatabaseReference gradesPerStudent =  FirebaseDatabase.getInstance().getReference().child(ClassroomIDActivity.getClassroomID()).child("Grades").child("PerStudent").child(MainActivity.studentID);
+        final DatabaseReference gradesPerStudent =  FirebaseDatabase.getInstance().getReference().child(classroomID).child("Grades").child("PerStudent").child(MainActivity.studentID);
         gradesPerStudent.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot){

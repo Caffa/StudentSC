@@ -93,7 +93,7 @@ public class BroadcastQuestionFragment extends Fragment {
                 if (radiogroup.getCheckedRadioButtonId() == radiogroup.getChildAt(Integer.parseInt(newbroadcast.getquestionanswer().get(0).getAnswer()) - 1).getId()) {
                     Toast.makeText(getContext(), "Well Done!", Toast.LENGTH_SHORT).show();
                     changeFragment();
-                    BroadcastQuestionTiming broadcastQuestionTiming = new BroadcastQuestionTiming();
+                    BroadcastQuestionTiming broadcastQuestionTiming = new BroadcastQuestionTiming(getContext());
                     broadcastQuestionTiming.pushFastestTiming(System.nanoTime());
                 } else if (radiogroup.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(getContext(), "Please Select Answer", Toast.LENGTH_SHORT).show();
