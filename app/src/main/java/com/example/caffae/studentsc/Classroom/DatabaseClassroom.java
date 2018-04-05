@@ -32,10 +32,11 @@ public class DatabaseClassroom {
     Context mContext;
     private String classroomID;
 
-    public DatabaseClassroom(Context c){
+    public DatabaseClassroom(Context c) throws InterruptedException {
         this.mContext = c;
         SharedPreferences sharedPref = c.getSharedPreferences(c.getString(R.string.classroomID), Context.MODE_PRIVATE);
         classroomID = sharedPref.getString(c.getString(R.string.classroomID),"Classroom1");
+        Thread.sleep(600);
     }
     private JSONArray[] jsonarray = new JSONArray[1];
     private String[] ongoing = new String[2];

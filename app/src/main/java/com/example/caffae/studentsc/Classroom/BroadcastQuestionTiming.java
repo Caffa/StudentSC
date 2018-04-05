@@ -15,14 +15,16 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class BroadcastQuestionTiming {
+    private String classroomID ;
     Context mContext;
     public BroadcastQuestionTiming(Context c){
         this.mContext = c;
+        SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
+        classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
     }
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
-    private String classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
+
     private final DatabaseReference broadcastnode = mDatabase.child(classroomID).child("BroadcastQuestion");
 
     // Compares timing with current timing in database
