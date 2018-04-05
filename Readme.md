@@ -1,7 +1,7 @@
 # SC - Student App
-<Write a description here TODO Me/Dorette>
-  
 
+Android application for smart interactive classroom to help professors with teaching and students with learning.
+  
 
 ## Features that have been implemented:
 - Login Screen
@@ -11,13 +11,22 @@
   - Basic click on recycler view for viewing the full question
   - Long press on recycler view for viewing the full question and answer in a dialog.
 - Grades
-  - Display the overall score and grade for the student logged in to the app.
-  - Display the individual quiz scores.
-
-<TODO - Dorette>
- - Classroom ID picker
- - Quiz
- - Broadcast Q
+  - Displays the overall score and grade for the student logged in to the app.
+  - Displays the individual quiz scores.
+- Classroom ID picker
+  - Displays available classrooms in grid format
+- Quiz
+  - Displays quiz available
+  - Automated marking of quizzes and updating of scores
+- Broadcast Q
+  - Displays broadcast question available
+  - Records the fastest student for each broadcast question
+- Slide Feedback
+  - Displays lecture slides 
+  - Records feedback for each slide
+- Lecturer Feedback
+  - Displays rating bars for student to rate current lecturer
+  - Basic click on submission button to record rating
 
 
 ## Features that remain to be integrated: 
