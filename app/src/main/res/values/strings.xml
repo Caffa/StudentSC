@@ -24,12 +24,11 @@
     <string name="lecture">Lecture</string>
     <string name="studentId">1000000</string>
     <string name="title_grades">Grades</string>
-<<<<<<< HEAD
     <string name="classroomID">Classroom1</string>
-=======
-    <string name="classroomID">ClassroomID</string>
->>>>>>> origin/master
+
     <string name="classroomcount">ClassroomCount</string>
     <string name="classnames">classnames</string>
+    <string name="counterQ">1</string>
+    <string name="counterQuestion">0</string>
 
 </resources>
