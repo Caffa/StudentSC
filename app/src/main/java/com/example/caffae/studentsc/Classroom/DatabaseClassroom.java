@@ -2,14 +2,11 @@ package com.example.caffae.studentsc.Classroom;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.ContactsContract;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.example.caffae.studentsc.ClassroomIDActivity;
-import com.example.caffae.studentsc.ClassroomMainActivity;
 import com.example.caffae.studentsc.Forum.MyApplication;
 import com.example.caffae.studentsc.MainActivity;
 import com.example.caffae.studentsc.R;
@@ -20,8 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
-
-import java.nio.DoubleBuffer;
 
 
 /**

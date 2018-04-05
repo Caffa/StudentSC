@@ -3,8 +3,6 @@ package com.example.caffae.studentsc.Classroom;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.caffae.studentsc.ClassroomIDActivity;
-import com.example.caffae.studentsc.ClassroomMainActivity;
 import com.example.caffae.studentsc.MainActivity;
 import com.example.caffae.studentsc.R;
 import com.google.firebase.database.DataSnapshot;

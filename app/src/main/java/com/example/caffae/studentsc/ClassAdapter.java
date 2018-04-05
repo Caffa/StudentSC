@@ -3,6 +3,8 @@ package com.example.caffae.studentsc;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -55,9 +57,11 @@ public class ClassAdapter extends BaseAdapter {
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
            button = new Button(mContext);
-           button.setLayoutParams(new ViewGroup.LayoutParams(800, 800));
-           button.setPadding(8, 8, 8, 8);
+           button.setLayoutParams(new ViewGroup.LayoutParams(600, 600));
+           button.setPadding(20, 20, 20, 20);
+           button.setBackground(ContextCompat.getDrawable(mContext, R.drawable.buttonbackground));
            button.setText(getSharedPreferenceClassNames()[position]);
+           button.setTextColor(ContextCompat.getColor(mContext,R.color.colorAccent));
            button.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
