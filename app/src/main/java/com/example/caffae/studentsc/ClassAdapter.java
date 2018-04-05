@@ -3,30 +3,12 @@ package com.example.caffae.studentsc;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import org.jetbrains.annotations.Nullable;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import static android.provider.Settings.System.getString;
-import static com.example.caffae.studentsc.ClassroomIDActivity.classroomID;
 
 /**
  * Created by dorette_ong on 4/4/2018.
@@ -91,7 +73,7 @@ public class ClassAdapter extends BaseAdapter {
         return button;
     }
     public void setClassroomID(String classroom){
-        String classroomID = classroom;
+        String classroomID = classroom.trim();
         System.out.println("ClassroomID: " + classroomID);
 
         SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
