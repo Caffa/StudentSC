@@ -155,7 +155,7 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.classroomID), Context.MODE_PRIVATE);
         String classroom = sharedPref.getString(getString(R.string.classroomID), "Classroom1");
-        System.out.println("Current classroom" + classroom);
+//        System.out.println("Current classroom" + classroom);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Query mQueryRef = mDatabase.child(classroom).child("Forum");
         mQueryRef.addValueEventListener(new ValueEventListener() {

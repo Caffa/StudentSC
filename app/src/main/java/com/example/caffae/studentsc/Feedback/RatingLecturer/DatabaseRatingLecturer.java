@@ -18,11 +18,13 @@ import com.google.firebase.database.ValueEventListener;
 public class DatabaseRatingLecturer {
     private DatabaseReference mDatabase;
     Context mContext;
+    private String classroomID;
     public DatabaseRatingLecturer(Context c){
         this.mContext = c;
+        SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
+        classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
     }
-    SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
-    private String classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
+
 
     //Push lecturer rating to database with main node: LecturerID, key: criteria, value: rating
     public void pushLecturerRating(final String criteria, final float rating){

@@ -26,7 +26,7 @@ public class SlidesDisplayFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_slides, container, false);
         WebView webView = view.findViewById(R.id.webview);
-        SlidesURLUpload slidesURLUpload = new SlidesURLUpload();
+        SlidesURLUpload slidesURLUpload = new SlidesURLUpload(getContext());
         slidesURLUpload.loadSlides(webView);
         return view;
     }
