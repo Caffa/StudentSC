@@ -1,5 +1,6 @@
 package com.example.caffae.studentsc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.AdaptiveIconDrawable;
 import android.os.Bundle;
@@ -25,17 +26,22 @@ import java.util.zip.Inflater;
 public class StudentMainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    DatabaseClassroom databaseClassroom;
+    private DatabaseClassroom databaseClassroom;
     public static String ongoingQuiz = "";
     public static String ongoingBroadcast = "";
+    Context mContext;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
-
+        mContext = StudentMainActivity.this;
         mTextMessage = findViewById(R.id.message);
+        databaseClassroom = new DatabaseClassroom(mContext);
+        databaseClassroom.fetchOngoingQuiz();
+        databaseClassroom.fetchOngoingBroadcast();
         BottomNavigationView navigation = findViewById(R.id.navigationBarSA);
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -80,15 +86,14 @@ public class StudentMainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }
-    public void onStart() {
-        super.onStart();
-        databaseClassroom = new DatabaseClassroom();
-        databaseClassroom.fetchOngoingQuiz();
-        databaseClassroom.fetchOngoingBroadcast();
+
+
+    class fetchOngoing{
+        public void fetch() {
+            databaseClassroom = new DatabaseClassroom(getApplicationContext());
+            databaseClassroom.fetchOngoingQuiz();
+            databaseClassroom.fetchOngoingBroadcast();
+        }
     }
-
-
-
-
 
 }

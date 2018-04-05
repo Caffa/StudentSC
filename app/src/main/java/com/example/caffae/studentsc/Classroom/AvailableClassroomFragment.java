@@ -16,8 +16,8 @@ import org.json.JSONArray;
 public class AvailableClassroomFragment extends Fragment {
     private Button quizButton;
     private Button questionButton;
-    private DatabaseClassroom quizDatabaseClassroom = new DatabaseClassroom(getContext());
-    private DatabaseClassroom questionDatabaseClassroom = new DatabaseClassroom(getContext());
+    private DatabaseClassroom quizDatabaseClassroom;
+    private DatabaseClassroom questionDatabaseClassroom;
     protected static JSONArray quizjsonArray = new JSONArray();
     protected static JSONArray questionjsonArray = new JSONArray();
 
@@ -37,9 +37,12 @@ public class AvailableClassroomFragment extends Fragment {
         quizButton = view.findViewById(R.id.quizButton);
         questionButton = new Button(getContext());
         questionButton = view.findViewById(R.id.questionButton);
+        quizDatabaseClassroom = new DatabaseClassroom(getContext());
+        questionDatabaseClassroom = new DatabaseClassroom(getContext());
         quizDatabaseClassroom.fetchQuizInfo(StudentMainActivity.ongoingQuiz);
         questionDatabaseClassroom.fetchBroadCastInfo(StudentMainActivity.ongoingBroadcast);
         addListenerOnButton(view);
+
         return view;
     }
 

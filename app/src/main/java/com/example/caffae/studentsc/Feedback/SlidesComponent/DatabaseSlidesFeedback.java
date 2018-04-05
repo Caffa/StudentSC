@@ -19,12 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 class DatabaseSlidesFeedback {
     private DatabaseReference mDatabase;
     Context mContext;
+    private String classroomID;
     public DatabaseSlidesFeedback(Context c){
         this.mContext = c;
+        SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
+         classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
     }
 
-    SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
-    private String classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
+    ;
 
     // Push slides feedback into database with key: slideNumber , value: feedback
     void pushSlidesFeedback(final String slideNumber, final String feedback){
