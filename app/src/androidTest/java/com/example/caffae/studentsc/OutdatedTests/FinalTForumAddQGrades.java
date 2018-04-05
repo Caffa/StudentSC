@@ -1,4 +1,4 @@
-package com.example.caffae.studentsc.Forum;
+package com.example.caffae.studentsc.OutdatedTests;
 
 
 import android.support.test.espresso.ViewInteraction;
