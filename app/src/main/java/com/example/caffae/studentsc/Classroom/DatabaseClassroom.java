@@ -30,17 +30,17 @@ import java.nio.DoubleBuffer;
 
 public class DatabaseClassroom {
     Context mContext;
+    private String classroomID;
 
     public DatabaseClassroom(Context c){
         this.mContext = c;
+        SharedPreferences sharedPref = c.getSharedPreferences(c.getString(R.string.classroomID), Context.MODE_PRIVATE);
+        classroomID = sharedPref.getString(c.getString(R.string.classroomID),"Classroom1");
     }
-    public DatabaseClassroom(){}
-
     private JSONArray[] jsonarray = new JSONArray[1];
     private String[] ongoing = new String[2];
-    private String classroomID = ClassroomMainActivity.classroomID;
-    //SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
-    //private String classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
+    //private String classroomID = ClassroomMainActivity.classroomID;
+   ;
     //get data from URL as a jsonarray
     private void fetchDatabaseInfo(String URL) {
         final JsonArrayRequest request = new JsonArrayRequest(URL,
