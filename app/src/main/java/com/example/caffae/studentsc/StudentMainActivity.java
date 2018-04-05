@@ -30,6 +30,46 @@ public class StudentMainActivity extends AppCompatActivity {
     public static String ongoingQuiz = "";
     public static String ongoingBroadcast = "";
     Context mContext;
+    BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentManager manager;
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    mTextMessage.setText(R.string.title_home);
+                    manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.container, new Forum()).commit();
+                    return true;
+                case R.id.navigation_dashboard:
+
+                    mTextMessage.setText("Class");
+                    manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.container, new AvailableClassroomFragment()).commit();
+                    ongoingQuiz = databaseClassroom.getOngoing()[0].substring(1, databaseClassroom.getOngoing()[0].length() - 1);
+                    ongoingBroadcast = databaseClassroom.getOngoing()[1].substring(1, databaseClassroom.getOngoing()[1].length() - 1);
+
+                    System.out.println("Ongoing" + ongoingBroadcast);
+                    //mTextMessage.setText(R.string.title_dashboard);
+                    // manager = getSupportFragmentManager();
+                    // manager.beginTransaction().replace(R.id.container, new AddQuestionFragment()).commit();
+
+                    return true;
+                case R.id.navigation_notifications:
+                    mTextMessage.setText("Feedback");
+                    manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.container, new FeedbackPageFragment()).commit();
+                    return true;
+                case R.id.navigation_grades:
+                    mTextMessage.setText("Grades");
+                    manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.container, new GradesPageFragment()).commit();
+                    return true;
+            }
+            return false;
+        }
+    };
 
 
 
@@ -39,57 +79,23 @@ public class StudentMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student);
         mContext = StudentMainActivity.this;
         mTextMessage = findViewById(R.id.message);
-        databaseClassroom = new DatabaseClassroom(mContext);
+        try {
+            databaseClassroom = new DatabaseClassroom(mContext);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         databaseClassroom.fetchOngoingQuiz();
         databaseClassroom.fetchOngoingBroadcast();
         BottomNavigationView navigation = findViewById(R.id.navigationBarSA);
-        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentManager manager;
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        mTextMessage.setText(R.string.title_home);
-                        manager = getSupportFragmentManager();
-                        manager.beginTransaction().replace(R.id.container, new Forum()).commit();
-                        return true;
-                    case R.id.navigation_dashboard:
-
-                        mTextMessage.setText("Class");
-                        manager = getSupportFragmentManager();
-                        manager.beginTransaction().replace(R.id.container, new AvailableClassroomFragment()).commit();
-                        ongoingQuiz = databaseClassroom.getOngoing()[0].substring(1, databaseClassroom.getOngoing()[0].length() - 1);
-                        ongoingBroadcast = databaseClassroom.getOngoing()[1].substring(1, databaseClassroom.getOngoing()[1].length() - 1);
-
-                        System.out.println("Ongoing" + ongoingBroadcast);
-                        //mTextMessage.setText(R.string.title_dashboard);
-                        // manager = getSupportFragmentManager();
-                        // manager.beginTransaction().replace(R.id.container, new AddQuestionFragment()).commit();
-
-                        return true;
-                    case R.id.navigation_notifications:
-                        mTextMessage.setText("Feedback");
-                        manager = getSupportFragmentManager();
-                        manager.beginTransaction().replace(R.id.container, new FeedbackPageFragment()).commit();
-                        return true;
-                    case R.id.navigation_grades:
-                        mTextMessage.setText("Grades");
-                        manager = getSupportFragmentManager();
-                        manager.beginTransaction().replace(R.id.container, new GradesPageFragment()).commit();
-                        return true;
-                }
-                return false;
-            }
-        };
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
 
     }
 
 
     class fetchOngoing{
-        public void fetch() {
+        public void fetch() throws InterruptedException {
             databaseClassroom = new DatabaseClassroom(getApplicationContext());
             databaseClassroom.fetchOngoingQuiz();
             databaseClassroom.fetchOngoingBroadcast();

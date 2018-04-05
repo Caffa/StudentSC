@@ -2,12 +2,17 @@ package com.example.caffae.studentsc.Feedback.RatingLecturer;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import com.example.caffae.studentsc.Classroom.AvailableClassroomFragment;
+import com.example.caffae.studentsc.Classroom.BroadcastQuestionFragment;
 import com.example.caffae.studentsc.R;
 
 /**
@@ -77,6 +82,7 @@ public class RatingFragment extends Fragment {
                 databaseRatingLecturer.pushLecturerRating("Clarity", ratingBar1.getRating());
                 databaseRatingLecturer.pushLecturerRating("Meaningful", ratingBar2.getRating());
                 databaseRatingLecturer.pushLecturerRating("Relevant", ratingBar3.getRating());
+                getActivity().onBackPressed();
 
                 // Toast.makeText(getContext(), "Clarity: "+ String.valueOf(ratingBar1.getRating()) + " Explanation: " + String.valueOf(ratingBar2.getRating()), Toast.LENGTH_SHORT).show();
             }

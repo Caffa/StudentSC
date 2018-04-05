@@ -62,6 +62,7 @@ public class ClassAdapter extends BaseAdapter {
                @Override
                public void onClick(View v) {
                    setClassroomID(getSharedPreferenceClassNames()[position]);
+                   System.out.println(getSharedPreferenceClassNames()[position]);
                    Intent intent = new Intent(mContext, StudentMainActivity.class);
                    mContext.startActivity(intent);
                }

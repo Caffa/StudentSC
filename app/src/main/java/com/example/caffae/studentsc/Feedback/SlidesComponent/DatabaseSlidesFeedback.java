@@ -23,7 +23,7 @@ class DatabaseSlidesFeedback {
     public DatabaseSlidesFeedback(Context c){
         this.mContext = c;
         SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
-         classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
+        classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
     }
 
     ;
@@ -35,7 +35,7 @@ class DatabaseSlidesFeedback {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final String lectureID= dataSnapshot.getValue().toString();
-                mDatabase = FirebaseDatabase.getInstance().getReference().child(ClassroomIDActivity.getClassroomID()).child("Rating").child(lectureID).child("Slides").child("Feedback").child(MainActivity.studentID);
+                mDatabase = FirebaseDatabase.getInstance().getReference().child(classroomID).child("Rating").child(lectureID).child("Slides").child("Feedback").child(MainActivity.studentID);
                 mDatabase.child(slideNumber).setValue(feedback);
             }
             @Override

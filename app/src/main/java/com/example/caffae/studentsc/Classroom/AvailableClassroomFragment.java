@@ -37,8 +37,16 @@ public class AvailableClassroomFragment extends Fragment {
         quizButton = view.findViewById(R.id.quizButton);
         questionButton = new Button(getContext());
         questionButton = view.findViewById(R.id.questionButton);
-        quizDatabaseClassroom = new DatabaseClassroom(getContext());
-        questionDatabaseClassroom = new DatabaseClassroom(getContext());
+        try {
+            quizDatabaseClassroom = new DatabaseClassroom(getContext());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            questionDatabaseClassroom = new DatabaseClassroom(getContext());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         quizDatabaseClassroom.fetchQuizInfo(StudentMainActivity.ongoingQuiz);
         questionDatabaseClassroom.fetchBroadCastInfo(StudentMainActivity.ongoingBroadcast);
         addListenerOnButton(view);
