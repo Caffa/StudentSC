@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.caffae.studentsc.ClassroomMainActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:textSize="25dp"
+        android:textColor="@android:color/black"
+        android:text="Please Select Classroom" />
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginTop="40dp"
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnWidth="90dp"
-        android:numColumns="2"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
-        android:stretchMode="columnWidth"
         android:gravity="center"
-              android:padding="5dp"
-        />
-</android.support.constraint.ConstraintLayout>
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:padding="5dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="20dp" />
+
+</LinearLayout>

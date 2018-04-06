@@ -3,8 +3,6 @@ package com.example.caffae.studentsc.Classroom;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.caffae.studentsc.ClassroomIDActivity;
-import com.example.caffae.studentsc.ClassroomMainActivity;
 import com.example.caffae.studentsc.MainActivity;
 import com.example.caffae.studentsc.R;
 import com.google.firebase.database.DataSnapshot;
@@ -17,15 +15,17 @@ import com.google.firebase.database.ValueEventListener;
 public class BroadcastQuestionTiming {
     private String classroomID ;
     Context mContext;
+    private DatabaseReference mDatabase;
+    private final DatabaseReference broadcastnode;
     public BroadcastQuestionTiming(Context c){
         this.mContext = c;
         SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
         classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        broadcastnode = mDatabase.child(classroomID).child("BroadcastQuestion");
     }
 
-    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-    private final DatabaseReference broadcastnode = mDatabase.child(classroomID).child("BroadcastQuestion");
 
     // Compares timing with current timing in database
     // Pushes key: studentID and value:timing to Fastest node if it is smaller than timing in database.

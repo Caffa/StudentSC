@@ -1,6 +1,7 @@
 package com.example.caffae.studentsc;
 
 
+import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -16,30 +17,35 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class RatingLecturerTest {
+public class SubmitBroadcastQuestionTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void ratingLecturerTest() {
+    public void submitBroadcastQuestionTest() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(3000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -78,7 +84,7 @@ public class RatingLecturerTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -127,90 +133,80 @@ public class RatingLecturerTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        ViewInteraction appCompatEditText6 = onView(
-                allOf(withId(R.id.editTextClassroomID),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText6.perform(click());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        ViewInteraction appCompatEditText7 = onView(
-                allOf(withId(R.id.editTextClassroomID),
+        DataInteraction button = onData(anything())
+                .inAdapterView(allOf(withId(R.id.gridview),
                         childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText7.perform(replaceText("1"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText8 = onView(
-                allOf(withId(R.id.editTextClassroomID), withText("1"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText8.perform(pressImeActionButton());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.buttonEnterClassroom), withText("Enter Classroom"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatButton.perform(click());
+                                withClassName(is("android.widget.LinearLayout")),
+                                1)))
+                .atPosition(0);
+        button.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         ViewInteraction bottomNavigationItemView = onView(
-                allOf(withId(R.id.navigation_notifications),
+                allOf(withId(R.id.navigation_dashboard),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.navigationBarSA),
                                         0),
-                                2),
+                                1),
                         isDisplayed()));
         bottomNavigationItemView.perform(click());
 
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.lectureButton), withText("Lecture"),
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.questionButton), withText("Questions Available"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.feedbackpagecontainer),
+                                        withId(R.id.availableclassroomcontainer),
                                         0),
-                                1),
+                                0),
+                        isDisplayed()));
+        appCompatButton.perform(click());
+
+        ViewInteraction appCompatRadioButton = onView(
+                allOf(withId(R.id.simpleRadioButton3), withText("6"),
+                        childAtPosition(
+                                allOf(withId(R.id.broadcastradiogroup),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                1)),
+                                2),
+                        isDisplayed()));
+        appCompatRadioButton.perform(click());
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.broadcastquestionsubmit), withText("Submit"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.broadcastquestioncontainer),
+                                        0),
+                                2),
                         isDisplayed()));
         appCompatButton2.perform(click());
-
-        ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.btnSubmit), withText("Submit"),
-                        childAtPosition(
-                                allOf(withId(R.id.fragmentrating),
-                                        childAtPosition(
-                                                withId(R.id.feedbackpagecontainer),
-                                                1)),
-                                6),
-                        isDisplayed()));
-        appCompatButton3.perform(click());
 
     }
 

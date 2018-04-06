@@ -1,13 +1,18 @@
-package com.example.caffae.studentsc;
+package com.example.caffae.studentsc.ClassroomLogin;
 
 
+import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+
+import com.example.caffae.studentsc.MainActivity;
+import com.example.caffae.studentsc.R;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -16,30 +21,42 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
 import static android.support.test.espresso.action.ViewActions.replaceText;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class TestSubmitQuiz {
+public class ClassroomIDLogin {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void testSubmitQuiz() {
+    public void classroomIDLogin() {
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.loginScreenID),
+                allOf(ViewMatchers.withId(R.id.loginScreenID),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -47,15 +64,6 @@ public class TestSubmitQuiz {
                                 1),
                         isDisplayed()));
         appCompatEditText.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(60000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.loginScreenID),
@@ -65,9 +73,57 @@ public class TestSubmitQuiz {
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("1002222"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("10000"), closeSoftKeyboard());
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.loginScreenID), withText("10000"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatEditText3.perform(replaceText("1000017"));
+
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.loginScreenID), withText("1000017"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatEditText4.perform(closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText5 = onView(
+                allOf(withId(R.id.loginScreenID), withText("1000017"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatEditText5.perform(pressImeActionButton());
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText6 = onView(
                 allOf(withId(R.id.loginScreenPW),
                         childAtPosition(
                                 childAtPosition(
@@ -75,17 +131,17 @@ public class TestSubmitQuiz {
                                         0),
                                 2),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("pwd"), closeSoftKeyboard());
+        appCompatEditText6.perform(replaceText("pwdpwd"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.loginScreenPW), withText("pwd"),
+        ViewInteraction appCompatEditText7 = onView(
+                allOf(withId(R.id.loginScreenPW), withText("pwdpwd"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 2),
                         isDisplayed()));
-        appCompatEditText4.perform(pressImeActionButton());
+        appCompatEditText7.perform(pressImeActionButton());
 
         ViewInteraction cardView = onView(
                 allOf(withId(R.id.loginCardView),
@@ -97,65 +153,49 @@ public class TestSubmitQuiz {
                         isDisplayed()));
         cardView.perform(click());
 
+        ViewInteraction cardView2 = onView(
+                allOf(withId(R.id.loginCardView),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                3),
+                        isDisplayed()));
+        cardView2.perform(click());
+
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(3554657);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        ViewInteraction bottomNavigationItemView = onView(
-                allOf(withId(R.id.navigation_dashboard),
+        ViewInteraction textView = onView(
+                allOf(withText("Please Select Classroom"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.navigationBarSA),
+                                        withId(android.R.id.content),
                                         0),
-                                1),
-                        isDisplayed()));
-        bottomNavigationItemView.perform(click());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.quizButton), withText("Quiz Available"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.availableclassroomcontainer),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatButton.perform(click());
-
-        ViewInteraction appCompatRadioButton = onView(
-                allOf(withId(R.id.quizOption1), withText("4"),
-                        childAtPosition(
-                                allOf(withId(R.id.quizradiogroup),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                1)),
                                 0),
                         isDisplayed()));
-        appCompatRadioButton.perform(click());
+        textView.check(matches(withText("Please Select Classroom")));
 
-        ViewInteraction appCompatRadioButton2 = onView(
-                allOf(withId(R.id.quizOption2), withText("3"),
-                        childAtPosition(
-                                allOf(withId(R.id.quizradiogroup),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                1)),
-                                1),
-                        isDisplayed()));
-        appCompatRadioButton2.perform(click());
 
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.quizsubmitbutton), withText("Submit"),
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        DataInteraction button = onData(anything())
+                .inAdapterView(allOf(withId(R.id.gridview),
                         childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                1)));
-        appCompatButton2.perform(scrollTo(), click());
+                                withClassName(is("android.widget.LinearLayout")),
+                                1)))
+                .atPosition(0);
+        button.perform(click());
 
     }
 

@@ -13,18 +13,22 @@
 
         <Button
             android:id="@+id/questionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:text="Questions Available"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"/>
+            android:textColor="@android:color/white"
+            android:background="@drawable/buttonbackground"
+            android:layout_marginTop="80dp"/>
 
         <Button
             android:id="@+id/quizButton"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_width="200dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/buttonbackground"
+            android:layout_height="50dp"
             android:text="Quiz Available" />
     </LinearLayout>
 

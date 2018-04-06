@@ -3,11 +3,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 
-import com.example.caffae.studentsc.ClassroomIDActivity;
 import com.example.caffae.studentsc.R;
-import com.example.caffae.studentsc.StudentMainActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
