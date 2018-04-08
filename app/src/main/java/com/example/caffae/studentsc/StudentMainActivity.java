@@ -38,13 +38,11 @@ public class StudentMainActivity extends AppCompatActivity {
             FragmentManager manager;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
                     manager = getSupportFragmentManager();
                     manager.beginTransaction().replace(R.id.container, new Forum()).commit();
                     return true;
                 case R.id.navigation_dashboard:
 
-                    mTextMessage.setText("Class");
                     manager = getSupportFragmentManager();
                     manager.beginTransaction().replace(R.id.container, new AvailableClassroomFragment()).commit();
                     ongoingQuiz = databaseClassroom.getOngoing()[0].substring(1, databaseClassroom.getOngoing()[0].length() - 1);
@@ -57,12 +55,10 @@ public class StudentMainActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText("Feedback");
                     manager = getSupportFragmentManager();
                     manager.beginTransaction().replace(R.id.container, new FeedbackPageFragment()).commit();
                     return true;
                 case R.id.navigation_grades:
-                    mTextMessage.setText("Grades");
                     manager = getSupportFragmentManager();
                     manager.beginTransaction().replace(R.id.container, new GradesPageFragment()).commit();
                     return true;
@@ -78,7 +74,6 @@ public class StudentMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
         mContext = StudentMainActivity.this;
-        mTextMessage = findViewById(R.id.message);
         try {
             databaseClassroom = new DatabaseClassroom(mContext);
         } catch (InterruptedException e) {

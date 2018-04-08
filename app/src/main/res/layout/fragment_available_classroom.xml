@@ -3,7 +3,7 @@
     android:id="@+id/availableclassroomcontainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#1565C0"
     tools:context="com.example.caffae.studentsc.Classroom.AvailableClassroomFragment">
 
     <LinearLayout
@@ -14,22 +14,31 @@
         <Button
             android:id="@+id/questionButton"
             android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_height="150dp"
+            android:drawableTop="@drawable/ic_help_outline_black_24dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:text="Questions Available"
             android:layout_gravity="center"
             android:textColor="@android:color/white"
             android:background="@drawable/buttonbackground"
             android:layout_marginTop="80dp"/>
 
+
         <Button
             android:id="@+id/quizButton"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
             android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:drawableTop="@drawable/ic_playlist_add_check_black_24dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="Quiz Available"
+            android:layout_gravity="center"
             android:textColor="@android:color/white"
             android:background="@drawable/buttonbackground"
-            android:layout_height="50dp"
-            android:text="Quiz Available" />
+            android:layout_marginTop="50dp"/>
+
+
     </LinearLayout>
 
 
