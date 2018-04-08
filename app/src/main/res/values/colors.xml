@@ -7,4 +7,5 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#ffffff</color>
     <color name="contact_number">#8c8c8c</color>
+    <color name="darkblue">#0D47A1</color>
 </resources>

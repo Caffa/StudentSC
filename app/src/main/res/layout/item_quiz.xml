@@ -9,7 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:padding="30dp" />
+        android:padding="40dp"
+        android:textSize="20dp"
+        android:text="testing"
+        android:textColor="@color/darkblue" />
 
     <RadioGroup
         android:id="@+id/quizradiogroup"
@@ -20,22 +23,31 @@
         <RadioButton
             android:id="@+id/quizOption1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/darkblue"
+            android:textColor="@color/darkblue" />
 
         <RadioButton
             android:id="@+id/quizOption2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/darkblue"
+            android:textColor="@color/darkblue" />
 
         <RadioButton
             android:id="@+id/quizOption3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/darkblue"
+            android:textColor="@color/darkblue" />
 
         <RadioButton
             android:id="@+id/quizOption4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/darkblue"
+            android:textColor="@color/darkblue" />
 
     </RadioGroup>
 

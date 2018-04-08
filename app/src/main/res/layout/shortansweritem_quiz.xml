@@ -11,7 +11,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/shortAnswerQuestion"
         android:text="question"
+        android:textColor="@color/darkblue"
         android:padding="20dp"
+        android:textSize="20dp"
         android:layout_marginStart="50dp"/>
 
     <EditText
