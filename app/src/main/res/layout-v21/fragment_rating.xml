@@ -1,107 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragmentrating"
-    style="@style/AppTheme"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/gradientbackground"
-    android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:background="#26FFFFFF"
-        android:gravity="center"
-        android:text="SELECT RATING"
-        android:textColor="@android:color/white"
-        android:textSize="25dp" />
+    <LinearLayout
+        android:id="@+id/fragmentrating"
+        style="@style/AppTheme"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/red"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/lblRateMe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Explanations were clear."
-        android:textColor="@android:color/white"
-        android:textSize="20dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="#26FFFFFF"
+            android:gravity="center"
+            android:text="SELECT RATING"
+            android:textColor="@android:color/white"
+            android:textSize="25dp" />
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:numStars="5"
-        android:progressTint="@android:color/white"
-        android:rating="2.0"
-        android:scaleX=".75"
-        android:scaleY=".75"
-        android:stepSize="1.0" />
+        <TextView
+            android:id="@+id/lblRateMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Explanations were clear."
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/explanations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="Explanations were meaningful."
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white"
-        android:textSize="20dp" />
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:numStars="5"
+            android:progressTint="@android:color/white"
+            android:rating="2.0"
+            android:scaleX=".75"
+            android:scaleY=".75"
+            android:stepSize="1.0" />
 
-    <RatingBar
-        android:id="@+id/explanationratingbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:numStars="5"
-        android:progressTint="@android:color/white"
-        android:rating="2.0"
-        android:scaleX=".75"
-        android:scaleY=".75"
-        android:stepSize="1.0" />
+        <TextView
+            android:id="@+id/explanations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Explanations were meaningful."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/contentcoveredrelevant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="Content covered was relevant."
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white"
-        android:textSize="20dp" />
+        <RatingBar
+            android:id="@+id/explanationratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:numStars="5"
+            android:progressTint="@android:color/white"
+            android:rating="2.0"
+            android:scaleX=".75"
+            android:scaleY=".75"
+            android:stepSize="1.0" />
 
-    <RatingBar
-        android:id="@+id/relevantcontentratingbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:numStars="5"
-        android:progressTint="@android:color/white"
-        android:rating="2.0"
-        android:scaleX=".75"
-        android:scaleY=".75"
-        android:stepSize="1.0" />
+        <TextView
+            android:id="@+id/contentcoveredrelevant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Content covered was relevant."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
 
-
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttonbackground"
-        android:padding="15dp"
-        android:text="@string/submit"
-        android:textColor="@android:color/white"
-        android:textSize="20dp" />
+        <RatingBar
+            android:id="@+id/relevantcontentratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:numStars="5"
+            android:progressTint="@android:color/white"
+            android:rating="2.0"
+            android:scaleX=".75"
+            android:scaleY=".75"
+            android:stepSize="1.0" />
 
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+
+            android:layout_marginRight="20dp"
+            android:background="@drawable/buttonbackground"
+            android:padding="15dp"
+            android:text="@string/submit"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+    </LinearLayout>
+</ScrollView>

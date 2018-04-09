@@ -1,23 +1,37 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.example.caffae.studentsc.Grades.GradesPageFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green"
+    tools:context="com.example.caffae.studentsc.Grades.GradesPageFragment">
 
     <!-- TODO: Update blank fragmshortanweritem_quizyout -->
+    <TextView
+        android:id="@+id/grades"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="#26FFFFFF"
+        android:gravity="center"
+        android:text="PERFORMANCE"
+        android:textColor="@android:color/white"
+        android:textSize="25dp" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignStart="@id/grades"
+        android:layout_below="@id/grades"
         android:layout_marginStart="42dp"
         android:layout_marginTop="64dp"
         android:text="Student ID :"
+        android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:textColor="#000000"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView6"
@@ -27,9 +41,9 @@
         android:layout_below="@+id/textView5"
         android:layout_marginTop="42dp"
         android:text="Grade :"
+        android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:textColor="#000000"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView7"
@@ -39,9 +53,9 @@
         android:layout_below="@+id/textView6"
         android:layout_marginTop="28dp"
         android:text="Overall Score :"
-        android:textColor="#000000"
+        android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/studentIDDisplay"
@@ -50,9 +64,9 @@
         android:layout_alignBottom="@+id/textView5"
         android:layout_marginStart="39dp"
         android:layout_toEndOf="@+id/textView5"
-        android:textColor="#212121"
         android:text="N/A"
-        android:textSize="18sp"/>
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/gradeDisplay"
@@ -60,9 +74,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView6"
         android:layout_alignStart="@+id/studentIDDisplay"
-        android:textColor="#212121"
         android:text="N/A"
-        android:textSize="18sp"/>
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/scoreDisplay"
@@ -70,9 +84,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView7"
         android:layout_alignStart="@+id/gradeDisplay"
-        android:textColor="#212121"
         android:text="N/A"
-        android:textSize="18sp"/>
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -82,21 +96,22 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
         android:text="Individual Quiz Scores"
+        android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:textColor="#000000"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/individualQScores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textColor="#212121"
+        android:layout_marginTop="14dp"
         android:ems="10"
         android:inputType="none"
         android:text="Quiz Scores"
         android:textAlignment="center"
-        android:textSize="14sp"/>
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
 
 </RelativeLayout>

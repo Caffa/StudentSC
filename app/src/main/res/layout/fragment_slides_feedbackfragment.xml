@@ -2,20 +2,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/red"
     android:orientation="vertical"
     tools:context="com.example.caffae.studentsc.Feedback.SlidesComponent.SlidesFeedbackfragment">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="#26FFFFFF"
+        android:gravity="center"
+        android:text="FEEDBACK"
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:id="@+id/linearlayoutslidesfeedback"
         android:orientation="vertical"></LinearLayout>
 
+
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:text="Submit"
+        android:textColor="@android:color/white"
+        android:background="@drawable/buttonbackground"
         android:id="@+id/slidesfeedbacksubmitbutton"
         android:layout_margin="5dp"
         android:textSize="10dp"/>

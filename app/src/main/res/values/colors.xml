@@ -8,4 +8,8 @@
     <color name="colorAccent">#ffffff</color>
     <color name="contact_number">#8c8c8c</color>
     <color name="darkblue">#0D47A1</color>
+    <color name="blue">  #3369e8</color>
+    <color name="green"> #0f9d58</color>
+    <color name="red">#AD1400</color>
+    <color name="yellow">#AD8600</color>
 </resources>

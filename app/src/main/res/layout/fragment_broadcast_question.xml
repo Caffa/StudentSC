@@ -1,9 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/broadcastquestioncontainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:id="@+id/broadcastquestioncontainer"
+    android:background="@color/blue"
     tools:context="com.example.caffae.studentsc.Classroom.BroadcastQuestionFragment">
 
     <LinearLayout
@@ -12,50 +12,67 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/broadcastquestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/broadcastquestion"
             android:layout_gravity="center_horizontal"
             android:padding="30dp"
-            />
+            android:textColor="@android:color/white" />
 
         <RadioGroup
+            android:id="@+id/broadcastradiogroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/broadcastradiogroup"
-            android:layout_marginStart="50dp">
+            android:layout_marginStart="50dp"
+
+            android:layout_marginBottom="20dp">
 
             <RadioButton
                 android:id="@+id/simpleRadioButton1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 />
+                android:textColor="@android:color/white"
+
+                android:buttonTint="@android:color/white" />
 
             <RadioButton
                 android:id="@+id/simpleRadioButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               />
+                android:textColor="@android:color/white"
+
+                android:buttonTint="@android:color/white" />
 
             <RadioButton
                 android:id="@+id/simpleRadioButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-              />
+                android:textColor="@android:color/white"
+
+
+                android:buttonTint="@android:color/white" />
 
             <RadioButton
                 android:id="@+id/simpleRadioButton4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+
+
+                android:buttonTint="@android:color/white" />
 
         </RadioGroup>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/submit"
             android:id="@+id/broadcastquestionsubmit"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="30dp"/>
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:padding="15dp"
+            android:textColor="@android:color/white"
+            android:layout_margin="20dp"
+            android:background="@drawable/buttonbackground"
+            android:text="@string/submit" />
     </LinearLayout>
 </FrameLayout>

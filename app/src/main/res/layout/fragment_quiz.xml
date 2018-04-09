@@ -2,16 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/blue">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@color/blue"
         android:layout_marginBottom="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -29,7 +31,7 @@
                 android:padding="15dp"
                 android:textColor="@android:color/white"
                 android:layout_margin="20dp"
-                android:background="@drawable/bluebutton"
+                android:background="@drawable/buttonbackground"
                 android:text="@string/submit" />
         </LinearLayout>
     </ScrollView>
