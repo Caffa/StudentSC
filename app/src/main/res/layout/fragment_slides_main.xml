@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/red"
     tools:context="com.example.caffae.studentsc.Feedback.SlidesComponent.SlidesMainFragment">
 
     <LinearLayout
@@ -16,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            tools:layout="@layout/fragment_rating" />
+            tools:layout="@layout/fragment_slides" />
 
         <fragment
             android:id="@+id/movie_details_fragment"
@@ -24,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            tools:layout="@layout/fragment_slides" />
+            tools:layout="@layout/fragment_slides_feedbackfragment" />
     </LinearLayout>
 
 </FrameLayout>

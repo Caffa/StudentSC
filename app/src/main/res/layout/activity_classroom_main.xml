@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/gradientbackground"
+    android:background="@android:color/black"
     tools:context="com.example.caffae.studentsc.ClassroomMainActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:gravity="center"
-        android:background="#26FFFFFF"
+        android:background="#30FFFFFF"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:textSize="25dp"

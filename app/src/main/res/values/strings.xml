@@ -20,8 +20,8 @@
     <string name="title_class">Class</string>
     <string name="title_feedback">Feedback</string>
     <string name="submit">Submit</string>
-    <string name="slides">Slides</string>
-    <string name="lecture">Lecture</string>
+    <string name="slides">Feedback for Slides</string>
+    <string name="lecture">Feedback for Lecturer</string>
     <string name="studentId">1000000</string>
     <string name="title_grades">Grades</string>
     <string name="classroomID">ClassroomID</string>
