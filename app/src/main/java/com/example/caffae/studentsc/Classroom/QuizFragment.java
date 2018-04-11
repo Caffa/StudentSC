@@ -3,6 +3,8 @@ package com.example.caffae.studentsc.Classroom;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,8 +145,15 @@ public class QuizFragment extends Fragment {
                 databaseClassroom.pushQuizScores(Math.round(100*(finalscore/questionanswer.size())));
                 databaseClassroom.updateOverallScore(Math.round(100*(finalscore/questionanswer.size())));
                 Toast.makeText(getContext(), "Submitted! Your score is " + finalscore, Toast.LENGTH_SHORT).show();
-            }
+                changeFragment();
+             }
         });
 
+    }
+    private void changeFragment() {
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.replace(R.id.quizcontainer, new AvailableClassroomFragment()).commit();
+        ft.addToBackStack(null);
     }
 }
