@@ -33,7 +33,7 @@ public class ClassroomMainActivity extends AppCompatActivity {
         getClassnames();
         final Context mContext = this;
 
-        final GridView gridview = (GridView) findViewById(R.id.gridview);
+        final GridView gridview = findViewById(R.id.gridview);
         ClassAdapter classAdapter = null;
         try {
             classAdapter = new ClassAdapter(this);
@@ -48,7 +48,7 @@ public class ClassroomMainActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                int count = (int) dataSnapshot.getChildrenCount()-2;;
+                int count = (int) dataSnapshot.getChildrenCount()-2;
                 SharedPreferences sharedPref = getSharedPreferences(getString(R.string.classroomcount), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putInt(getString(R.string.classroomcount),count);

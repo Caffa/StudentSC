@@ -89,7 +89,7 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
         // white background notification bar
 //        whiteNotificationBar(recyclerView);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView = view.findViewById(R.id.recycler_view);
 
         fAdapter = new ForumAdapter(getContext(),forumList, listener);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getActivity());
@@ -129,7 +129,7 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
 
         Log.d("RecyclerV", "Finish Data Prep");
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+        FloatingActionButton fab = view.findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -425,9 +425,9 @@ public class Forum extends Fragment implements ForumAdapter.ForumAdapterListener
         }
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.popupview);//popup view is the shortansweritem_quiz you created
-        TextView txt = (TextView)dialog.findViewById(R.id.contentBoxAns);
+        TextView txt = dialog.findViewById(R.id.contentBoxAns);
         txt.setText(currentAns);
-        TextView qtitle = (TextView)dialog.findViewById(R.id.titleQ);
+        TextView qtitle = dialog.findViewById(R.id.titleQ);
         qtitle.setText(currentQ);
         dialog.show();
 

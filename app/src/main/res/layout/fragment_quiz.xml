@@ -8,10 +8,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/QuizScrollView"
         android:background="@color/blue"
         android:layout_marginBottom="40dp">
 
         <LinearLayout
+            android:id="@+id/quizContainerLinearLayout"
             android:layout_width="match_parent"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"

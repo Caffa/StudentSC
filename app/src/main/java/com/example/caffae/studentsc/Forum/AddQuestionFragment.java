@@ -34,7 +34,7 @@ public class AddQuestionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_submit_question, container, false);
         btnSubmit = new Button(getContext());
         btnSubmit = view.findViewById(R.id.buttonsubmitquestion);
-        edittextsubmitquestion = (EditText) view.findViewById(R.id.QuestionTxtSubmit);
+        edittextsubmitquestion = view.findViewById(R.id.QuestionTxtSubmit);
 //        edittextsubmitquestion = new EditText(getContext());
 //        edittextsubmitquestion = view.findViewById(R.id.QuestionTxtSubmit);
 

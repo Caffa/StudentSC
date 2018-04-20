@@ -19,6 +19,7 @@ import static junit.framework.Assert.assertEquals;
  */
 @RunWith(Parameterized.class)
 public class QuizMultipleChoiceScoreTest {
+    // Tests the marking function for multiple choice questions
     private QuizAndBroadcastMain quizAndBroadcastMain;
     private ArrayList<QuizItem> quiz;
     private ArrayList<Integer> buttonnumber;

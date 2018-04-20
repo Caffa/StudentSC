@@ -12,12 +12,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class BroadcastQuestionTiming {
+class BroadcastQuestionTiming {
     private String classroomID ;
-    Context mContext;
+    private Context mContext;
     private DatabaseReference mDatabase;
     private final DatabaseReference broadcastnode;
-    public BroadcastQuestionTiming(Context c){
+    BroadcastQuestionTiming(Context c){
         this.mContext = c;
         SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
         classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
@@ -26,10 +26,9 @@ public class BroadcastQuestionTiming {
     }
 
 
-
     // Compares timing with current timing in database
     // Pushes key: studentID and value:timing to Fastest node if it is smaller than timing in database.
-    public void pushFastestTiming(final long endTime) {
+    void pushFastestTiming(final long endTime) {
         broadcastnode.child("Ongoing").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

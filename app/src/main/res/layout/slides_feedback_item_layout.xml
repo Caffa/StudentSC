@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/slidefeedbacklinearlayout"
     android:layout_height="match_parent"
     android:background="@color/red"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/slidenumberhorizontal"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Slide Number"
+            android:text="@string/slide_number"
             android:textColor="@android:color/white"
-            android:textSize="10dp"
+            android:textSize="10sp"
             android:layout_margin="5dp"/>
 
         <EditText
@@ -26,7 +28,7 @@
             android:maxLines="1"
             android:inputType="number"
             android:id="@+id/editTextSlideNumber"
-            android:textSize="10dp"
+            android:textSize="10sp"
             android:background="@drawable/edittextbackground"/>
     </LinearLayout>
     <EditText
@@ -34,8 +36,9 @@
         android:layout_height="50dp"
         android:maxLines="6"
         android:padding="5dp"
-        android:textSize="10dp"
+        android:textSize="10sp"
         android:gravity="top"
+        android:textColor="@android:color/white"
         android:layout_margin="5dp"
         android:isScrollContainer="true"
         android:id="@+id/editTextSlideFeedback"

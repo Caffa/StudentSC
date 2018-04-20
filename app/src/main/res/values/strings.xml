@@ -30,5 +30,8 @@
     <string name="classnames">classnames</string>
     <string name="counterQ">1</string>
     <string name="counterQuestion">0</string>
+    <string name="no_available_question_now">No Available Question Now.</string>
+    <string name="no_quiz_available">No Quiz Available.</string>
+    <string name="slide_number">Slide Number</string>
 
 </resources>

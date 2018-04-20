@@ -89,9 +89,9 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.MyViewHolder
 
         public MyViewHolder(View view) {
             super(view);
-            question = (TextView) view.findViewById(R.id.question);
-            answer = (TextView) view.findViewById(R.id.answer);
-            answered = (TextView) view.findViewById(R.id.answered);
+            question = view.findViewById(R.id.question);
+            answer = view.findViewById(R.id.answer);
+            answered = view.findViewById(R.id.answered);
 
 //            view.setOnClickListener(new View.OnClickListener() {
 //                @Override

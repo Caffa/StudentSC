@@ -50,11 +50,7 @@ public class ForumQuestion {
 
     public void setAnswer(String answer) {
         this.answer = answer;
-        if(answer.equals("")){
-            answered = false;
-        }else{
-            answered = true;
-        }
+        answered = !answer.equals("");
     }
 
     public void setDontShow() {

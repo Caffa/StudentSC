@@ -83,8 +83,6 @@ public class RatingFragment extends Fragment {
                 databaseRatingLecturer.pushLecturerRating("Meaningful", ratingBar2.getRating());
                 databaseRatingLecturer.pushLecturerRating("Relevant", ratingBar3.getRating());
                 getActivity().onBackPressed();
-
-                // Toast.makeText(getContext(), "Clarity: "+ String.valueOf(ratingBar1.getRating()) + " Explanation: " + String.valueOf(ratingBar2.getRating()), Toast.LENGTH_SHORT).show();
             }
 
         });

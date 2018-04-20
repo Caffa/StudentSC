@@ -15,7 +15,6 @@ import com.example.caffae.studentsc.R;
 
 public class SlidesMainFragment extends Fragment {
     //Main fragment that holds the SlideFeedbackFragment and SlidesDisplayFragment side by side
-
     public SlidesMainFragment() {}
 
     public void onCreate(Bundle savedInstanceState) {
