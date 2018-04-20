@@ -24,7 +24,7 @@ public class QuizAndBroadcastMain {
         return questionsanswer;
     }
 
-    public ArrayList<QuizItem>   getquestionanswer(){
+    ArrayList<QuizItem> getQuestionAnswer(){
         return questionsanswer;
     }
 

@@ -2,6 +2,7 @@ package com.example.caffae.studentsc.Classroom;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.provider.ContactsContract;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -24,19 +25,22 @@ import org.json.JSONArray;
  */
 
 public class DatabaseClassroom {
-    Context mContext;
+    private Context mContext;
     private String classroomID;
+    private DatabaseReference classroomReference;
+
 
     public DatabaseClassroom(Context c) throws InterruptedException {
         this.mContext = c;
         SharedPreferences sharedPref = c.getSharedPreferences(c.getString(R.string.classroomID), Context.MODE_PRIVATE);
         classroomID = sharedPref.getString(c.getString(R.string.classroomID),"Classroom1");
+        classroomReference = FirebaseDatabase.getInstance().getReference().child(classroomID);
         Thread.sleep(600);
+
     }
     private JSONArray[] jsonarray = new JSONArray[1];
     private String[] ongoing = new String[2];
-    //private String classroomID = ClassroomMainActivity.classroomID;
-   ;
+
     //get data from URL as a jsonarray
     private void fetchDatabaseInfo(String URL) {
         final JsonArrayRequest request = new JsonArrayRequest(URL,
@@ -94,12 +98,12 @@ public class DatabaseClassroom {
     }
     // Save quiz scores into database with key: QuizID, value: QuizScore into student's grades
     void pushQuizScores(final double QuizScore) {
-        FirebaseDatabase.getInstance().getReference().child(classroomID).child("Quiz").child("Ongoing").addListenerForSingleValueEvent(new ValueEventListener() {
+        classroomReference.child("Quiz").child("Ongoing").addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String QuizID = dataSnapshot.getValue().toString();
-                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child(classroomID).child("Grades").child("PerStudent").child(MainActivity.studentID);
+                DatabaseReference mDatabase = classroomReference.child("Grades").child("PerStudent").child(MainActivity.studentID);
                 mDatabase.child(QuizID).setValue(Double.toString(QuizScore));
             }
 
@@ -109,8 +113,10 @@ public class DatabaseClassroom {
 
         });
     }
+
+    // updates the overall score and grade in Firebase
     void updateOverallScore(final double newQuizScore){
-        final DatabaseReference gradesPerStudent =  FirebaseDatabase.getInstance().getReference().child(classroomID).child("Grades").child("PerStudent").child(MainActivity.studentID);
+        final DatabaseReference gradesPerStudent =  classroomReference.child("Grades").child("PerStudent").child(MainActivity.studentID);
         gradesPerStudent.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot){
@@ -163,7 +169,7 @@ public class DatabaseClassroom {
         });
     }
 
-    protected JSONArray[] getJsonarray() {
+    JSONArray[] getJsonarray() {
         return jsonarray;
     }
 

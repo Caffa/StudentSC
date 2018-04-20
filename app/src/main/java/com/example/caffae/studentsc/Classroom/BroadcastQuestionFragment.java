@@ -71,15 +71,15 @@ public class BroadcastQuestionFragment extends Fragment {
     //Set text for question
     private void setQuestion() {
         newbroadcast.convertJSON(AvailableClassroomFragment.questionjsonArray.toString());
-        question.setText(newbroadcast.getquestionanswer().get(0).getQuestion());
+        question.setText(newbroadcast.getQuestionAnswer().get(0).getQuestion());
     }
 
     //Set text for options
     private void setAnswers() {
-        button1.setText(newbroadcast.getquestionanswer().get(0).getOption1());
-        button2.setText(newbroadcast.getquestionanswer().get(0).getOption2());
-        button3.setText(newbroadcast.getquestionanswer().get(0).getOption3());
-        button4.setText(newbroadcast.getquestionanswer().get(0).getOption4());
+        button1.setText(newbroadcast.getQuestionAnswer().get(0).getOption1());
+        button2.setText(newbroadcast.getQuestionAnswer().get(0).getOption2());
+        button3.setText(newbroadcast.getQuestionAnswer().get(0).getOption3());
+        button4.setText(newbroadcast.getQuestionAnswer().get(0).getOption4());
     }
 
     //Submit button toasts whether answer is correct and pushes timing to database if it is correct and the fastest
@@ -90,7 +90,7 @@ public class BroadcastQuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (radiogroup.getCheckedRadioButtonId() == radiogroup.getChildAt(Integer.parseInt(newbroadcast.getquestionanswer().get(0).getAnswer()) - 1).getId()) {
+                if (radiogroup.getCheckedRadioButtonId() == radiogroup.getChildAt(Integer.parseInt(newbroadcast.getQuestionAnswer().get(0).getAnswer()) - 1).getId()) {
                     Toast.makeText(getContext(), "Well Done!", Toast.LENGTH_SHORT).show();
                     changeFragment();
                     BroadcastQuestionTiming broadcastQuestionTiming = new BroadcastQuestionTiming(getContext());
@@ -99,7 +99,7 @@ public class BroadcastQuestionFragment extends Fragment {
                     Toast.makeText(getContext(), "Please Select Answer", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Toast.makeText(getContext(), "Try Again Next Time! \n The right answer was Option " + newbroadcast.getquestionanswer().get(0).getAnswer(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Try Again Next Time! \n The right answer was Option " + newbroadcast.getQuestionAnswer().get(0).getAnswer(), Toast.LENGTH_SHORT).show();
                     changeFragment();
                 }
             }

@@ -62,7 +62,7 @@ public class QuizFragment extends Fragment {
             //covert JSON string into list of Quiz Items
             quizMain.convertJSON(AvailableClassroomFragment.quizjsonArray.toString());
             addListenerOnButton();
-            questionanswer = quizMain.getquestionanswer();
+            questionanswer = quizMain.getQuestionAnswer();
 
             //Dynamically add quiz items into the overall linear shortansweritem_quiz
             j = 0;

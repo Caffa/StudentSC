@@ -17,11 +17,12 @@ import static junit.framework.Assert.assertEquals;
  */
 @RunWith(Parameterized.class)
 public class QuizShortAnswerScoreTest {
+    // tests the score for the short answer questions
 
     private QuizAndBroadcastMain quizAndBroadcastMain;
     private ArrayList<QuizItem> quiz;
     private ArrayList<String> submittedAnswers;
-    double expectedscore;
+    private double expectedscore;
 
     public QuizShortAnswerScoreTest(double expectedscore, ArrayList<String> submittedAnswers, ArrayList<QuizItem> quiz) {
         this.expectedscore = expectedscore;

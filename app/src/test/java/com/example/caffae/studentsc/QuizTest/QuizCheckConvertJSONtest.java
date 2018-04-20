@@ -14,9 +14,10 @@ import static org.junit.Assert.*;
  */
 
 public class QuizCheckConvertJSONtest {
-    QuizAndBroadcastMain quizAndBroadcastMain;
-    ArrayList<QuizItem> expected = new ArrayList<>();
-    ArrayList<QuizItem> generated;
+    // Tests if the JSON is converted correctly
+    private QuizAndBroadcastMain quizAndBroadcastMain;
+    private ArrayList<QuizItem> expected = new ArrayList<>();
+    private ArrayList<QuizItem> generated;
 
     @Before
     public void runBeforeEachTest() {
@@ -93,6 +94,7 @@ public class QuizCheckConvertJSONtest {
         }
         assertEquals(j,expected.size());
     }
+
     @Test
     public void testconvertJSONOption4(){
         int j =0;

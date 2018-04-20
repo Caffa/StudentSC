@@ -14,11 +14,11 @@ import com.google.firebase.database.ValueEventListener;
  * Created by dorette_ong on 29/3/2018.
  */
 
-public class DatabaseRatingLecturer {
+class DatabaseRatingLecturer {
     private DatabaseReference mDatabase;
-    Context mContext;
+    private Context mContext;
     private String classroomID;
-    public DatabaseRatingLecturer(Context c){
+    DatabaseRatingLecturer(Context c){
         this.mContext = c;
         SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.classroomID), Context.MODE_PRIVATE);
         classroomID = sharedPref.getString(mContext.getString(R.string.classroomID),"Classroom1");
@@ -26,17 +26,18 @@ public class DatabaseRatingLecturer {
 
 
     //Push lecturer rating to database with main node: LecturerID, key: criteria, value: rating
-    public void pushLecturerRating(final String criteria, final float rating){
+    void pushLecturerRating(final String criteria, final float rating){
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(classroomID);
 
-        FirebaseDatabase.getInstance().getReference().child(classroomID).child("CurrentLecture").addListenerForSingleValueEvent(new ValueEventListener() {
+       databaseReference.child("CurrentLecture").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final String lectureID= dataSnapshot.getValue().toString();
-                FirebaseDatabase.getInstance().getReference().child(classroomID).child("Lecturer").addValueEventListener(new ValueEventListener() {
+                databaseReference.child("Lecturer").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String lecturerID = dataSnapshot.getValue().toString();
-                        mDatabase = FirebaseDatabase.getInstance().getReference().child(classroomID).child("Rating").child(lectureID).child(lecturerID);
+                        mDatabase = databaseReference.child("Rating").child(lectureID).child(lecturerID);
                         mDatabase.child(criteria).setValue(rating);
                     }
 
@@ -45,7 +46,6 @@ public class DatabaseRatingLecturer {
                     }
 
                 });
-
 
             }
 
